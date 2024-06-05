@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
     includes: [],
     gallery: { first: Object, second: Object, third: Object },
     others: [],
-    categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
+    categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
     documents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document'}]
 });
 
@@ -26,4 +26,4 @@ if(validationResult.errors) {
 
 */
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('Product', productSchema);  

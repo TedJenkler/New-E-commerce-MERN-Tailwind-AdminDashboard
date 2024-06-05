@@ -2,7 +2,10 @@ const { Schema } = require('schema-express');
 const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product'}]
 });
 
@@ -14,3 +17,5 @@ if(validationResult.errors) {
     console.log('Data is valid')
 }
 */
+
+module.exports = mongoose.model('Category', categorySchema);    
