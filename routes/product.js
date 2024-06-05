@@ -5,11 +5,11 @@ const Category = require('../schema/categorySchea');
 
 router.post('/add', async (req, res) => {
     try {
-        const { name, price, slug, isNew, description, features, Image, categoryImage, includes, gallery, others, categoryName, documents } = req.body;
+        const { name, price, slug, isNew, description, features, Image, categoryImage, includes, gallery, others, category } = req.body;
         
-        const categoryId = await Category.findOne({ name: categoryName });
+        const categoryId = await Category.findOne({ name: category });
         if(!categoryId){
-            return res.status(400).json({ message: 'Invalid categoryName' });
+            return res.status(400).json({ message: 'Invalid category name, Create the category first', category });
         }
         
         const newProduct = new Product({
@@ -24,8 +24,7 @@ router.post('/add', async (req, res) => {
             includes, 
             gallery, 
             others, 
-            categoryId, 
-            documents
+            categoryId,
         })
 
         await newProduct.save();

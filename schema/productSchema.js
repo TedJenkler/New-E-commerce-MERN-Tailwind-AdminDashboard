@@ -1,9 +1,17 @@
 const { Schema } = require('schema-express')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { unique } = require('underscore');
 
 const productSchema = new mongoose.Schema({   
-    name: String,
-    price: Number,
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
     slug: String,
     isNew: Boolean,
     description: String,
@@ -14,7 +22,6 @@ const productSchema = new mongoose.Schema({
     gallery: { first: Object, second: Object, third: Object },
     others: [],
     categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
-    documents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document'}]
 });
 
 /* const validationResult = productSchema.validate(productData);
