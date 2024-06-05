@@ -1,9 +1,18 @@
 const { Schema } = require('schema-express')
 const mongoose = require('mongoose')
 
-const productSchema = new SchemaHandler({
+const productSchema = new SchemaHandler({   
     name: String,
     price: Number,
+    slug: String,
+    new: Boolean,
+    description: String,
+    features: String,
+    Image: [{ mobile: String, tablet: String, desktop: String }],
+    categoryImage: [{ mobile: String, tablet: String, desktop: String }],
+    includes: [],
+    gallery: { first: Object, second: Object, third: Object },
+    others: [],
     categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
     documents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document'}]
 });
