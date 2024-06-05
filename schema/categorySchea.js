@@ -1,0 +1,14 @@
+const { Schema } = require('schema-express');
+const mongoose = require('mongoose');
+
+const categorySchema = new SchemaHandler({
+    name: String,
+    products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product'}]
+});
+
+const validationResult = categorySchema.validate(categoryData);
+if(validationResult.errors) {
+    console.error('Validation errors:', validationResult.errors);
+} else {
+    console.log('Data is valid')
+}

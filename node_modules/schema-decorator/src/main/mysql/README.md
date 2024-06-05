@@ -1,0 +1,1 @@
+Assertion delegates useful for working with MySQL
