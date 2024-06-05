@@ -1,11 +1,11 @@
 const { Schema } = require('schema-express')
 const mongoose = require('mongoose')
 
-const productSchema = new SchemaHandler({   
+const productSchema = new mongoose.Schema({   
     name: String,
     price: Number,
     slug: String,
-    new: Boolean,
+    isNew: Boolean,
     description: String,
     features: String,
     Image: [{ mobile: String, tablet: String, desktop: String }],
@@ -17,9 +17,13 @@ const productSchema = new SchemaHandler({
     documents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document'}]
 });
 
-const validationResult = productSchema.validate(productData);
+/* const validationResult = productSchema.validate(productData);
 if(validationResult.errors) {
     console.error('Validation errors:', validationResult.errors);
 } else {
     console.log('Data is valid')
 }
+
+*/
+
+module.exports = mongoose.model('Product', productSchema);
