@@ -5,7 +5,9 @@ const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category')
 const { default: mongoose } = require('mongoose');
 const port = process.env.PORT || 2000;
+const cors = require('cors')
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
