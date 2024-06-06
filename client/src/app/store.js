@@ -3,6 +3,6 @@ import shopSlice from "../features/shopSlice";
 
 export const store = configureStore({
     reducer: {
-        data: shopSlice
+        shop: shopSlice
     }
 })
