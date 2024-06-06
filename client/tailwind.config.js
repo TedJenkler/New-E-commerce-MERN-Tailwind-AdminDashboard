@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       fontSize: {
+        'lxs': '0.8125rem',
         'sbase': '0.938rem',
         '28xl': '1.75rem',
       },

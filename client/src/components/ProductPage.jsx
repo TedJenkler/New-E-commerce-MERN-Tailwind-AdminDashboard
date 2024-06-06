@@ -30,8 +30,17 @@ function productPage() {
         <h1 className='text-28xl font-bold text-black2 mb-6'>{product ? product.name : null}</h1>
         <p className='text-sbase text-bordergrey font-medium mb-6'>{product ? product.description : null}</p>
         <p className='text-lg text-black2 font-bold mb-8'>$ {product ? product.price : null}</p>
-        <div>
-
+        <div className='flex mb-24'>
+          <div className='flex w-1/2'>
+            <div className='flex w-[120px] h-[48px] bg-greywhite'>
+              <button className='w-1/3'>-</button>
+              <input className='w-1/3 bg-greywhite text-center' value="0"></input>
+              <button className='w-1/3'>+</button>
+            </div>
+          </div>
+          <div className='w-1/2 flex items-center justify-end'>
+            <button className='bg-darkorange text-white px-8 py-4 text-lxs'>ADD TO CART</button>
+          </div>
         </div>
         <h2 className='text-2xl text-black2 font-bold mb-6'>FEATURES</h2>
         <p className='text-sbase text-bordergrey font-medium mb-6'>{product ? splitByTag(product.features)[0] : null}</p>
