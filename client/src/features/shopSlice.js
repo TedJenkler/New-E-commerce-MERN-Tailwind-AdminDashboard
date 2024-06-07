@@ -13,8 +13,21 @@ export const fetchData = createAsyncThunk(
     }
 );
 
+export const fetchCategory = createAsyncThunk(
+    'shopSlice/category/get',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axios.get('http://localhost:2000/category/get');
+            return response.data;
+        }catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
+
 const initialState = {
     data: [],
+    category: [],
     status: 'idle',
     error: null,
 };
@@ -36,7 +49,17 @@ const shopSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.payload;
             })
-
+            .addCase(fetchCategory.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchCategory.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.category = action.payload;
+            })
+            .addCase(fetchCategory.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
     }
 })
 

@@ -8,13 +8,12 @@ function productPage() {
     const dispatch = useDispatch()
     const state = useSelector((shop) => shop.shop.data)
     const { id } = useParams();
-  
-    const product = state.find(product => product.slug === id)
-    console.log(product)
 
     useEffect(() => {
         dispatch(fetchData());
     }, []);
+
+    const product = state ? state.find(product => product.slug === id) : null
 
     const splitByTag = (str) => {
       return str.split("<br>")

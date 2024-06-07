@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logo from '../assets/logo.svg'
 import facebook from '../assets/facebook.svg'
 import twitter from '../assets/twitter.svg'
 import instagram from '../assets/instagram.svg'
+import { useDispatch } from 'react-redux'
+import { fetchCategory } from '../features/shopSlice'
 
 function Footer() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  },[])
+
   return (
     <footer className='pt-14 px-6 text-center pb-10 bg-black2 flex flex-col items-center'>
         <img className='mb-12' src={logo} alt='logo' />

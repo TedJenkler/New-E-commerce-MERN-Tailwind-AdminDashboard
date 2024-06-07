@@ -20,4 +20,14 @@ router.post('/add', async (req, res) => {
     }
 });
 
+router.get('/get', async (req, res) => {
+    try {
+        const categorys = await Category.find()
+        res.status(201).json(categorys)
+    }catch (error) {
+        console.error('Error fetching category:', error);
+        res.status().json({ message: 'Internal server error'});
+    }
+})
+
 module.exports = router
