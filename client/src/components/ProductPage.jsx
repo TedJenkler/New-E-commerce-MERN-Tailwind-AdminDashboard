@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../features/shopSlice';
 import { useParams } from 'react-router';
 import listen from '../assets/listen.png'
+import CategoryLinks from './CategoryLinks';
 
 function productPage() {
     const dispatch = useDispatch()
@@ -59,13 +60,14 @@ function productPage() {
         <h3 className='text-2xl text-black2 font-bold text-center mb-10'>YOU MAY ALSO LIKE</h3>
         {product ? product.others.map((item) => {
           return (
-            <div className='flex flex-col items-center mb-14'>
+            <div className='flex flex-col items-center mb-32'>
               <img className='mb-8' src={item.image.mobile} />
               <p className='text-2xl font-bold text-black2 text-center mb-8'>{item.name}</p>
               <button className='bg-darkorange text-white px-8 py-4'>SEE PRODUCT</button>
             </div>
           )
         }) : null}
+        <CategoryLinks />
         <img className='mb-10' src={listen} alt='listen' />
         <h3 className='text-28xl text-black2 font-bold text-center mb-8'>BRINGING YOU THE <span className='text-28xl text-darkorange font-bold'>BEST</span> AUDIO GEAR</h3>
         <p className='text-sbase text-bordergrey font-medium mb-32'>Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.</p>
