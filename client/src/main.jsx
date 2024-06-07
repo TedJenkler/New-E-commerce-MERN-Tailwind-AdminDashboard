@@ -10,11 +10,16 @@ import { Provider } from 'react-redux'
 import ProductPage from './components/ProductPage';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
+import CategoryPage from './components/CategoryPage';
 
 const router = createBrowserRouter([
   {
     path: "/product/:id",
     element: <ProductPage />,
+  },
+  {
+    path: "/:id",
+    element: <CategoryPage />,
   },
 ]);
 
