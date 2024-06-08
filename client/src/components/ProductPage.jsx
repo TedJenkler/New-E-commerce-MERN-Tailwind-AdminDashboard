@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../features/shopSlice';
 import { useParams } from 'react-router';
 import CategoryLinks from './CategoryLinks';
 import Ad from './Ad';
 import { Link } from 'react-router-dom';
+import { addItem } from '../features/shopSlice';
 
 function productPage() {
     const dispatch = useDispatch()
     const state = useSelector((shop) => shop.shop.data)
     const { id } = useParams();
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         dispatch(fetchData());
@@ -35,13 +37,13 @@ function productPage() {
         <div className='flex mb-24'>
           <div className='flex w-1/2'>
             <div className='flex w-[120px] h-[48px] bg-greywhite'>
-              <button className='w-1/3'>-</button>
-              <input className='w-1/3 bg-greywhite text-center' value="0"></input>
-              <button className='w-1/3'>+</button>
+              <button onClick={count > 0 ? (e) => {setCount(count - 1)} : null} className='w-1/3'>-</button>
+              <input value={count} className='w-1/3 bg-greywhite text-center' disabled={true}></input>
+              <button onClick={(e) => {setCount(count + 1)}} className='w-1/3'>+</button>
             </div>
           </div>
           <div className='w-1/2 flex items-center justify-end'>
-            <button className='bg-darkorange text-white px-8 py-4 text-lxs'>ADD TO CART</button>
+            <button onClick={() => {dispatch(addItem({ id: product._id, quantity: count })), setCount(0)}} className='bg-darkorange text-white px-8 py-4 text-lxs'>ADD TO CART</button>
           </div>
         </div>
         <h2 className='text-2xl text-black2 font-bold mb-6 tracking-[0.86px]'>FEATURES</h2>

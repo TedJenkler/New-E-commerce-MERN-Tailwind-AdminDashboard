@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { act } from "react";
 
 export const fetchData = createAsyncThunk(
     'shopSlice/product/get',
@@ -30,12 +31,22 @@ const initialState = {
     category: [],
     status: 'idle',
     error: null,
+    cart: [],
 };
 
 const shopSlice = createSlice({
     name: 'shop',
     initialState,
-    reducers: {},
+    reducers: {
+        addItem: (state, action) => {
+            const existingItem = state.cart.find(item => item.id === action.payload.id);
+            if (existingItem) {
+                existingItem.quantity = action.payload.quantity;
+            } else {
+                state.cart.push({ ...action.payload, quantity: action.payload.quantity });
+            }
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchData.pending, (state) => {
@@ -63,4 +74,5 @@ const shopSlice = createSlice({
     }
 })
 
+export const { addItem } = shopSlice.actions;
 export default shopSlice.reducer;
