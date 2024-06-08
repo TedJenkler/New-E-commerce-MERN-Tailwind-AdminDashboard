@@ -21,6 +21,11 @@ export default {
         'lightgreywhite': '#FAFAFA',
         'bordergrey': '#979797',
         'hoverblack': '#4C4C4C',
+      },
+      backgroundImage: {
+        'hero': "url('./src/assets/bghero.png')",
+        'hero2': "url('./src/assets/bgzx9.png')",
+        'hero3': "url('./src/assets/bgzx7.png')",
       }
     },
   },

@@ -5,6 +5,7 @@ import twitter from '../assets/twitter.svg'
 import instagram from '../assets/instagram.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCategory } from '../features/shopSlice'
+import { Link } from 'react-router-dom'
 
 function Footer() {
   const dispatch = useDispatch()
@@ -18,13 +19,13 @@ function Footer() {
   return (
     <footer className='pt-14 px-6 text-center pb-10 bg-black2 flex flex-col items-center'>
         <img className='mb-12' src={logo} alt='logo' />
-        <ul className='text-white mb-12'>
-            <li className='mb-4'>HOME</li>
-            {state.map((category) => {
+        <ul className='text-white mb-12 flex flex-col'>
+            <Link to="/" className='mb-4'>HOME</Link>
+            {state ? state.map((category, index) => {
               return (
-                <li className='mb-4'>{category.name.toUpperCase()}</li>
+                <Link key={index} to={ category.name ? "/" + category.name : null} className='mb-4'>{category.name.toUpperCase()}</Link>
               )
-            })}
+            }) : null}
         </ul>
         <p className='text-white opacity-50 mb-12'>Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.</p>
         <p className='text-white opacity-50 mb-12'>Copyright 2021. All Rights Reserved</p>
