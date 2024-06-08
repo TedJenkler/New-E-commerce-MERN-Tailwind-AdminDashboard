@@ -43,7 +43,7 @@ const shopSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity = action.payload.quantity;
             } else {
-                state.cart.push({ ...action.payload, quantity: action.payload.quantity });
+                state.cart.push({ ...action.payload, quantity: action.payload.quantity, price: action.payload.price, name: action.payload.name, img: action.payload.img });
             }
         }
     },
