@@ -12,6 +12,12 @@ import ProductPage from './components/ProductPage';
 import CategoryPage from './components/CategoryPage';
 import Homepage from './components/Homepage';
 import Layout from './components/Layout';
+import Checkout from './components/Checkout';
+
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe('pk_test_51PPfNkP7UvQT87QE68NIZvrMqWqZleH2fi2zG5y1Sh5sTz24MhhC3ULZitXA6sqdN9e6JpDpsQObBsr26iyH9rhx00Evd4LB0n');
 
 const router = createBrowserRouter([
   {
@@ -26,6 +32,16 @@ const router = createBrowserRouter([
     path: "/:id",
     element: <Layout><CategoryPage /></Layout>,
   },
+  {
+    path: "/checkout",
+    element: (
+      <Layout>
+        <Elements stripe={stripePromise}>
+          <Checkout />
+        </Elements>
+      </Layout>
+    ),
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -34,4 +50,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
-) ;
+);
