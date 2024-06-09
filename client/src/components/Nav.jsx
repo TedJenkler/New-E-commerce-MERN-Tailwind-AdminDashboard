@@ -6,6 +6,7 @@ import CategoryLinks from './CategoryLinks'
 import { useDispatch, useSelector } from 'react-redux'
 import { incrementItem } from '../features/shopSlice'
 import { decrementItem } from '../features/shopSlice';
+import { removeAll } from '../features/shopSlice'
 
 function Nav() {
   const [toggle, setToggle] = useState(false)
@@ -29,13 +30,13 @@ function Nav() {
         <div className='absolute bg-white py-8 px-7 w-11/12 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg'>
           <div className='flex justify-between mb-8'>
             <h2 className='text-lg text-black2 font-bold tracking-[1.29px]'>cart ({cart.length})</h2>
-            <p className='text-sbase text-bordergrey underline font-medium'>Remove all</p>
+            <p onClick={(e) => {dispatch(removeAll())}} className='text-sbase text-bordergrey underline font-medium'>Remove all</p>
           </div>
           {cart.map((item) =>{
             return (
               <div className='flex gap-4 mb-6'>
                 <div>
-                  <img className='h-16 w-16 rounded-lg' src={item.img} alt={item.name} />
+                  <img className='h-16 min-w-16 rounded-lg' src={item.img} alt={item.name} />
                 </div>
                 <div className='flex flex-col justify-center'>
                   <p className='text-sbase font-bold text-black2'>{item.name}</p>

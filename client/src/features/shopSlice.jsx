@@ -66,6 +66,9 @@ const shopSlice = createSlice({
                 }
             } 
         },
+        removeAll: (state) => {
+            state.cart = [];
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -94,5 +97,5 @@ const shopSlice = createSlice({
     }
 });
 
-export const { addItem, incrementItem, decrementItem } = shopSlice.actions;
+export const { addItem, incrementItem, decrementItem, removeAll } = shopSlice.actions;
 export default shopSlice.reducer;
