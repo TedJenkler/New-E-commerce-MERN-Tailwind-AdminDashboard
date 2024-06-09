@@ -3,13 +3,18 @@ import burger from '../assets/burger.jpg'
 import logo from '../assets/logo.svg'
 import cartimg from '../assets/cart.jpg'
 import CategoryLinks from './CategoryLinks'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { incrementItem } from '../features/shopSlice'
+import { decrementItem } from '../features/shopSlice';
 
 function Nav() {
   const [toggle, setToggle] = useState(false)
   const [toggleCart, setToggleCart] = useState(false)
   const cart = useSelector((state) => state.shop.cart)
-  console.log(cart)
+  const dispatch = useDispatch();
+
+  const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+
   return (
     <div>
       <header className='bg-black2 flex justify-between items-center px-6 py-8'>
@@ -21,7 +26,7 @@ function Nav() {
         <CategoryLinks />
       </nav> : null }
       {toggleCart ? 
-        <div className='absolute bg-white py-8 px-7 w-5/6 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg'>
+        <div className='absolute bg-white py-8 px-7 w-11/12 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg'>
           <div className='flex justify-between mb-8'>
             <h2 className='text-lg text-black2 font-bold tracking-[1.29px]'>cart ({cart.length})</h2>
             <p className='text-sbase text-bordergrey underline font-medium'>Remove all</p>
@@ -36,15 +41,21 @@ function Nav() {
                   <p className='text-sbase font-bold text-black2'>{item.name}</p>
                   <p className='text-sm font-bold text-bordergrey'>$ {item.price}</p>
                 </div>
-                <div></div>
+                <div className='flex items-center'>
+                  <button onClick={(e) => dispatch(decrementItem({ id: item.id, quantity: item.quantity }))} className='w-6 h-8 bg-greywhite'>-</button>
+                  <input className='w-6 h-8 bg-greywhite text-center' disabled={true} value={item.quantity}></input>
+                  <button onClick={(e) => dispatch(incrementItem({ id: item.id, quantity: item.quantity }))} className='w-6 h-8 bg-greywhite'>+</button>
+                </div>
               </div>
             )
           })}
-          <div>
-            <p>TOTAL</p>
-            <p>$ </p>
+          <div className='flex items-center justify-between mb-6'>
+            <p className='text-sbase text-bordergrey font-medium'>TOTAL</p>
+            <p className='text-lg text-black2 font-bold'>$ {totalPrice}</p>
           </div>
-          <button>CHECKOUT</button>
+          <div className='flex justify-center'>
+            <button className='text-sm bg-darkorange text-white w-full py-4'>CHECKOUT</button>
+          </div>
         </div> : null}
     </div> 
   )

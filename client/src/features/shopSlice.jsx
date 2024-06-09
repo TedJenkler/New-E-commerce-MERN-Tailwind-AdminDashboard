@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react";
 
 export const fetchData = createAsyncThunk(
     'shopSlice/product/get',
@@ -8,8 +7,8 @@ export const fetchData = createAsyncThunk(
         try {
             const response = await axios.get('http://localhost:2000/product/get');
             return response.data;
-        }catch (error) {
-            return rejectWithValue(error.response.data)
+        } catch (error) {
+            return rejectWithValue(error.response.data);
         }
     }
 );
@@ -20,11 +19,11 @@ export const fetchCategory = createAsyncThunk(
         try {
             const response = await axios.get('http://localhost:2000/category/get');
             return response.data;
-        }catch (error) {
-            return rejectWithValue(error.response.data)
+        } catch (error) {
+            return rejectWithValue(error.response.data);
         }
     }
-)
+);
 
 const initialState = {
     data: [],
@@ -43,9 +42,30 @@ const shopSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity = action.payload.quantity;
             } else {
-                state.cart.push({ ...action.payload, quantity: action.payload.quantity, price: action.payload.price, name: action.payload.name, img: action.payload.img });
+                state.cart.push({
+                    ...action.payload,
+                    quantity: action.payload.quantity,
+                    price: action.payload.price,
+                    name: action.payload.name,
+                    img: action.payload.img
+                });
             }
-        }
+        },
+        incrementItem: (state, action) => {
+            const existingItem = state.cart.find(item => item.id === action.payload.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            }
+        },
+        decrementItem: (state, action) => {
+            const existingItem = state.cart.find(item => item.id === action.payload.id);
+            if (existingItem && existingItem.quantity > 0) {
+                existingItem.quantity -= 1;
+                if (existingItem.quantity === 0) {
+                    state.cart = state.cart.filter(item => item.id !== action.payload.id);
+                }
+            } 
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -61,7 +81,7 @@ const shopSlice = createSlice({
                 state.error = action.payload;
             })
             .addCase(fetchCategory.pending, (state) => {
-                state.status = 'loading'
+                state.status = 'loading';
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
                 state.status = 'succeeded';
@@ -70,9 +90,9 @@ const shopSlice = createSlice({
             .addCase(fetchCategory.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
-            })
+            });
     }
-})
+});
 
-export const { addItem } = shopSlice.actions;
+export const { addItem, incrementItem, decrementItem } = shopSlice.actions;
 export default shopSlice.reducer;
