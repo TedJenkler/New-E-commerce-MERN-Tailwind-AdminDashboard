@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { incrementItem } from '../features/shopSlice'
 import { decrementItem } from '../features/shopSlice';
 import { removeAll } from '../features/shopSlice'
+import { Link } from 'react-router-dom'
 
 function Nav() {
   const [toggle, setToggle] = useState(false)
@@ -55,7 +56,7 @@ function Nav() {
             <p className='text-lg text-black2 font-bold'>$ {totalPrice}</p>
           </div>
           <div className='flex justify-center'>
-            <button className='text-sm bg-darkorange text-white w-full py-4'>CHECKOUT</button>
+            <Link to="/checkout" className='text-sm bg-darkorange text-white w-full py-4'>CHECKOUT</Link>
           </div>
         </div> : null}
     </div> 

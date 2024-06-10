@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useSelector } from 'react-redux';
 
 const stripePromise = loadStripe('your_publishable_key');
 
@@ -8,6 +9,11 @@ function Checkout() {
   const stripe = useStripe();
   const elements = useElements();
   const [paymentError, setPaymentError] = useState(null);
+  const cart = useSelector((state) => state.shop.cart)
+  console.log(cart)
+
+  const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+  const deliveryPrice = 50;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,11 +40,11 @@ function Checkout() {
   };
 
   return (
-    <section className='bg-greywhite'>
+    <section className='bg-greywhite pb-24'>
       <div className='py-4 px-6'>
         <button>Go Back</button>
       </div>
-      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col' onSubmit={handleSubmit}>
+      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col'>
         <h1 className='text-28xl font-bold tracking-[1px] text-black2 mb-8'>CHECKOUT</h1>
         <div className='flex flex-col'>
           <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>BILLING DETAILS</h2>
@@ -75,8 +81,43 @@ function Checkout() {
           </div>
           {paymentError && <div className="error-message">{paymentError}</div>}
         </div>
-        <button type="submit" disabled={!stripe}>Pay Now</button>
       </form>
+      <div className='bg-white mx-6 py-8 px-6 rounded-lg'>
+        <h2 className='text-lg text-black2 tracking-[1.29px] font-bold mb-8'>SUMMARY</h2>
+        {cart.map((item) => {
+          return (
+            <div className='flex'>
+              <div>
+                  <img className='h-16 min-w-16 rounded-lg' src={item.img} alt={item.name} />
+                </div>
+                <div className='flex flex-col justify-center'>
+                  <p className='text-sbase font-bold text-black2'>{item.name}</p>
+                  <p className='text-sm font-bold text-bordergrey'>$ {item.price}</p>
+                </div>
+                <div>
+                  <p>x {item.quantity}</p>
+                </div>
+            </div>
+          )
+        })}
+        <div className='flex justify-between mb-2'>
+          <p className='text-sbase text-bordergrey font-medium'>TOTAL</p>
+          <p className='text-lg text-black2 font-bold'>$ {totalPrice}</p>
+        </div>
+        <div className='flex justify-between mb-2'>
+          <p className='text-sbase text-bordergrey font-medium'>SHIPPING</p>
+          <p className='text-lg text-black2 font-bold'>$ {deliveryPrice}</p>
+        </div>
+        <div className='flex justify-between mb-6'>
+          <p className='text-sbase text-bordergrey font-medium'>VAT (INCLUDED)</p>
+          <p className='text-lg text-black2 font-bold'>$ {Math.ceil(totalPrice * 0.20)}</p>
+        </div>
+        <div className='flex justify-between mb-8'>
+          <p className='text-sbase text-bordergrey font-medium'>GRAND TOTAL</p>
+          <p className='text-lg text-black2 font-bold'>$ {totalPrice + deliveryPrice}</p>
+        </div>
+        <button className='bg-darkorange text-white w-full py-4' onClick={handleSubmit} disabled={!stripe}>CONTINUE & PAY</button>
+      </div>
     </section>
   );
 }
