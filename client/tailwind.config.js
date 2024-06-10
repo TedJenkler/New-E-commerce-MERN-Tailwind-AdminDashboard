@@ -21,6 +21,7 @@ export default {
         'lightgreywhite': '#FAFAFA',
         'bordergrey': '#979797',
         'hoverblack': '#4C4C4C',
+        'inputborder': '#CFCFCF',
       },
       backgroundImage: {
         'hero': "url('./src/assets/bghero.png')",

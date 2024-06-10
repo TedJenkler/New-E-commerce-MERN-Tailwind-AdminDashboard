@@ -34,38 +34,48 @@ function Checkout() {
   };
 
   return (
-    <section>
-      <div>
+    <section className='bg-greywhite'>
+      <div className='py-4 px-6'>
         <button>Go Back</button>
       </div>
-      <form onSubmit={handleSubmit}>
-        <h1>CHECKOUT</h1>
-        <div>
-          <h2>BILLING DETAILS</h2>
-          <label>Name</label>
-          <input type="text" placeholder="John Doe" />
-          <label>Email Address</label>
-          <input type="email" placeholder="john@example.com" />
-          <label>Phone Number</label>
-          <input type="tel" placeholder="123-456-7890" />
+      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col' onSubmit={handleSubmit}>
+        <h1 className='text-28xl font-bold tracking-[1px] text-black2 mb-8'>CHECKOUT</h1>
+        <div className='flex flex-col'>
+          <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>BILLING DETAILS</h2>
+          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Name</label>
+          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="John Doe" />
+          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Email Address</label>
+          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="email" placeholder="john@example.com" />
+          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Phone Number</label>
+          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="tel" placeholder="123-456-7890" />
         </div>
-        <div>
-          <h2>SHIPPING INFO</h2>
-          <label>Your Address</label>
-          <input type="text" placeholder="123 Street" />
-          <label>ZIP Code</label>
-          <input type="text" placeholder="12345" />
-          <label>City</label>
-          <input type="text" placeholder="City" />
-          <label>Country</label>
-          <input type="text" placeholder="Country" />
+        <div className='flex flex-col'>
+          <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>SHIPPING INFO</h2>
+          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Your Address</label>
+          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="123 Street" />
+          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>ZIP Code</label>
+          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="12345" />
+          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>City</label>
+          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="City" />
+          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Country</label>
+          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="Country" />
         </div>
-        <div>
-          <h2>PAYMENT DETAILS</h2>
-          <CardElement />
+        <div className='flex flex-col'>
+          <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>PAYMENT DETAILS</h2>
+          <label className='h-14 w-full px-4 flex items-center gap-4 border border-inputborder rounded-lg mb-4'>
+            <input className='w-5 h-5' type='radio' name='payment'></input>
+            <p className='text-sm font-bold text-black2 tracking-[-0.25px]'>Stripe</p>
+          </label>
+          <label className='h-14 w-full px-4 flex items-center gap-4 border border-inputborder rounded-lg mb-6'>
+            <input className='w-5 h-5' type='radio' name='payment'></input>
+            <p className='text-sm font-bold text-black2 tracking-[-0.25px]'>Cash on Delivery</p>
+          </label>
+          <div className='h-14 w-full border border-inputborder px-4 flex flex-col justify-center rounded-lg mb-4'>
+            <CardElement />
+          </div>
           {paymentError && <div className="error-message">{paymentError}</div>}
-          <button type="submit" disabled={!stripe}>Pay Now</button>
         </div>
+        <button type="submit" disabled={!stripe}>Pay Now</button>
       </form>
     </section>
   );
