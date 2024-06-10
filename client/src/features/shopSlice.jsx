@@ -30,7 +30,13 @@ const initialState = {
     category: [],
     status: 'idle',
     error: null,
-    cart: [],
+    cart: [{
+        id: "666036f7b1788b61a5cb9ec9",
+        quantity: 1,
+        img: "../src/assets/product-yx1-earphonesmobile.jpg",
+        price: 599,
+        name: "YX1"
+      }],
 };
 
 const shopSlice = createSlice({

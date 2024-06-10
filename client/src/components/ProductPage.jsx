@@ -43,7 +43,7 @@ function productPage() {
             </div>
           </div>
           <div className='w-1/2 flex items-center justify-end'>
-            <button onClick={() => {dispatch(addItem({ id: product._id, quantity: count, img: product.img, price: product.price, name: product.name })), setCount(0)}} className='bg-darkorange text-white px-8 py-4 text-lxs'>ADD TO CART</button>
+            <button onClick={() => {dispatch(addItem({ id: product._id, quantity: count, img: product.img, price: product.price, name: product.shortname })), setCount(0)}} className='bg-darkorange text-white px-8 py-4 text-lxs'>ADD TO CART</button>
           </div>
         </div>
         <h2 className='text-2xl text-black2 font-bold mb-6 tracking-[0.86px]'>FEATURES</h2>
