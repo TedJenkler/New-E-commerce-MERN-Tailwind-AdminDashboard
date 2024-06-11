@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useSelector } from 'react-redux';
 import img from "../assets/check.png"
+import { Link } from 'react-router-dom';
 
 const stripePromise = loadStripe('your_publishable_key');
 
@@ -12,6 +13,7 @@ function Checkout() {
   const [paymentError, setPaymentError] = useState(null);
   const cart = useSelector((state) => state.shop.cart)
   const [radio, setRadio] = useState(false);
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
   const deliveryPrice = 50;
@@ -41,11 +43,12 @@ function Checkout() {
   };
 
   const handleSubmit = () => {
-    alert('Cash on delivery')
+    setOrderConfirmed(true);
   }
 
   return (
     <section className='bg-greywhite pb-24'>
+      {orderConfirmed ? 
       <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56'>
         <img className='mb-6' src={img} alt='check' />
         <p className='text-2xl font-bold  text-black2 tracking-[0.86px] mb-4'>THANK YOU FOR YOUR ORDER</p>
@@ -73,10 +76,10 @@ function Checkout() {
             <p className='text-white text-lg font-bold'>$ {totalPrice + deliveryPrice}</p>
           </div>
         </div>
-        <button className='bg-darkorange text-white text-sm font-bold tracking-[1px] w-full py-4'>BACK TO HOME</button>
-      </div>
+        <Link to="/" className='bg-darkorange text-white text-sm font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
+      </div> : null}
       <div className='py-4 px-6'>
-        <button>Go Back</button>
+        <Link to="/">Go Back</Link>
       </div>
       <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col'>
         <h1 className='text-28xl font-bold tracking-[1px] text-black2 mb-8'>CHECKOUT</h1>
@@ -120,16 +123,18 @@ function Checkout() {
         <h2 className='text-lg text-black2 tracking-[1.29px] font-bold mb-8'>SUMMARY</h2>
         {cart.map((item) => {
           return (
-            <div className='flex'>
-              <div>
+            <div className='flex justify-between mb-6'>
+              <div className='flex gap-4'>
+                <div>
                   <img className='h-16 min-w-16 rounded-lg' src={item.img} alt={item.name} />
                 </div>
                 <div className='flex flex-col justify-center'>
                   <p className='text-sbase font-bold text-black2'>{item.name}</p>
                   <p className='text-sm font-bold text-bordergrey'>$ {item.price}</p>
                 </div>
-                <div>
-                  <p>x {item.quantity}</p>
+              </div>
+                <div className='flex pt-3'>
+                  <p className='text-sbase font-bold text-bordergrey'>x {item.quantity}</p>
                 </div>
             </div>
           )

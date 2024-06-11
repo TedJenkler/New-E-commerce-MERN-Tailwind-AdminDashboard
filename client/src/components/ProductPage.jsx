@@ -26,7 +26,7 @@ function productPage() {
   return (
     <div className='px-6'>
       <div className='py-4'>
-        <p className='text-sbase font-medium text-bordergrey'>Go Back</p>
+        <Link to="/" className='text-sbase font-medium text-bordergrey'>Go Back</Link>
       </div>
       <section>
         <img className='mb-8' src={product ? product.img : null} alt="product img"/>

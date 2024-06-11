@@ -30,18 +30,20 @@ function Nav() {
       {toggleCart ? 
         <div className='absolute bg-white py-8 px-7 w-11/12 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg'>
           <div className='flex justify-between mb-8'>
-            <h2 className='text-lg text-black2 font-bold tracking-[1.29px]'>cart ({cart.length})</h2>
+            <h2 className='text-lg text-black2 font-bold tracking-[1.29px]'>CART ({cart.length})</h2>
             <p onClick={(e) => {dispatch(removeAll())}} className='text-sbase text-bordergrey underline font-medium'>Remove all</p>
           </div>
           {cart.map((item) =>{
             return (
-              <div className='flex gap-4 mb-6'>
-                <div>
-                  <img className='h-16 min-w-16 rounded-lg' src={item.img} alt={item.name} />
-                </div>
-                <div className='flex flex-col justify-center'>
-                  <p className='text-sbase font-bold text-black2'>{item.name}</p>
-                  <p className='text-sm font-bold text-bordergrey'>$ {item.price}</p>
+              <div className='flex justify-between mb-6'>
+                <div className='flex gap-4'>
+                  <div>
+                    <img className='h-16 min-w-16 rounded-lg' src={item.img} alt={item.name} />
+                  </div>
+                  <div className='flex flex-col justify-center'>
+                    <p className='text-sbase font-bold text-black2'>{item.name}</p>
+                    <p className='text-sm font-bold text-bordergrey'>$ {item.price}</p>
+                  </div>
                 </div>
                 <div className='flex items-center'>
                   <button onClick={(e) => dispatch(decrementItem({ id: item.id, quantity: item.quantity }))} className='w-6 h-8 bg-greywhite'>-</button>
@@ -56,7 +58,7 @@ function Nav() {
             <p className='text-lg text-black2 font-bold'>$ {totalPrice}</p>
           </div>
           <div className='flex justify-center'>
-            <Link to="/checkout" className='text-sm bg-darkorange text-white w-full py-4'>CHECKOUT</Link>
+            <Link onClick={() => {setToggleCart(false)}} to="/checkout" className='text-sm bg-darkorange text-white w-full py-4 text-center'>CHECKOUT</Link>
           </div>
         </div> : null}
     </div> 

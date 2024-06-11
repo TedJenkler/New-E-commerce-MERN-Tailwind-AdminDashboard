@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 function Homepage() {
   return (
     <section>
-      <div className='bg-black2 text-white bg-hero bg-center py-28 flex flex-col text-center items-center mb-24'>
+      <div className='bg-black2 text-white bg-hero bg-center py-28 flex flex-col text-center items-center border-t border-bordergrey/25 mb-24'>
         <p className='text-sm text-bordergrey tracking-[10px] mb-4'>NEW PRODUCT</p>
         <h1 className='text-4xl tracking-[1.29px] font-bold mb-6'>XX99 Mark II HeadphoneS</h1>
         <p className='mx-6 text-bordergrey text-sbase font-medium mb-7'>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
