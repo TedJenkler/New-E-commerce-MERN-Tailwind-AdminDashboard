@@ -26,11 +26,11 @@ function Nav() {
         </div>
         <img onClick={(e) => setToggleCart(!toggleCart)} className='h-5 w-5' src={cartimg} alt='cart' />
       </header>
-      {toggle ? <nav className='absolute bg-white w-full px-6 pt-20 z-50'>
+      {toggle ? <nav className='absolute bg-white w-full px-6 pt-20 z-50 md:px-10'>
         <CategoryLinks />
       </nav> : null }
       {toggleCart ? 
-        <div className='absolute bg-white py-8 px-7 w-11/12 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg'>
+        <div className='absolute bg-white py-8 px-7 w-11/12 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg md:w-[49%] md:p-8 md:transform-none md:right-10'>
           <div className='flex justify-between mb-8'>
             <h2 className='text-lg text-black2 font-bold tracking-[1.29px]'>CART ({cart.length})</h2>
             <p onClick={(e) => {dispatch(removeAll())}} className='text-sbase text-bordergrey underline font-medium'>Remove all</p>

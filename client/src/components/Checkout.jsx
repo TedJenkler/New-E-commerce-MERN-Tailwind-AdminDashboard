@@ -49,12 +49,12 @@ function Checkout() {
   return (
     <section className='bg-greywhite pb-24'>
       {orderConfirmed ? 
-      <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56'>
-        <img className='mb-6' src={img} alt='check' />
-        <p className='text-2xl font-bold  text-black2 tracking-[0.86px] mb-4'>THANK YOU FOR YOUR ORDER</p>
-        <p className='text-sbase font-medium text-bordergrey mb-6'>You will receive an email confirmation shortly.</p>
-        <div className='mb-6'>
-          <div className='bg-greywhite rounded-t-lg p-8 pb-6 flex flex-col'>
+      <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56 md:w-[70%] md:p-12'>
+        <img className='mb-6 md:mb-8' src={img} alt='check' />
+        <p className='text-2xl font-bold  text-black2 tracking-[0.86px] mb-4 md:text-32xl md:tracking-[1.14px] md:mr-40 md:mb-6'>THANK YOU FOR YOUR ORDER</p>
+        <p className='text-sbase font-medium text-bordergrey mb-6 md:mb-8'>You will receive an email confirmation shortly.</p>
+        <div className='mb-6 md:flex md:w-full md:mb-12'>
+          <div className='bg-greywhite rounded-t-lg p-8 pb-6 flex flex-col md:rounded-l-lg md:rounded-r-none md:w-[56%] md:p-6'>
             <div className='flex justify-between pb-3 border-b border-bordergrey/25 mb-3'>
               <div className='flex gap-4'>
                 <img className='w-[50px] h-[50px]' src={cart ? cart[0].img : null} alt={cart ? cart[0].name : null} />
@@ -71,37 +71,65 @@ function Checkout() {
               <p className='text-xs text-bordergrey font-bold tracking-[0.21px]'>and {cart.length} other {cart.length > 1 ? "item(s)" : "item"}</p>
             </div>
           </div>
-          <div className='bg-black2 text-white rounded-b-lg pt-4 pb-5 px-6'>
-            <p className='text-bordergrey text-sbase font-medium'>GRAND TOTAL</p>
+          <div className='bg-black2 text-white rounded-b-lg pt-4 pb-5 px-6 md:rounded-r-lg md:rounded-l-none md:w-[44%] md:py-10 md:px-6'>
+            <p className='text-bordergrey text-sbase font-medium md:mb-2'>GRAND TOTAL</p>
             <p className='text-white text-lg font-bold'>$ {totalPrice + deliveryPrice}</p>
           </div>
         </div>
         <Link to="/" className='bg-darkorange text-white text-sm font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
       </div> : null}
-      <div className='py-4 px-6'>
+      <div className='py-4 px-6 md:pt-12 md:pb-6 md:px-10'>
         <Link to="/">Go Back</Link>
       </div>
-      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col'>
-        <h1 className='text-28xl font-bold tracking-[1px] text-black2 mb-8'>CHECKOUT</h1>
-        <div className='flex flex-col'>
+      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col md:mx-10 md:py-8 md:px-7'>
+        <h1 className='text-28xl font-bold tracking-[1px] text-black2 mb-8 md:text-32xl md:tracking-[1.14px] md:mb-10'>CHECKOUT</h1>
+        <div className='flex flex-col md:mb-14'>
           <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>BILLING DETAILS</h2>
-          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Name</label>
-          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="John Doe" />
-          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Email Address</label>
-          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="email" placeholder="john@example.com" />
-          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Phone Number</label>
-          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="tel" placeholder="123-456-7890" />
+          <div className='md:flex md:gap-4'>
+            <div className='md:w-1/2'>
+              <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Name</label>
+              <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="John Doe" />
+            </div>
+            <div className='md:w-1/2'>
+              <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Email Address</label>
+              <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="email" placeholder="john@example.com" />
+            </div>
+          </div>
+          <div className='md:flex md:gap-4'>
+          <div className='md:w-1/2'>
+            <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Phone Number</label>
+            <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="tel" placeholder="123-456-7890" />
+          </div>
+          <div className='md:w-1/2'></div>
+          </div>
         </div>
         <div className='flex flex-col'>
-          <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>SHIPPING INFO</h2>
-          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Your Address</label>
-          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="123 Street" />
-          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>ZIP Code</label>
-          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="12345" />
-          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>City</label>
-          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="City" />
-          <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Country</label>
-          <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="Country" />
+          <div className='md:mb-16'>
+            <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>SHIPPING INFO</h2>
+            <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Your Address</label>
+            <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="123 Street" />
+            <div>
+              <div className='md:flex md:gap-4'>
+                <div className='md:w-1/2'>
+                  <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>ZIP Code</label>
+                  <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="12345" />
+                </div>
+                <div className='md:w-1/2'>
+                  <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>City</label>
+                  <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="City" />
+                </div>
+              </div>
+              <div className='md:flex md:gap-4'>
+                <div className='md:w-1/2'>              
+                  <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Country</label>
+                  <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="Country" />
+                </div>
+                <div className='md:w-1/2'>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className='flex flex-col'>
           <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>PAYMENT DETAILS</h2>
@@ -119,7 +147,7 @@ function Checkout() {
           {paymentError && <div className="error-message">{paymentError}</div>}
         </div>
       </form>
-      <div className='bg-white mx-6 py-8 px-6 rounded-lg'>
+      <div className='bg-white mx-6 py-8 px-6 rounded-lg md:mx-10 md:p-8'>
         <h2 className='text-lg text-black2 tracking-[1.29px] font-bold mb-8'>SUMMARY</h2>
         {cart.map((item) => {
           return (
