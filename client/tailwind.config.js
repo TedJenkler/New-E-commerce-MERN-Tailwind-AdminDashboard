@@ -10,6 +10,9 @@ export default {
         'lxs': '0.8125rem',
         'sbase': '0.938rem',
         '28xl': '1.75rem',
+        '32xl': '2rem',
+        '40xl': '2.5rem',
+        '56xl': '3.5rem',
       },
       colors: {
         'darkorange': '#D87D4A',
@@ -25,8 +28,11 @@ export default {
       },
       backgroundImage: {
         'hero': "url('./src/assets/bghero.png')",
+        'heromd': "url('./src/assets/bgheromd.png')",
         'hero2': "url('./src/assets/bgzx9.png')",
+        'hero2md': "url('./src/assets/bgzx9md.png')",
         'hero3': "url('./src/assets/bgzx7.png')",
+        'hero3md': "url('./src/assets/bgzx7md.png')",
       }
     },
   },

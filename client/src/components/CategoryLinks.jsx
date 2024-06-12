@@ -7,10 +7,10 @@ function CategoryLinks() {
     const state = useSelector((state) => state.shop.category)
     console.log(state)
   return (
-    <div className='mb-32'>
+    <div className='mb-32 md:flex md:gap-3 md:mb-24'>
         {state.map((category, index) => {
             return (
-                <div key={index} className='h-40 w-full bg-greywhite rounded-lg mb-20 relative pt-20 flex flex-col items-center'>
+                <div key={index} className='h-40 w-full bg-greywhite rounded-lg mb-20 relative pt-20 flex flex-col items-center md:mb-0'>
                     <img className='absolute bottom-2/3 left-1/2 transform -translate-x-1/2' src={category.img.mobile} />
                     <p className='mb-4'>{category.name.toUpperCase()}</p>
                     <Link to={"/" + category.name} className='flex items-center justify-center gap-3'>SHOP<img className='w-2 h-3' src={arrow} alt='arrow' /></Link>

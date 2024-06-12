@@ -19,9 +19,11 @@ function Nav() {
 
   return (
     <div>
-      <header className='bg-black2 flex justify-between items-center px-6 py-8'>
-        <img onClick={(e) => setToggle(!toggle)} className='h-4 w-4' src={burger} alt='menu' />
-        <img className='h-6' src={logo} alt='logo' />
+      <header className='bg-black2 flex justify-between items-center px-6 py-8 md:px-10'>
+        <div className='flex md:gap-10 items-center'>
+          <img onClick={(e) => setToggle(!toggle)} className='h-4 w-4' src={burger} alt='menu' />
+          <img className='h-6 absolute left-1/2 transform -translate-x-1/2 md:left-0 md:relative md:transform-none' src={logo} alt='logo' />
+        </div>
         <img onClick={(e) => setToggleCart(!toggleCart)} className='h-5 w-5' src={cartimg} alt='cart' />
       </header>
       {toggle ? <nav className='absolute bg-white w-full px-6 pt-20 z-50'>

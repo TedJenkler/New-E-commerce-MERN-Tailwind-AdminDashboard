@@ -10,29 +10,32 @@ import { Link } from 'react-router-dom'
 function Footer() {
   const dispatch = useDispatch()
   const state = useSelector((state) => state.shop.category)
-  console.log(state)
 
   useEffect(() => {
     dispatch(fetchCategory());
   },[])
 
   return (
-    <footer className='pt-14 px-6 text-center pb-10 bg-black2 flex flex-col items-center'>
-        <img className='mb-12' src={logo} alt='logo' />
-        <ul className='text-white mb-12 flex flex-col'>
-            <Link to="/" className='mb-4'>HOME</Link>
-            {state ? state.map((category, index) => {
-              return (
-                <Link key={index} to={ category.name ? "/" + category.name : null} className='mb-4'>{category.name.toUpperCase()}</Link>
-              )
-            }) : null}
-        </ul>
-        <p className='text-white opacity-50 mb-12'>Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.</p>
-        <p className='text-white opacity-50 mb-12'>Copyright 2021. All Rights Reserved</p>
-        <div className='flex gap-4'>
+    <footer className='pt-14 px-6 text-center pb-10 bg-black2 flex flex-col items-center md:items-start md:px-10 md:pt-16 md:pb-11'>
+        <img className='mb-12 md:mb-8' src={logo} alt='logo' />
+        <div>
+          <ul className='text-white mb-12 flex flex-col md:flex-row md:gap-8 md:mb-8'>
+              <Link to="/" className='mb-4'>HOME</Link>
+              {state ? state.map((category, index) => {
+                return (
+                  <Link key={index} to={ category.name ? "/" + category.name : null} className='mb-4'>{category.name.toUpperCase()}</Link>
+                )
+              }) : null}
+          </ul>
+        </div>
+        <p className='text-white opacity-50 mb-12 md:text-start md:mb-20'>Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.</p>
+        <div className='flex flex-col items-center md:justify-between md:w-full md:flex-row'>
+          <p className='text-white opacity-50 mb-12 md:w-1/2 md:text-start md:items-center md:mb-0'>Copyright 2021. All Rights Reserved</p>
+          <div className='flex gap-4 md:w-1/2 md:justify-end'>
             <img src={facebook} alt='facebook' />
             <img src={twitter} alt='twitter' />
             <img src={instagram} alt='instagram' />
+          </div>
         </div>
     </footer>
   )
