@@ -29,10 +29,13 @@ export default {
       backgroundImage: {
         'hero': "url('./src/assets/bghero.png')",
         'heromd': "url('./src/assets/bgheromd.png')",
+        'heroxl': "url('./src/assets/bgheroxl.svg')",
         'hero2': "url('./src/assets/bgzx9.png')",
+        'hero2xl': "url('./src/assets/bgzx9xl.png')",
         'hero2md': "url('./src/assets/bgzx9md.png')",
         'hero3': "url('./src/assets/bgzx7.png')",
         'hero3md': "url('./src/assets/bgzx7md.png')",
+        'hero3xl': "url('./src/assets/bgzx7xl.png')"
       }
     },
   },

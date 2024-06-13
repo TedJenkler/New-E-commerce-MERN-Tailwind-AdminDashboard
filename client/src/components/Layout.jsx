@@ -6,9 +6,9 @@ const Layout = ({ children }) => {
   return (
     <div className="layout">
       <Nav />
-      <div className="main-content">
-        {children}
-      </div>
+        <div className="main-content">
+          {children}
+        </div>
       <Footer />
     </div>
   );

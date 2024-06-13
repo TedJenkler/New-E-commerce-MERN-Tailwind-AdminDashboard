@@ -47,9 +47,9 @@ function Checkout() {
   }
 
   return (
-    <section className='bg-greywhite pb-24'>
+    <section className='bg-greywhite pb-24 xl:pt-20 xl:px-40 xl:pb-32'>
       {orderConfirmed ? 
-      <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56 md:w-[70%] md:p-12'>
+      <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56 md:w-[70%] md:p-12 xl:w-[37%]'>
         <img className='mb-6 md:mb-8' src={img} alt='check' />
         <p className='text-2xl font-bold  text-black2 tracking-[0.86px] mb-4 md:text-32xl md:tracking-[1.14px] md:mr-40 md:mb-6'>THANK YOU FOR YOUR ORDER</p>
         <p className='text-sbase font-medium text-bordergrey mb-6 md:mb-8'>You will receive an email confirmation shortly.</p>
@@ -78,10 +78,11 @@ function Checkout() {
         </div>
         <Link to="/" className='bg-darkorange text-white text-sm font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
       </div> : null}
-      <div className='py-4 px-6 md:pt-12 md:pb-6 md:px-10'>
+      <div className='py-4 px-6 md:pt-12 md:pb-6 md:px-10 xl:pt-0 xl:pb-10'>
         <Link to="/">Go Back</Link>
       </div>
-      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col md:mx-10 md:py-8 md:px-7'>
+      <div className='xl:flex'>
+      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col md:mx-10 md:py-8 md:px-7 xl:w-[65%] xl:m-0'>
         <h1 className='text-28xl font-bold tracking-[1px] text-black2 mb-8 md:text-32xl md:tracking-[1.14px] md:mb-10'>CHECKOUT</h1>
         <div className='flex flex-col md:mb-14'>
           <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>BILLING DETAILS</h2>
@@ -147,7 +148,7 @@ function Checkout() {
           {paymentError && <div className="error-message">{paymentError}</div>}
         </div>
       </form>
-      <div className='bg-white mx-6 py-8 px-6 rounded-lg md:mx-10 md:p-8'>
+      <div className='bg-white mx-6 py-8 px-6 rounded-lg md:mx-10 md:p-8 xl:w-[31%] xl:h-full'>
         <h2 className='text-lg text-black2 tracking-[1.29px] font-bold mb-8'>SUMMARY</h2>
         {cart.map((item) => {
           return (
@@ -185,6 +186,7 @@ function Checkout() {
         </div>
         
         {radio ? <button className='bg-darkorange text-white w-full py-4' onClick={handleSubmit}>CONTINUE & PAY</button> : <button className='bg-darkorange text-white w-full py-4' onClick={handleSubmitStripe} disabled={!stripe}>CONTINUE & PAY</button> }
+      </div>
       </div>
     </section>
   );
