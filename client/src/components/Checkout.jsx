@@ -117,18 +117,27 @@ function Checkout() {
           <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>BILLING DETAILS</h2>
           <div className='md:flex md:gap-4'>
             <div className='md:w-1/2'>
-              <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Name</label>
-              <input onChange={handleChange} value={formData.name} name='name' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="John Doe" />
+              <div className='flex justify-between'>
+                <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.name ? "text-red" : ""}`}>Name</label>
+                <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.name}</p>
+              </div>
+              <input onChange={handleChange} value={formData.name} name='name' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.name ? "border-2 border-red" : ""}`} type="text" placeholder="John Doe" />
             </div>
             <div className='md:w-1/2'>
-              <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Email Address</label>
-              <input onChange={handleChange} value={formData.email} name='email' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="email" placeholder="john@example.com" />
+              <div className='flex justify-between'>
+                <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.email ? "text-red" : ""}`}>Email</label>
+                <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.email}</p>
+              </div>
+              <input onChange={handleChange} value={formData.email} name='email' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.email ? "border-2 border-red" : ""}`} type="email" placeholder="john@example.com" />
             </div>
           </div>
           <div className='md:flex md:gap-4'>
           <div className='md:w-1/2'>
-            <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Phone Number</label>
-            <input onChange={handleChange} value={formData.phone} name='phone' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="tel" placeholder="123-456-7890" />
+            <div className='flex justify-between'>
+              <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.phone ? "text-red" : ""}`}>Phone</label>
+              <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.phone}</p>
+            </div>
+            <input onChange={handleChange} value={formData.phone} name='phone' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.phone ? "border-2 border-red" : ""}`} type="tel" placeholder="123-456-7890" />
           </div>
           <div className='md:w-1/2'></div>
           </div>
@@ -136,23 +145,35 @@ function Checkout() {
         <div className='flex flex-col'>
           <div className='md:mb-16'>
             <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>SHIPPING INFO</h2>
-            <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Your Address</label>
-            <input onChange={handleChange} value={formData.address} name='address' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="123 Street" />
+            <div className='flex justify-between'>
+              <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.address ? "text-red" : ""}`}>Your Address</label>
+              <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.address}</p>
+            </div>
+            <input onChange={handleChange} value={formData.address} name='address' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.address ? "border-2 border-red" : ""}`} type="text" placeholder="123 Street" />
             <div>
               <div className='md:flex md:gap-4'>
                 <div className='md:w-1/2'>
-                  <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>ZIP Code</label>
-                  <input onChange={handleChange} value={formData.postal} name='postal' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="12345" />
+                  <div className='flex justify-between'>
+                    <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.postal ? "text-red" : ""}`}>Zip Code</label>
+                    <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.postal}</p>
+                  </div>
+                  <input onChange={handleChange} value={formData.postal} name='postal' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.postal ? "border-2 border-red" : ""}`} type="text" placeholder="12345" />
                 </div>
                 <div className='md:w-1/2'>
-                  <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>City</label>
-                  <input onChange={handleChange} value={formData.city} name='city' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="City" />
+                  <div className='flex justify-between'>
+                    <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.city ? "text-red" : ""}`}>City</label>
+                    <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.city}</p>
+                  </div>
+                  <input onChange={handleChange} value={formData.city} name='city' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.city ? "border-2 border-red" : ""}`} type="text" placeholder="City" />
                 </div>
               </div>
               <div className='md:flex md:gap-4'>
                 <div className='md:w-1/2'>              
-                  <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Country</label>
-                  <input onChange={handleChange} value={formData.country} name='country' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="Country" />
+                  <div className='flex justify-between'>
+                    <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.country ? "text-red" : ""}`}>Country</label>
+                    <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.country}</p>
+                  </div>
+                  <input onChange={handleChange} value={formData.country} name='country' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.country ? "border-2 border-red" : ""}`} type="text" placeholder="Country" />
                 </div>
                 <div className='md:w-1/2'>
 

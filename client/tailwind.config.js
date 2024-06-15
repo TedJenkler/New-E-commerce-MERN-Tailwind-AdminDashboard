@@ -25,6 +25,7 @@ export default {
         'bordergrey': '#979797',
         'hoverblack': '#4C4C4C',
         'inputborder': '#CFCFCF',
+        'red': '#CD2C2C'
       },
       backgroundImage: {
         'hero': "url('./src/assets/bghero.png')",
