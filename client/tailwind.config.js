@@ -3,6 +3,8 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./dist/**/*.html", // Add dist HTML files if needed
+    "./dist/**/*.{js,ts,jsx,tsx}", // Add dist JS/TS files if needed
   ],
   theme: {
     extend: {
