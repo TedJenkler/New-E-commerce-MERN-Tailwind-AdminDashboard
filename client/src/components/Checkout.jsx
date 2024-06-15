@@ -129,7 +129,7 @@ function Checkout() {
         </div>
         <Link to="/" className='bg-darkorange hover:bg-lightorange text-white text-lxs font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
       </div> : null}
-      <div className={`py-4 px-6 md:pt-12 md:pb-6 md:px-10 xl:pt-0 xl:pb-10 ${orderConfirmed ? "blur" : ""}`}>
+      <div className={`py-4 px-6 md:pt-12 md:pb-6 md:px-10 xl:pt-0 xl:pb-10 xl:px-0 ${orderConfirmed ? "blur" : ""}`}>
         <Link className='hover:text-darkorange text-sbase font-medium text-bordergrey' to="/">Go Back</Link>
       </div>
       <div className={`xl:flex ${orderConfirmed ? "blur" : ""}`}>

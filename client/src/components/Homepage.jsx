@@ -30,7 +30,7 @@ function Homepage() {
         <div className='xl:w-1/2 xl:flex xl:flex-col xl:justify-start'>
           <h2 className='pt-72 mx-10 text-4xl font-bold tracking-[1.29px] mb-6 md:text-56xl md:tracking-[2px] md:leading-[58px] md:pt-80 xl:mx-40 xl:flex xl:flex-col xl:justify-start xl:text-start xl:pt-10'>ZX9 SPEAKER</h2>
           <p className='text-sbase text-white opacity-75 font-medium mx-6 mb-6 md:mb-10 xl:mr-20 xl:ml-40 xl:text-start'>Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</p>
-          <Link to="/product/zx9-speaker" className='btn-b'>SEE PRODUCT</Link>
+          <Link to="/product/zx9-speaker" className='btn-b xl:max-w-[160px] xl:ml-40'>SEE PRODUCT</Link>
         </div>
       </div>
       <div className='bg-hero3 bg-right bg-no-repeat py-24 mx-6 rounded-lg mb-6 px-6 md:bg-hero3md md:mx-10 md:px-16 md:mb-8 xl:bg-hero3xl xl:mx-40 xl:min-w-[1110px] xl:min-h-[320px] xl:bg-cover xl:p-24 xl:mb-12'>

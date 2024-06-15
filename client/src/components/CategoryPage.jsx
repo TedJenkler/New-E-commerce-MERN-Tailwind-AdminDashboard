@@ -49,7 +49,7 @@ function CategoryPage() {
           </div>
         );
       }) : null}
-      <div className='px-6 md:mx-10 xl:mb-40'>
+      <div className='px-6 md:mx-10 xl:mx-40 xl:mb-40 xl:p-0'>
         <CategoryLinks />
       </div>
       <div className='px-6 md:mx-10 xl:mb-40'>

@@ -59,12 +59,12 @@ function productPage() {
             <p className='text-sbase text-bordergrey font-medium mb-28 md:mb-32 xl:mb-0'>{product ? splitByTag(product.features)[1] : null}</p>
           </div>
           <div className='md:flex md:justify-between'>
-            <div className='md:flex md:w-full'>
+            <div className='md:flex md:w-full xl:flex-col xl:min-w-[350px] xl:whitespace-nowrap'>
               <h2 className='text-2xl text-black2 font-bold mb-6 tracking-[0.86px] md:w-1/2 md:text-32xl md:tracking-[1.14px] xl:mb-8'>IN THE BOX</h2>
               <div className='md:flex md:flex-col md:w-1/2 xl:gap-2'>
                 {product ? product.includes.map((item, index) => (
                   <div key={index} className='flex gap-5 mb-2 md:gap-8'>
-                    <p className='text-sbase w-[20px] text-darkorange font-bold'>{item.quantity}x</p>
+                    <p className='text-sbase min-w-[20px] text-darkorange font-bold'>{item.quantity}x</p>
                     <p className='text-sbase text-bordergrey font-medium'>{item.item}</p>
                   </div>
                 )) : null}
