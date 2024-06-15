@@ -29,6 +29,7 @@ const initialState = {
     data: [],
     category: [],
     cartOpen: false,
+    navOpen: false,
     status: 'idle',
     error: null,
     cart: [{
@@ -44,10 +45,19 @@ const shopSlice = createSlice({
     name: 'shop',
     initialState,
     reducers: {
+        toggleNav: (state) => {
+            if(state.navOpen === true){
+                state.navOpen = false
+            }else {
+                state.cartOpen = false
+                state.navOpen = true
+            }
+        },
         toggleCart: (state) => {
             if(state.cartOpen === true){
                 state.cartOpen = false
             }else {
+                state.navOpen = false
                 state.cartOpen = true
             }
         },
@@ -111,5 +121,5 @@ const shopSlice = createSlice({
     }
 });
 
-export const { toggleCart, addItem, incrementItem, decrementItem, removeAll } = shopSlice.actions;
+export const { toggleNav, toggleCart, addItem, incrementItem, decrementItem, removeAll } = shopSlice.actions;
 export default shopSlice.reducer;

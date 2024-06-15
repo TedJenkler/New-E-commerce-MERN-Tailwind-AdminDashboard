@@ -11,14 +11,21 @@ function Checkout() {
   const stripe = useStripe();
   const elements = useElements();
   const [paymentError, setPaymentError] = useState(null);
-  const cart = useSelector((state) => state.shop.cart)
+  const cart = useSelector((state) => state.shop.cart);
   const [radio, setRadio] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', address: '', postal: '', city: '', country: '' })
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    email: '', 
+    phone: '', 
+    address: '', 
+    postal: '', 
+    city: '', 
+    country: '' 
+  });
+  
   const [formErrors, setFormErrors] = useState({});
-  console.log(formData)
-  console.log(formErrors)
 
   const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
   const deliveryPrice = 50;
@@ -40,10 +47,13 @@ function Checkout() {
     if (!formData.postal) errors.postal = "Postal code is required";
     if (!formData.city) errors.city = "City is required";
     if (!formData.country) errors.country = "Country is required";
+    
     setFormErrors(errors);
+    
+    // Return true if there are no errors
     return Object.keys(errors).length === 0;
-  }
- 
+  };
+
   const handleSubmitStripe = async (event) => {
     event.preventDefault();
 
@@ -65,20 +75,32 @@ function Checkout() {
       // Payment successful, handle payment method id
       console.log('[PaymentMethod]', result.paymentMethod);
       // Send result.paymentMethod.id to your server to complete the payment
+      setOrderConfirmed(true);
     }
   };
 
-  const handleSubmit = () => {
-    handleValidate()
-    if(formErrors.length === 0) {
-      setOrderConfirmed(true);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Validate the form
+    const isValid = handleValidate();
+
+    // If form is valid, proceed with payment submission
+    if (isValid) {
+      if (radio) {
+        // Handle Cash on Delivery submission
+        setOrderConfirmed(true);
+      } else {
+        // Handle Stripe payment submission
+        handleSubmitStripe(event);
+      }
     }
-  }
+  };
 
   return (
-    <section className='bg-greywhite pb-24 xl:pt-20 xl:px-40 xl:pb-32'>
+    <section className='bg-lightgreywhite pb-24 xl:pt-20 xl:px-40 xl:pb-32'>
       {orderConfirmed ? 
-      <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56 md:w-[70%] md:p-12 xl:w-[37%]'>
+      <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56 md:w-[70%] md:p-12 xl:w-[37%] z-50'>
         <img className='mb-6 md:mb-8' src={img} alt='check' />
         <p className='text-2xl font-bold  text-black2 tracking-[0.86px] mb-4 md:text-32xl md:tracking-[1.14px] md:mr-40 md:mb-6'>THANK YOU FOR YOUR ORDER</p>
         <p className='text-sbase font-medium text-bordergrey mb-6 md:mb-8'>You will receive an email confirmation shortly.</p>
@@ -105,16 +127,16 @@ function Checkout() {
             <p className='text-white text-lg font-bold'>$ {totalPrice + deliveryPrice}</p>
           </div>
         </div>
-        <Link to="/" className='bg-darkorange hover:bg-lightorange text-white text-sm font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
+        <Link to="/" className='bg-darkorange hover:bg-lightorange text-white text-lxs font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
       </div> : null}
-      <div className='py-4 px-6 md:pt-12 md:pb-6 md:px-10 xl:pt-0 xl:pb-10'>
-        <Link className='hover:text-darkorange' to="/">Go Back</Link>
+      <div className={`py-4 px-6 md:pt-12 md:pb-6 md:px-10 xl:pt-0 xl:pb-10 ${orderConfirmed ? "blur" : ""}`}>
+        <Link className='hover:text-darkorange text-sbase font-medium text-bordergrey' to="/">Go Back</Link>
       </div>
-      <div className='xl:flex'>
+      <div className={`xl:flex ${orderConfirmed ? "blur" : ""}`}>
       <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col md:mx-10 md:py-8 md:px-7 xl:w-[65%] xl:m-0'>
         <h1 className='text-28xl font-bold tracking-[1px] text-black2 mb-8 md:text-32xl md:tracking-[1.14px] md:mb-10'>CHECKOUT</h1>
         <div className='flex flex-col md:mb-14'>
-          <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>BILLING DETAILS</h2>
+          <h2 className='text-darkorange text-lxs font-bold tracking-[0.93px] mb-4'>BILLING DETAILS</h2>
           <div className='md:flex md:gap-4'>
             <div className='md:w-1/2'>
               <div className='flex justify-between'>
@@ -144,7 +166,7 @@ function Checkout() {
         </div>
         <div className='flex flex-col'>
           <div className='md:mb-16'>
-            <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>SHIPPING INFO</h2>
+            <h2 className='text-darkorange text-lxs font-bold tracking-[0.93px] mb-4'>SHIPPING INFO</h2>
             <div className='flex justify-between'>
               <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.address ? "text-red" : ""}`}>Your Address</label>
               <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.address}</p>
@@ -183,13 +205,13 @@ function Checkout() {
           </div>
         </div>
         <div className='flex flex-col'>
-          <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>PAYMENT DETAILS</h2>
+          <h2 className='text-darkorange text-lxs font-bold tracking-[0.93px] mb-4'>PAYMENT DETAILS</h2>
           <label className='h-14 w-full px-4 flex items-center gap-4 border border-inputborder rounded-lg mb-4 focus-within:outline focus-within:outline-1 focus-within:outline-darkorange'>
-            <input onClick={(e) => setRadio(false)} className='w-5 h-5 peer' type='radio' checked={radio === false} name='payment'></input>
+            <input onClick={(e) => setRadio(false)} className='w-5 h-5 peer' type='radio' defaultChecked={radio === false} name='payment'></input>
             <p className='text-sm font-bold text-black2 tracking-[-0.25px]'>Stripe</p>
           </label>
           <label className='h-14 w-full px-4 flex items-center gap-4 border border-inputborder rounded-lg mb-6 focus-within:outline focus-within:outline-1 focus-within:outline-darkorange'>
-            <input onClick={(e) => setRadio(true)} className='w-5 h-5 peer' type='radio' checked={radio === true} name='payment'></input>
+            <input onClick={(e) => setRadio(true)} className='w-5 h-5 peer' type='radio' defaultChecked={radio === true} name='payment'></input>
             <p className='text-sm font-bold text-black2 tracking-[-0.25px]'>Cash on Delivery</p>
           </label>
           <div className='h-14 w-full border border-inputborder px-4 flex flex-col justify-center rounded-lg mb-4'>
@@ -200,9 +222,9 @@ function Checkout() {
       </form>
       <div className='bg-white mx-6 py-8 px-6 rounded-lg md:mx-10 md:p-8 xl:w-[31%] xl:h-full'>
         <h2 className='text-lg text-black2 tracking-[1.29px] font-bold mb-8'>SUMMARY</h2>
-        {cart.map((item) => {
+        {cart.map((item, index) => {
           return (
-            <div className='flex justify-between mb-6'>
+            <div key={index} className='flex justify-between mb-6'>
               <div className='flex gap-4'>
                 <div>
                   <img className='h-16 min-w-16 rounded-lg' src={item.img} alt={item.name} />
@@ -235,7 +257,7 @@ function Checkout() {
           <p className='text-lg text-black2 font-bold xl:text-darkorange'>$ {totalPrice + deliveryPrice}</p>
         </div>
         
-        {radio ? <button className='bg-darkorange hover:bg-lightorange text-white w-full py-4' onClick={handleSubmit}>CONTINUE & PAY</button> : <button className='bg-darkorange hover:bg-lightorange text-white w-full py-4' onClick={handleSubmitStripe} disabled={!stripe}>CONTINUE & PAY</button> }
+        {radio ? <button className='bg-darkorange text-lxs font-bold hover:bg-lightorange text-white w-full py-4' onClick={handleSubmit}>CONTINUE & PAY</button> : <button className='bg-darkorange text-lxs font-bold hover:bg-lightorange text-white w-full py-4' onClick={handleSubmitStripe} disabled={!stripe}>CONTINUE & PAY</button> }
       </div>
       </div>
     </section>
