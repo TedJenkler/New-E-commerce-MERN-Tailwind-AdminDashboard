@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { fetchData } from '../features/shopSlice';
@@ -28,6 +28,11 @@ function CategoryPage() {
     }
   }) : null;
 
+  // Function to determine base path based on environment
+  const getBasePath = () => {
+    return process.env.NODE_ENV === 'development' ? '../src' : '/assets';
+  };
+
   return (
     <section className=''>
       <div className='bg-black1 py-8 flex items-center justify-center border-t border-bordergrey border-opacity-25 mb-16 md:pt-28 md:pb-24 md:mb-32 xl:mb-40'>
@@ -36,9 +41,9 @@ function CategoryPage() {
       {sortedP ? sortedP.map((item, index) => {
         return (
           <div key={index} className='card flex flex-col items-center text-center px-6 md:px-10 xl:px-40 xl:flex-row xl:gap-32 xl:mb-40'>
-            <div className='md:bg-greywhite md:w-full md:rounded-lg md:flex md:justify-center md:mb-14 xl:bg-white xl:w-1/2 xl:mb-0'>
-              <img className='mb-8 md:mb-0 xl:hidden xl:absolute' src={item.img} alt='product img' />
-              <img className='hidden absolute xl:relative xl:flex' src={item.imgxl} alt='product img' />
+            <div className='md:bg-greywhite md:w-full md:rounded-lg md:flex md:justify-center md:mb-14 xl:bg-white xl:justify-between xl:w-1/2 xl:mb-0'>
+              <img className='mb-8 md:mb-0 xl:hidden xl:absolute' src={`${getBasePath()}/${item.img}`} alt='product img' />
+              <img className='hidden absolute xl:relative xl:flex' src={`${getBasePath()}/${item.imgxl}`} alt='product img' />
             </div>
             <div className='mb-32 xl:w-1/2 xl:flex xl:flex-col xl:items-start xl:justify-center xl:mb-0'>
               <p className='text-darkorange text-sm tracking-[10px] mb-6 md:mb-4 xl:text-start'>{item.newP ? "NEW PRODUCT" : null}</p>
@@ -52,7 +57,7 @@ function CategoryPage() {
       <div className='px-6 md:mx-10 xl:mx-40 xl:mb-40 xl:p-0'>
         <CategoryLinks />
       </div>
-      <div className='px-6 md:mx-10 xl:mb-40'>
+      <div className='px-6 md:mx-10 xl:mb-40 xl:mx-40 xl:px-0'>
         <Ad />
       </div>
     </section>

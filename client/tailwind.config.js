@@ -3,8 +3,6 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./dist/**/*.html", // Add dist HTML files if needed
-    "./dist/**/*.{js,ts,jsx,tsx}", // Add dist JS/TS files if needed
   ],
   theme: {
     extend: {
@@ -40,15 +38,15 @@ export default {
         'red': '#CD2C2C'
       },
       backgroundImage: {
-        'hero': "url('/assets/bghero.png')",
-        'heromd': "url('/assets/bgheromd.png')",
-        'heroxl': "url('/assets/bgheroxl.svg')",
-        'hero2': "url('/assets/bgzx9.png')",
-        'hero2xl': "url('/assets/bgzx9xl.png')",
-        'hero2md': "url('/assets/bgzx9md.png')",
-        'hero3': "url('/assets/bgzx7.png')",
-        'hero3md': "url('/assets/bgzx7md.png')",
-        'hero3xl': "url('/assets/bgzx7xl.png')"
+        'hero': process.env.NODE_ENV === 'production' ? "url('/assets/bghero.png')" : "url('../src/assets/bghero.png')",
+        'heromd': process.env.NODE_ENV === 'production' ? "url('/assets/bgheromd.png')" : "url('../src/assets/bgheromd.png')",
+        'heroxl': process.env.NODE_ENV === 'production' ? "url('/assets/bgheroxl.svg')" : "url('../src/assets/bgheroxl.svg')",
+        'hero2': process.env.NODE_ENV === 'production' ? "url('/assets/bgzx9.png')" : "url('../src/assets/bgzx9.png')",
+        'hero2xl': process.env.NODE_ENV === 'production' ? "url('/assets/bgzx9xl.png')" : "url('../src/assets/bgzx9xl.png')",
+        'hero2md': process.env.NODE_ENV === 'production' ? "url('/assets/bgzx9md.png')" : "url('../src/assets/bgzx9md.png')",
+        'hero3': process.env.NODE_ENV === 'production' ? "url('/assets/bgzx7.png')" : "url('../src/assets/bgzx7.png')",
+        'hero3md': process.env.NODE_ENV === 'production' ? "url('/assets/bgzx7md.png')" : "url('../src/assets/bgzx7md.png')",
+        'hero3xl': process.env.NODE_ENV === 'production' ? "url('/assets/bgzx7xl.png')" : "url('../src/assets/bgzx7xl.png')",
       },
     },
   },
