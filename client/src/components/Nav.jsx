@@ -69,7 +69,7 @@ function Nav() {
             <p className='text-lg text-black2 font-bold'>$ {totalPrice}</p>
           </div>
           <div className='flex justify-center'>
-            <Link to="/checkout" className='text-lxs bg-darkorange hover:bg-lightorange text-white w-full py-[15px] text-center'>CHECKOUT</Link>
+            <Link onClick={() => cart.length === 0 ? null : dispatch(toggleCart(false))} to={cart.length === 0 ? null : "/checkout"} className='text-lxs bg-darkorange hover:bg-lightorange text-white w-full py-[15px] text-center'>CHECKOUT</Link>
           </div>
         </div>
       ) : null}

@@ -4,16 +4,16 @@ import './index.css';
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet
 } from "react-router-dom";
 import { store } from './app/store';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import ProductPage from './components/ProductPage';
 import CategoryPage from './components/CategoryPage';
 import Homepage from './components/Homepage';
 import Layout from './components/Layout';
 import Checkout from './components/Checkout';
 import Blur from './components/Blur';
+import ScrollToTop from './components/ScrollToTop';
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -23,20 +23,42 @@ const stripePromise = loadStripe('pk_test_51PPfNkP7UvQT87QE68NIZvrMqWqZleH2fi2zG
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout><Blur><Homepage /></Blur></Layout>,
+    element: (
+      <Layout>
+        <ScrollToTop />
+        <Blur>
+          <Homepage />
+        </Blur>
+      </Layout>
+    ),
   },
   {
     path: "/product/:id",
-    element: <Layout><Blur><ProductPage /></Blur></Layout>,
+    element: (
+      <Layout>
+        <ScrollToTop />
+        <Blur>
+          <ProductPage />
+        </Blur>
+      </Layout>
+    ),
   },
   {
     path: "/:id",
-    element: <Layout><Blur><CategoryPage /></Blur></Layout>,
+    element: (
+      <Layout>
+        <ScrollToTop />
+        <Blur>
+          <CategoryPage />
+        </Blur>
+      </Layout>
+    ),
   },
   {
     path: "/checkout",
     element: (
       <Layout>
+        <ScrollToTop />
         <Elements stripe={stripePromise}>
           <Checkout />
         </Elements>

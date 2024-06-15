@@ -91,7 +91,7 @@ function productPage() {
                 <img className='mb-10 hidden absolute md:flex md:relative xl:hidden xl:absolute' src={item.image.tablet} />
                 <img className='mb-10 hidden absolute xl:flex xl:relative' src={item.image.desktop} />
                 <p className='text-2xl font-bold text-black2 text-center mb-8 md:tracking-[1.71px]'>{item.name}</p>
-                <Link to={"/product/" + item.slug} className='btn-do'>SEE PRODUCT</Link>
+                <Link onClick={() => setCount(0)} to={"/product/" + item.slug} className='btn-do'>SEE PRODUCT</Link>
               </div>
             )) : null}
           </div>
