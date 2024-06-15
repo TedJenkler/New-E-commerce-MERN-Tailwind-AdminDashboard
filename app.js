@@ -14,6 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '/client/dist')))
 
+// Serve images from src/assets
+app.use('/assets', express.static(path.join(__dirname, 'client', 'src', 'assets')));
+
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
 }).then(() => {
