@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Define the base URLs for development and production environments
 const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:2000'
+    ? 'https://new-e-commerce-mern-tailwind.onrender.com'
     : 'http://localhost:2000';
 
 export const placeOrder = createAsyncThunk(
