@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function CategoryLinks() {
   const categories = useSelector((state) => state.shop.category);
-  const basePath = process.env.NODE_ENV === 'development' ? '../src' : '';
+  const basePath = process.env.NODE_ENV === 'development' ? '../src' : null;
   
   return (
     <div className='mb-32 md:flex md:gap-3 md:mb-24 xl:gap-8 xl:mb-40'>
