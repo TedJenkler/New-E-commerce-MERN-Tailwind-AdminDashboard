@@ -9,4 +9,13 @@
     .card:nth-child(2n+1) {
       @apply xl:flex-row-reverse;
     }
+    .btn-do {
+      @apply text-lxs font-bold tracking-[1px] text-white leading-[auto] bg-darkorange hover:bg-lightorange px-7 py-[15px]
+    }
+    .btn-b {
+      @apply text-lxs font-bold tracking-[1px] leading-[auto] bg-black2 hover:bg-hoverblack px-7 py-[15px]
+    }
+    .btn-t {
+      @apply text-lxs font-bold tracking-[1px] leading-[auto] border border-black2 bg-transparent hover:bg-black2 hover:text-white px-7 py-[15px]
+    }
   }

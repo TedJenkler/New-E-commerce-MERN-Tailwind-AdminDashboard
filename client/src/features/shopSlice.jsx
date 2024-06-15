@@ -28,6 +28,7 @@ export const fetchCategory = createAsyncThunk(
 const initialState = {
     data: [],
     category: [],
+    cartOpen: false,
     status: 'idle',
     error: null,
     cart: [{
@@ -43,6 +44,13 @@ const shopSlice = createSlice({
     name: 'shop',
     initialState,
     reducers: {
+        toggleCart: (state) => {
+            if(state.cartOpen === true){
+                state.cartOpen = false
+            }else {
+                state.cartOpen = true
+            }
+        },
         addItem: (state, action) => {
             const existingItem = state.cart.find(item => item.id === action.payload.id);
             if (existingItem) {
@@ -103,5 +111,5 @@ const shopSlice = createSlice({
     }
 });
 
-export const { addItem, incrementItem, decrementItem, removeAll } = shopSlice.actions;
+export const { toggleCart, addItem, incrementItem, decrementItem, removeAll } = shopSlice.actions;
 export default shopSlice.reducer;

@@ -29,11 +29,12 @@ function Footer() {
   };
 
   return (
-    <footer className='pt-14 px-6 text-center pb-10 bg-black2 flex flex-col items-center md:items-start md:px-10 md:pt-16 md:pb-11 xl:px-40'>
+    <footer className='px-6 text-center pb-10 bg-black2 flex flex-col items-center md:items-start md:px-10 md:pb-11 xl:px-40'>
+      <div className='h-1 w-24 border-t-4 border-darkorange mb-14 md:mb-16'></div>
       <div className='xl:flex xl:w-full xl:justify-between'>
         <img className='mb-12 md:mb-8 xl:mb-9' src={logo} alt='logo' />
         <div>
-          <ul className='text-white mb-12 flex flex-col md:flex-row md:gap-8 md:mb-8 xl:mb-0'>
+          <ul className='text-white text-lxs tracking-[2px] font-bold mb-12 flex flex-col md:flex-row md:gap-8 md:mb-8 xl:mb-0'>
             <Link to="/" className='mb-4 hover:text-darkorange'>HOME</Link>
             {state ? state.map((category, index) => (
               <Link key={index} to={category.name ? "/" + category.name : null} className='mb-4 hover:text-darkorange'>{category.name.toUpperCase()}</Link>
@@ -44,7 +45,7 @@ function Footer() {
       <div>
         <div className='xl:flex xl:mb-14'>
           <div className='xl:w-1/2'>
-            <p className='text-white opacity-50 mb-12 md:text-start md:mb-20 xl:mb-0'>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.</p>
+            <p className='text-white text-sbase opacity-50 mb-12 md:text-start md:mb-20 xl:mb-0'>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.</p>
           </div>
           <div className='xl:w-1/2 xl:flex xl:items-end xl:justify-end'>
             <div className='hidden absolute gap-4 xl:flex xl:relative'>
@@ -73,7 +74,7 @@ function Footer() {
           </div>
         </div>
         <div className='flex flex-col items-center md:justify-between md:w-full md:flex-row'>
-          <p className='text-white opacity-50 mb-12 md:w-1/2 md:text-start md:items-center md:mb-0'>Copyright 2021. All Rights Reserved</p>
+          <p className='text-white text-sbase opacity-50 mb-12 md:w-1/2 md:text-start md:items-center md:mb-0'>Copyright 2021. All Rights Reserved</p>
           <div className='flex gap-4 md:w-1/2 md:justify-end xl:hidden xl:absolute'>
             <img src={facebook} alt='facebook' />
             <img src={twitter} alt='twitter' />

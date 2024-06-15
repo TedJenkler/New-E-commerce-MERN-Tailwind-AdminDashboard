@@ -13,6 +13,7 @@ import CategoryPage from './components/CategoryPage';
 import Homepage from './components/Homepage';
 import Layout from './components/Layout';
 import Checkout from './components/Checkout';
+import Blur from './components/Blur';
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -22,15 +23,15 @@ const stripePromise = loadStripe('pk_test_51PPfNkP7UvQT87QE68NIZvrMqWqZleH2fi2zG
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout><Homepage /></Layout>,
+    element: <Layout><Blur><Homepage /></Blur></Layout>,
   },
   {
     path: "/product/:id",
-    element: <Layout><ProductPage /></Layout>,
+    element: <Layout><Blur><ProductPage /></Blur></Layout>,
   },
   {
     path: "/:id",
-    element: <Layout><CategoryPage /></Layout>,
+    element: <Layout><Blur><CategoryPage /></Blur></Layout>,
   },
   {
     path: "/checkout",

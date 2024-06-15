@@ -34,7 +34,7 @@ function productPage() {
             <img className='hidden absolute xl:relative xl:flex' src={product ? product.imgxl : null} alt="product img"/>
           </div>
           <div className='md:w-1/2 md:flex md:flex-col pt-12 xl:justify-center'>
-            <p className='text-darkorange text-sbase tracking-[10px] mb-6 md:text-xs md:tracking-[8.57px] md:mb-4'>{product ? product.newP ? "NEW PRODUCT" : null : null}</p>
+            <p className='text-darkorange text-sm tracking-[10px] mb-6 md:text-xs md:tracking-[8.57px] md:mb-4'>{product ? product.newP ? "NEW PRODUCT" : null : null}</p>
             <h1 className='text-28xl font-bold text-black2 mb-6 tracking-[1px] md:mb-8 xl:mr-40 xl:text-40xl xl:tracking-[1.43px] xl:leading-[44px]'>{product ? product.name : null}</h1>
             <p className='text-sbase text-bordergrey font-medium mb-6 md:mb-8 xl:mr-20'>{product ? product.description : null}</p>
             <p className='text-lg text-black2 font-bold mb-8 tracking-[1.29px]'>$ {product ? product.price : null}</p>
@@ -47,7 +47,7 @@ function productPage() {
                 </div>
               </div>
               <div className='w-1/2 flex items-center justify-end xl:justify-start'>
-                <button onClick={() => {dispatch(addItem({ id: product._id, quantity: count, img: product.img, price: product.price, name: product.shortname })), setCount(0)}} className='bg-darkorange hover:bg-lightorange text-white px-8 py-4 text-lxs'>ADD TO CART</button>
+                <button onClick={() => {dispatch(addItem({ id: product._id, quantity: count, img: product.img, price: product.price, name: product.shortname })), setCount(0)}} className='btn-do'>ADD TO CART</button>
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@ function productPage() {
               <div className='md:flex md:flex-col xl:gap-2'>
                 {product ? product.includes.map((item, index) => (
                   <div key={index} className='flex gap-5 mb-2 md:gap-8'>
-                    <p className='text-sbase text-darkorange font-medium'>{item.quantity}x</p>
+                    <p className='text-sbase text-darkorange font-bold'>{item.quantity}x</p>
                     <p className='text-sbase text-bordergrey font-medium'>{item.item}</p>
                   </div>
                 )) : null}
@@ -91,7 +91,7 @@ function productPage() {
                 <img className='mb-10 hidden absolute md:flex md:relative xl:hidden xl:absolute' src={item.image.tablet} />
                 <img className='mb-10 hidden absolute xl:flex xl:relative' src={item.image.desktop} />
                 <p className='text-2xl font-bold text-black2 text-center mb-8 md:tracking-[1.71px]'>{item.name}</p>
-                <Link to={"/product/" + item.slug} className='bg-darkorange hover:bg-lightorange text-white px-8 py-4'>SEE PRODUCT</Link>
+                <Link to={"/product/" + item.slug} className='btn-do'>SEE PRODUCT</Link>
               </div>
             )) : null}
           </div>

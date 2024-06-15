@@ -4,14 +4,14 @@ import logo from '../assets/logo.svg';
 import cartimg from '../assets/cart.jpg';
 import CategoryLinks from './CategoryLinks';
 import { useDispatch, useSelector } from 'react-redux';
-import { incrementItem, decrementItem, removeAll } from '../features/shopSlice';
+import { incrementItem, decrementItem, removeAll, toggleCart } from '../features/shopSlice';
 import { Link } from 'react-router-dom';
 
 function Nav() {
   const [toggle, setToggle] = useState(false);
-  const [toggleCart, setToggleCart] = useState(false);
   const cart = useSelector((state) => state.shop.cart);
   const category = useSelector((state) => state.shop.category);
+  const cartToggle = useSelector((state) => state.shop.cartOpen);
   const dispatch = useDispatch();
 
   const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
@@ -29,7 +29,7 @@ function Nav() {
             <Link className='hover:text-darkorange' key={item.id} to={"/" + item.name}>{item.name.toUpperCase()}</Link>
           )) : null}
         </ul>
-        <img onClick={(e) => setToggleCart(!toggleCart)} className='h-5 w-5' src={cartimg} alt='cart' />
+        <img onClick={(e) => dispatch(toggleCart())} className='h-5 w-5' src={cartimg} alt='cart' />
       </header>
 
       {toggle ? (
@@ -38,8 +38,8 @@ function Nav() {
         </nav>
       ) : null }
 
-      {toggleCart ? (
-        <div className='absolute bg-white py-8 px-7 w-11/12 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg md:w-[49%] md:p-8 md:transform-none md:right-10 xl:w-[26%] xl:mt-8'>
+      {cartToggle ? (
+        <div className='absolute z-50 bg-white py-8 px-7 w-11/12 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg md:w-[49%] md:p-8 md:transform-none md:right-10 xl:w-[26%] xl:mt-8'>
           <div className='flex justify-between mb-8'>
             <h2 className='text-lg text-black2 font-bold tracking-[1.29px]'>CART ({cart.length})</h2>
             <p onClick={(e) => {dispatch(removeAll())}} className='text-sbase hover:text-darkorange text-bordergrey underline font-medium'>Remove all</p>

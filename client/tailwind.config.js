@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Manrope', 'sans-serif'],
+      },
       fontSize: {
         'lxs': '0.8125rem',
         'sbase': '0.938rem',
