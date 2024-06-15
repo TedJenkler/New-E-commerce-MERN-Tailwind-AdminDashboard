@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../assets/logo.svg';
 import facebook from '../assets/facebook.svg';
 import twitter from '../assets/twitter.svg';
@@ -15,15 +15,28 @@ function Footer() {
     dispatch(fetchCategory());
   }, []);
 
+  // State to track hover status
+  const [hoveredIcon, setHoveredIcon] = useState(null);
+
+  // Function to handle hover
+  const handleHover = (iconName) => {
+    setHoveredIcon(iconName);
+  };
+
+  // Function to handle mouse leave
+  const handleMouseLeave = () => {
+    setHoveredIcon(null);
+  };
+
   return (
     <footer className='pt-14 px-6 text-center pb-10 bg-black2 flex flex-col items-center md:items-start md:px-10 md:pt-16 md:pb-11 xl:px-40'>
       <div className='xl:flex xl:w-full xl:justify-between'>
         <img className='mb-12 md:mb-8 xl:mb-9' src={logo} alt='logo' />
         <div>
           <ul className='text-white mb-12 flex flex-col md:flex-row md:gap-8 md:mb-8 xl:mb-0'>
-            <Link to="/" className='mb-4'>HOME</Link>
+            <Link to="/" className='mb-4 hover:text-darkorange'>HOME</Link>
             {state ? state.map((category, index) => (
-              <Link key={index} to={category.name ? "/" + category.name : null} className='mb-4'>{category.name.toUpperCase()}</Link>
+              <Link key={index} to={category.name ? "/" + category.name : null} className='mb-4 hover:text-darkorange'>{category.name.toUpperCase()}</Link>
             )) : null}
           </ul>
         </div>
@@ -35,9 +48,27 @@ function Footer() {
           </div>
           <div className='xl:w-1/2 xl:flex xl:items-end xl:justify-end'>
             <div className='hidden absolute gap-4 xl:flex xl:relative'>
-              <img src={facebook} alt='facebook' />
-              <img src={twitter} alt='twitter' />
-              <img src={instagram} alt='instagram' />
+              <img
+                src={facebook}
+                alt='facebook'
+                onMouseEnter={() => handleHover('facebook')}
+                onMouseLeave={handleMouseLeave}
+                style={{ filter: hoveredIcon === 'facebook' ? 'invert(65%) sepia(32%) saturate(3088%) hue-rotate(333deg) brightness(89%) contrast(90%)' : 'none' }}
+              />
+              <img
+                src={twitter}
+                alt='twitter'
+                onMouseEnter={() => handleHover('twitter')}
+                onMouseLeave={handleMouseLeave}
+                style={{ filter: hoveredIcon === 'twitter' ? 'invert(65%) sepia(32%) saturate(3088%) hue-rotate(333deg) brightness(89%) contrast(90%)' : 'none' }}
+              />
+              <img
+                src={instagram}
+                alt='instagram'
+                onMouseEnter={() => handleHover('instagram')}
+                onMouseLeave={handleMouseLeave}
+                style={{ filter: hoveredIcon === 'instagram' ? 'invert(65%) sepia(32%) saturate(3088%) hue-rotate(333deg) brightness(89%) contrast(90%)' : 'none' }}
+              />
             </div>
           </div>
         </div>
@@ -55,3 +86,4 @@ function Footer() {
 }
 
 export default Footer;
+

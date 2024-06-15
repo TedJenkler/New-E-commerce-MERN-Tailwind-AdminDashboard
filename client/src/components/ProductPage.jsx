@@ -25,7 +25,7 @@ function productPage() {
   return (
     <div className='px-6 md:px-10 md:pt-8 xl:px-40 xl:pt-20'>
       <div className='py-4 md:pb-6 md:pt-0 xl:pb-14'>
-        <Link to="/" className='text-sbase font-medium text-bordergrey'>Go Back</Link>
+        <Link to="/" className='text-sbase font-medium text-bordergrey hover:text-darkorange'>Go Back</Link>
       </div>
       <section>
         <div className='md:flex md:gap-16 md:mb-32 xl:gap-32 xl:mb-40'>
@@ -41,13 +41,13 @@ function productPage() {
             <div className='flex mb-24 xl:gap-4'>
               <div className='flex w-1/2 xl:w-1/4'>
                 <div className='flex w-[120px] h-[48px] bg-greywhite'>
-                  <button onClick={count > 0 ? (e) => {setCount(count - 1)} : null} className='w-1/3'>-</button>
+                  <button onClick={count > 0 ? (e) => {setCount(count - 1)} : null} className='w-1/3 hover:text-darkorange'>-</button>
                   <input value={count} className='w-1/3 bg-greywhite text-center' disabled={true}></input>
-                  <button onClick={(e) => {setCount(count + 1)}} className='w-1/3'>+</button>
+                  <button onClick={(e) => {setCount(count + 1)}} className='w-1/3 hover:text-darkorange'>+</button>
                 </div>
               </div>
               <div className='w-1/2 flex items-center justify-end xl:justify-start'>
-                <button onClick={() => {dispatch(addItem({ id: product._id, quantity: count, img: product.img, price: product.price, name: product.shortname })), setCount(0)}} className='bg-darkorange text-white px-8 py-4 text-lxs'>ADD TO CART</button>
+                <button onClick={() => {dispatch(addItem({ id: product._id, quantity: count, img: product.img, price: product.price, name: product.shortname })), setCount(0)}} className='bg-darkorange hover:bg-lightorange text-white px-8 py-4 text-lxs'>ADD TO CART</button>
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@ function productPage() {
                 <img className='mb-10 hidden absolute md:flex md:relative xl:hidden xl:absolute' src={item.image.tablet} />
                 <img className='mb-10 hidden absolute xl:flex xl:relative' src={item.image.desktop} />
                 <p className='text-2xl font-bold text-black2 text-center mb-8 md:tracking-[1.71px]'>{item.name}</p>
-                <Link to={"/product/" + item.slug} className='bg-darkorange text-white px-8 py-4'>SEE PRODUCT</Link>
+                <Link to={"/product/" + item.slug} className='bg-darkorange hover:bg-lightorange text-white px-8 py-4'>SEE PRODUCT</Link>
               </div>
             )) : null}
           </div>

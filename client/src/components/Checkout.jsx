@@ -15,9 +15,35 @@ function Checkout() {
   const [radio, setRadio] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', address: '', postal: '', city: '', country: '' })
+  const [formErrors, setFormErrors] = useState({});
+  console.log(formData)
+  console.log(formErrors)
+
   const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
   const deliveryPrice = 50;
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleValidate = () => {
+    const errors = {};
+    if (!formData.name) errors.name = "Name is required";
+    if (!formData.email) errors.email = "Email is required";
+    if (!formData.phone) errors.phone = "Phone number is required";
+    if (!formData.address) errors.address = "Address is required";
+    if (!formData.postal) errors.postal = "Postal code is required";
+    if (!formData.city) errors.city = "City is required";
+    if (!formData.country) errors.country = "Country is required";
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
+ 
   const handleSubmitStripe = async (event) => {
     event.preventDefault();
 
@@ -43,7 +69,10 @@ function Checkout() {
   };
 
   const handleSubmit = () => {
-    setOrderConfirmed(true);
+    handleValidate()
+    if(formErrors.length === 0) {
+      setOrderConfirmed(true);
+    }
   }
 
   return (
@@ -76,10 +105,10 @@ function Checkout() {
             <p className='text-white text-lg font-bold'>$ {totalPrice + deliveryPrice}</p>
           </div>
         </div>
-        <Link to="/" className='bg-darkorange text-white text-sm font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
+        <Link to="/" className='bg-darkorange hover:bg-lightorange text-white text-sm font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
       </div> : null}
       <div className='py-4 px-6 md:pt-12 md:pb-6 md:px-10 xl:pt-0 xl:pb-10'>
-        <Link to="/">Go Back</Link>
+        <Link className='hover:text-darkorange' to="/">Go Back</Link>
       </div>
       <div className='xl:flex'>
       <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col md:mx-10 md:py-8 md:px-7 xl:w-[65%] xl:m-0'>
@@ -89,17 +118,17 @@ function Checkout() {
           <div className='md:flex md:gap-4'>
             <div className='md:w-1/2'>
               <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Name</label>
-              <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="John Doe" />
+              <input onChange={handleChange} value={formData.name} name='name' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="John Doe" />
             </div>
             <div className='md:w-1/2'>
               <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Email Address</label>
-              <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="email" placeholder="john@example.com" />
+              <input onChange={handleChange} value={formData.email} name='email' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="email" placeholder="john@example.com" />
             </div>
           </div>
           <div className='md:flex md:gap-4'>
           <div className='md:w-1/2'>
             <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Phone Number</label>
-            <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="tel" placeholder="123-456-7890" />
+            <input onChange={handleChange} value={formData.phone} name='phone' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="tel" placeholder="123-456-7890" />
           </div>
           <div className='md:w-1/2'></div>
           </div>
@@ -108,22 +137,22 @@ function Checkout() {
           <div className='md:mb-16'>
             <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>SHIPPING INFO</h2>
             <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Your Address</label>
-            <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="123 Street" />
+            <input onChange={handleChange} value={formData.address} name='address' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="123 Street" />
             <div>
               <div className='md:flex md:gap-4'>
                 <div className='md:w-1/2'>
                   <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>ZIP Code</label>
-                  <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="12345" />
+                  <input onChange={handleChange} value={formData.postal} name='postal' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="12345" />
                 </div>
                 <div className='md:w-1/2'>
                   <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>City</label>
-                  <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="City" />
+                  <input onChange={handleChange} value={formData.city} name='city' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="City" />
                 </div>
               </div>
               <div className='md:flex md:gap-4'>
                 <div className='md:w-1/2'>              
                   <label className='text-xs font-bold text-black2 tracking-[-0.21px] mb-2'>Country</label>
-                  <input className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px]' type="text" placeholder="Country" />
+                  <input onChange={handleChange} value={formData.country} name='country' className='h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange' type="text" placeholder="Country" />
                 </div>
                 <div className='md:w-1/2'>
 
@@ -134,12 +163,12 @@ function Checkout() {
         </div>
         <div className='flex flex-col'>
           <h2 className='text-darkorange text-sm font-bold tracking-[0.93px] mb-4'>PAYMENT DETAILS</h2>
-          <label className='h-14 w-full px-4 flex items-center gap-4 border border-inputborder rounded-lg mb-4'>
-            <input onClick={(e) => setRadio(false)} className='w-5 h-5' type='radio' checked={radio === false} name='payment'></input>
+          <label className='h-14 w-full px-4 flex items-center gap-4 border border-inputborder rounded-lg mb-4 focus-within:outline focus-within:outline-1 focus-within:outline-darkorange'>
+            <input onClick={(e) => setRadio(false)} className='w-5 h-5 peer' type='radio' checked={radio === false} name='payment'></input>
             <p className='text-sm font-bold text-black2 tracking-[-0.25px]'>Stripe</p>
           </label>
-          <label className='h-14 w-full px-4 flex items-center gap-4 border border-inputborder rounded-lg mb-6'>
-            <input onClick={(e) => setRadio(true)} className='w-5 h-5' type='radio' checked={radio === true} name='payment'></input>
+          <label className='h-14 w-full px-4 flex items-center gap-4 border border-inputborder rounded-lg mb-6 focus-within:outline focus-within:outline-1 focus-within:outline-darkorange'>
+            <input onClick={(e) => setRadio(true)} className='w-5 h-5 peer' type='radio' checked={radio === true} name='payment'></input>
             <p className='text-sm font-bold text-black2 tracking-[-0.25px]'>Cash on Delivery</p>
           </label>
           <div className='h-14 w-full border border-inputborder px-4 flex flex-col justify-center rounded-lg mb-4'>
@@ -182,10 +211,10 @@ function Checkout() {
         </div>
         <div className='flex justify-between mb-8'>
           <p className='text-sbase text-bordergrey font-medium'>GRAND TOTAL</p>
-          <p className='text-lg text-black2 font-bold'>$ {totalPrice + deliveryPrice}</p>
+          <p className='text-lg text-black2 font-bold xl:text-darkorange'>$ {totalPrice + deliveryPrice}</p>
         </div>
         
-        {radio ? <button className='bg-darkorange text-white w-full py-4' onClick={handleSubmit}>CONTINUE & PAY</button> : <button className='bg-darkorange text-white w-full py-4' onClick={handleSubmitStripe} disabled={!stripe}>CONTINUE & PAY</button> }
+        {radio ? <button className='bg-darkorange hover:bg-lightorange text-white w-full py-4' onClick={handleSubmit}>CONTINUE & PAY</button> : <button className='bg-darkorange hover:bg-lightorange text-white w-full py-4' onClick={handleSubmitStripe} disabled={!stripe}>CONTINUE & PAY</button> }
       </div>
       </div>
     </section>

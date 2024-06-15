@@ -17,7 +17,7 @@ export default {
       colors: {
         'darkorange': '#D87D4A',
         'lightorange': '#fbaf85',
-        'black1': '#101010',
+        'black1': '#121212',
         'white': '#FFFFFF',
         'greywhite': '#F1F1F1',
         'black2': '#000000',

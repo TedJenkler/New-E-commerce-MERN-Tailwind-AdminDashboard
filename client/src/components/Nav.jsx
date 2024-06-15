@@ -18,15 +18,15 @@ function Nav() {
 
   return (
     <div>
-      <header className='bg-black2 flex justify-between items-center px-6 py-8 md:px-10 xl:px-40'>
+      <header className='bg-black1 flex justify-between items-center px-6 py-8 md:px-10 xl:px-40'>
         <div className='flex md:gap-10 items-center'>
           <img onClick={(e) => setToggle(!toggle)} className='h-4 w-4 xl:hidden xl:absolute' src={burger} alt='menu' />
           <img className='h-6 absolute left-1/2 transform -translate-x-1/2 md:left-0 md:relative md:transform-none' src={logo} alt='logo' />
         </div>
         <ul className='hidden absolute text-white xl:relative xl:flex xl:gap-9 text-sm font-bold tracking-[2px]'>
-          <Link to="/">HOME</Link>
+          <Link className='hover:text-darkorange' to="/">HOME</Link>
           {category ? category.map((item) => (
-            <Link key={item.id} to={"/" + item.name}>{item.name.toUpperCase()}</Link>
+            <Link className='hover:text-darkorange' key={item.id} to={"/" + item.name}>{item.name.toUpperCase()}</Link>
           )) : null}
         </ul>
         <img onClick={(e) => setToggleCart(!toggleCart)} className='h-5 w-5' src={cartimg} alt='cart' />
@@ -42,7 +42,7 @@ function Nav() {
         <div className='absolute bg-white py-8 px-7 w-11/12 left-1/2 transform -translate-x-1/2 mt-6 rounded-lg md:w-[49%] md:p-8 md:transform-none md:right-10 xl:w-[26%] xl:mt-8'>
           <div className='flex justify-between mb-8'>
             <h2 className='text-lg text-black2 font-bold tracking-[1.29px]'>CART ({cart.length})</h2>
-            <p onClick={(e) => {dispatch(removeAll())}} className='text-sbase text-bordergrey underline font-medium'>Remove all</p>
+            <p onClick={(e) => {dispatch(removeAll())}} className='text-sbase hover:text-darkorange text-bordergrey underline font-medium'>Remove all</p>
           </div>
           {cart.map((item) => (
             <div key={item.id} className='flex justify-between mb-6'>
@@ -56,9 +56,9 @@ function Nav() {
                 </div>
               </div>
               <div className='flex items-center'>
-                <button onClick={(e) => dispatch(decrementItem({ id: item.id, quantity: item.quantity }))} className='w-6 h-8 bg-greywhite'>-</button>
+                <button onClick={(e) => dispatch(decrementItem({ id: item.id, quantity: item.quantity }))} className='w-6 h-8 hover:text-darkorange bg-greywhite'>-</button>
                 <input className='w-6 h-8 bg-greywhite text-center' disabled={true} value={item.quantity}></input>
-                <button onClick={(e) => dispatch(incrementItem({ id: item.id, quantity: item.quantity }))} className='w-6 h-8 bg-greywhite'>+</button>
+                <button onClick={(e) => dispatch(incrementItem({ id: item.id, quantity: item.quantity }))} className='w-6 h-8 hover:text-darkorange bg-greywhite'>+</button>
               </div>
             </div>
           ))}
@@ -67,7 +67,7 @@ function Nav() {
             <p className='text-lg text-black2 font-bold'>$ {totalPrice}</p>
           </div>
           <div className='flex justify-center'>
-            <Link onClick={() => {setToggleCart(false)}} to="/checkout" className='text-sm bg-darkorange text-white w-full py-4 text-center'>CHECKOUT</Link>
+            <Link onClick={() => {setToggleCart(false)}} to="/checkout" className='text-sm bg-darkorange hover:bg-lightorange text-white w-full py-4 text-center'>CHECKOUT</Link>
           </div>
         </div>
       ) : null}
