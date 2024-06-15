@@ -1,6 +1,5 @@
 const { Schema } = require('schema-express')
 const mongoose = require('mongoose');
-const { unique } = require('underscore');
 
 const productSchema = new mongoose.Schema({   
     name: {
