@@ -42,7 +42,7 @@ function Homepage() {
           <img className='mb-6 base:w-full md:mb-0 md:min-h-[178px] xl:hidden xl:absolute' src={yx1} alt='yx1' />
           <img className='hidden absolute contain md:mb-0 xl:flex xl:relative' src={yx1xl} alt='yx1' />
         </div>
-        <div className='py-10 px-6 bg-greywhite rounded-lg mb-32 md:w-full md:mb-0 md:min-h-full xl:w-1/2 xl:p-24'>
+        <div className='py-10 px-6 bg-greywhite rounded-lg mb-32 md:w-full md:mb-0 md:min-h-full xl:w-full xl:p-24'>
           <h2 className='text-28xl font-bold tracking-[2px] mb-8'>YX1 EARPHONES</h2>
           <Link to="/product/yx1-earphones" className='btn-t'>SEE PRODUCT</Link>
         </div>
