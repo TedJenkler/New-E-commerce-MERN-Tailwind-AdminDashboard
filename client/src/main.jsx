@@ -7,7 +7,7 @@ import {
   Outlet
 } from "react-router-dom";
 import { store } from './app/store';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import ProductPage from './components/ProductPage';
 import CategoryPage from './components/CategoryPage';
 import Homepage from './components/Homepage';

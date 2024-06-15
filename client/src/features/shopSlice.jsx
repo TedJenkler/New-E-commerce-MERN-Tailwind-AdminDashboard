@@ -45,21 +45,31 @@ const shopSlice = createSlice({
     name: 'shop',
     initialState,
     reducers: {
-        toggleNav: (state) => {
-            if(state.navOpen === true){
-                state.navOpen = false
+        toggleNav: (state, action) => {
+            if(action.payload.toggle === true){
+                if(state.navOpen === true){
+                    state.navOpen = false
+                }else {
+                    state.cartOpen = false
+                    state.navOpen = true
+                }
             }else {
-                state.cartOpen = false
-                state.navOpen = true
+                state.navOpen = false
             }
+            
         },
-        toggleCart: (state) => {
-            if(state.cartOpen === true){
-                state.cartOpen = false
+        toggleCart: (state, action) => {
+            if(action.payload.toggle === true){
+                if(state.cartOpen === true){
+                    state.cartOpen = false
+                }else {
+                    state.navOpen = false
+                    state.cartOpen = true
+                }
             }else {
-                state.navOpen = false
-                state.cartOpen = true
+                state.cartOpen = false
             }
+            
         },
         addItem: (state, action) => {
             const existingItem = state.cart.find(item => item.id === action.payload.id);

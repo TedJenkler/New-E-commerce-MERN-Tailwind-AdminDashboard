@@ -22,7 +22,7 @@ function Nav() {
     <div>
       <header className='bg-black1 flex justify-between items-center px-6 py-8 md:px-10 xl:px-40'>
         <div className='flex md:gap-10 items-center'>
-          <img onClick={() => path.pathname === "/checkout" ? null : dispatch(toggleNav())} className='h-4 w-4 xl:hidden xl:absolute' src={burger} alt='menu' />
+          <img onClick={() => path.pathname === "/checkout" ? null : dispatch(toggleNav({ toggle: true }))} className='h-4 w-4 xl:hidden xl:absolute' src={burger} alt='menu' />
           <img className='h-6 absolute left-1/2 transform -translate-x-1/2 md:left-0 md:relative md:transform-none' src={logo} alt='logo' />
         </div>
         <ul className='hidden absolute text-white xl:relative xl:flex xl:gap-9 text-sm font-bold tracking-[2px]'>
@@ -31,7 +31,7 @@ function Nav() {
             <Link key={index} className='hover:text-darkorange' to={"/" + item.name}>{item.name.toUpperCase()}</Link>
           )) : null}
         </ul>
-        <img onClick={() => path.pathname === "/checkout" ? null : dispatch(toggleCart())} className='h-5 w-5' src={cartimg} alt='cart' />
+        <img onClick={() => path.pathname === "/checkout" ? null : dispatch(toggleCart({ toggle: true }))} className='h-5 w-5 z-50' src={cartimg} alt='cart' />
       </header>
 
       {navToggle ? (
@@ -69,7 +69,7 @@ function Nav() {
             <p className='text-lg text-black2 font-bold'>$ {totalPrice}</p>
           </div>
           <div className='flex justify-center'>
-            <Link onClick={() => {setToggleCart(false)}} to="/checkout" className='text-lxs bg-darkorange hover:bg-lightorange text-white w-full py-[15px] text-center'>CHECKOUT</Link>
+            <Link to="/checkout" className='text-lxs bg-darkorange hover:bg-lightorange text-white w-full py-[15px] text-center'>CHECKOUT</Link>
           </div>
         </div>
       ) : null}
