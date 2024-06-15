@@ -7,10 +7,12 @@ const orderRoutes = require('./routes/order');
 const { default: mongoose } = require('mongoose');
 const port = process.env.PORT || 2000;
 const cors = require('cors')
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, '/client/dist')))
 
 mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true

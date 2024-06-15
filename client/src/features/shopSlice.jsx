@@ -1,11 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// Define the base URLs for development and production environments
+const apiUrl = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:2000'
+    : 'http://localhost:2000';
+
 export const placeOrder = createAsyncThunk(
     'shop/placeOrder',
     async (orderData, thunkAPI) => {
         try {
-            const response = await axios.post('http://localhost:2000/order/add', orderData);
+            const response = await axios.post(`${apiUrl}/order/add`, orderData);
             return response.data.order;
         } catch (error) {
             console.error('Error creating order:', error);
@@ -18,7 +23,7 @@ export const fetchData = createAsyncThunk(
     'shopSlice/product/get',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axios.get('http://localhost:2000/product/get');
+            const response = await axios.get(`${apiUrl}/product/get`);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -30,7 +35,7 @@ export const fetchCategory = createAsyncThunk(
     'shopSlice/category/get',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axios.get('http://localhost:2000/category/get');
+            const response = await axios.get(`${apiUrl}/category/get`);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);

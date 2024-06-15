@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "server": "nodemon app.js",
+    "build": "npm install --prefix ./client && npm run build --prefix ./client && npm install"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

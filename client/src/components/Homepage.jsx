@@ -13,8 +13,8 @@ function Homepage() {
       <div className='bg-black1 text-white bg-hero bg-no-repeat bg-bottom py-28 flex flex-col text-center items-center border-t border-bordergrey/25 mb-24 md:px-48 md:pt-32 md:pb-40 md:bg-heromd md:mb-36 xl:flex-row xl:px-40 xl:bg-heroxl xl:bg-[right_4rem_bottom]'>
         <div className='xl:w-1/2 xl:flex xl:flex-col xl:items-start'>
           <p className='text-sm text-bordergrey tracking-[10px] mb-4 md:mb-6 xl:text-start'>NEW PRODUCT</p>
-          <h1 className='xsm:mx-20 sm:mx-40 text-4xl md:mx-0 tracking-[1.29px] font-bold mb-6 md:text-56xl md:tracking-[2px] md:leading-[58px] l:mx-32 xl:mx-0 xl:text-start'>XX99 Mark II Headphones</h1>
-          <p className='mx-10 xsm:mx-24 sm:mx-40 md:mx-0 text-bordergrey text-sbase font-medium mb-7 md:mb-10 lmd:mx-20 l:mx-40 xl:text-start xl:mx-0 xl:mr-40'>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
+          <h1 className='xsm:mx-20 sm:mx-40 text-4xl md:mx-0 tracking-[1.29px] font-bold mb-6 leading-[40px] md:text-56xl md:tracking-[2px] md:leading-[58px] l:mx-32 xl:mx-0 xl:text-start'>XX99 Mark II Headphones</h1>
+          <p className='mx-10 xsm:mx-24 sm:mx-40 md:mx-0 text-bordergrey text-sbase font-medium mb-8 leading-[20px] md:mb-10 lmd:mx-20 l:mx-40 xl:text-start xl:mx-0 xl:mr-40'>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
           <Link to="/product/xx99-mark-two-headphones" className='btn-do'>SEE PRODUCT</Link>
         </div>
         <div className='xl:w-1/2'></div>
