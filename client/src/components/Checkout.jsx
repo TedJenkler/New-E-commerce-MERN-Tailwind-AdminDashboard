@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { placeOrder } from "../features/shopSlice";
+import { placeOrder, removeAll } from "../features/shopSlice";
 import img from "../assets/check.png";
 
 const stripePromise = loadStripe('your_publishable_key');
@@ -114,8 +114,8 @@ function Checkout() {
           postal: formData.postal,
           city: formData.city,
           country: formData.country,
-          paid: true,
-          payOnDelivery: false,
+          paid: false,
+          payOnDelivery: true,
           items: cart,
           price: totalPrice + deliveryPrice,
         };
@@ -160,7 +160,7 @@ function Checkout() {
             <p className='text-white text-lg font-bold'>$ {totalPrice + deliveryPrice}</p>
           </div>
         </div>
-        <Link to="/" className='bg-darkorange hover:bg-lightorange text-white text-lxs font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
+        <Link onClick={() => dispatch(removeAll())} to="/" className='bg-darkorange hover:bg-lightorange text-white text-lxs font-bold tracking-[1px] w-full block text-center py-4'>BACK TO HOME</Link>
       </div> : null}
       <div className={`py-4 px-6 md:pt-12 md:pb-6 md:px-10 xl:pt-0 xl:pb-10 xl:px-0 ${orderConfirmed ? "blur" : ""}`}>
         <Link className='hover:text-darkorange text-sbase font-medium text-bordergrey' to="/">Go Back</Link>
