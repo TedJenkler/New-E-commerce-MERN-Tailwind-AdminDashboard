@@ -29,6 +29,12 @@ app.use('/product', productRoutes);
 app.use('/category', categoryRoutes);
 app.use('/order', orderRoutes);
 
+
+// Example route to serve React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+  });
+
 app.listen(port, () => {
     console.log(`Started server on port ${port}`);
 })  
