@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useSelector } from 'react-redux';
-import img from "../assets/check.png"
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { placeOrder } from "../features/shopSlice";
+import img from "../assets/check.png";
 
 const stripePromise = loadStripe('your_publishable_key');
 
@@ -14,17 +15,18 @@ function Checkout() {
   const cart = useSelector((state) => state.shop.cart);
   const [radio, setRadio] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
+  const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({ 
-    name: '', 
-    email: '', 
-    phone: '', 
-    address: '', 
-    postal: '', 
-    city: '', 
-    country: '' 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    postal: '',
+    city: '',
+    country: ''
   });
-  
+
   const [formErrors, setFormErrors] = useState({});
 
   const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
@@ -47,9 +49,9 @@ function Checkout() {
     if (!formData.postal) errors.postal = "Postal code is required";
     if (!formData.city) errors.city = "City is required";
     if (!formData.country) errors.country = "Country is required";
-    
+
     setFormErrors(errors);
-    
+
     // Return true if there are no errors
     return Object.keys(errors).length === 0;
   };
@@ -75,6 +77,22 @@ function Checkout() {
       // Payment successful, handle payment method id
       console.log('[PaymentMethod]', result.paymentMethod);
       // Send result.paymentMethod.id to your server to complete the payment
+      const orderData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        postal: formData.postal,
+        city: formData.city,
+        country: formData.country,
+        paid: true,
+        payOnDelivery: false,
+        items: cart,
+        price: totalPrice + deliveryPrice,
+      };
+
+      // Dispatch the order action with orderData
+      dispatch(placeOrder(orderData));
       setOrderConfirmed(true);
     }
   };
@@ -88,7 +106,22 @@ function Checkout() {
     // If form is valid, proceed with payment submission
     if (isValid) {
       if (radio) {
-        // Handle Cash on Delivery submission
+        const orderData = {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          postal: formData.postal,
+          city: formData.city,
+          country: formData.country,
+          paid: true,
+          payOnDelivery: false,
+          items: cart,
+          price: totalPrice + deliveryPrice,
+        };
+
+        // Dispatch the order action with orderData
+        dispatch(placeOrder(orderData));
         setOrderConfirmed(true);
       } else {
         // Handle Stripe payment submission
@@ -143,14 +176,14 @@ function Checkout() {
                 <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.name ? "text-red" : ""}`}>Name</label>
                 <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.name}</p>
               </div>
-              <input onChange={handleChange} value={formData.name} name='name' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.name ? "border-2 border-red" : ""}`} type="text" placeholder="John Doe" />
+              <input onChange={handleChange} value={formData.name} name='name' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.name ? "border-2 border-red" : ""}`} placeholder="John Doe" />
             </div>
             <div className='md:w-1/2'>
               <div className='flex justify-between'>
                 <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.email ? "text-red" : ""}`}>Email</label>
                 <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.email}</p>
               </div>
-              <input onChange={handleChange} value={formData.email} name='email' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.email ? "border-2 border-red" : ""}`} type="email" placeholder="john@example.com" />
+              <input onChange={handleChange} value={formData.email} name='email' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.email ? "border-2 border-red" : ""}`} placeholder="john@example.com" />
             </div>
           </div>
           <div className='md:flex md:gap-4'>
@@ -159,7 +192,7 @@ function Checkout() {
               <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.phone ? "text-red" : ""}`}>Phone</label>
               <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.phone}</p>
             </div>
-            <input onChange={handleChange} value={formData.phone} name='phone' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.phone ? "border-2 border-red" : ""}`} type="tel" placeholder="123-456-7890" />
+            <input onChange={handleChange} value={formData.phone} name='phone' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.phone ? "border-2 border-red" : ""}`} placeholder="123-456-7890" />
           </div>
           <div className='md:w-1/2'></div>
           </div>
@@ -171,7 +204,7 @@ function Checkout() {
               <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.address ? "text-red" : ""}`}>Your Address</label>
               <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.address}</p>
             </div>
-            <input onChange={handleChange} value={formData.address} name='address' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.address ? "border-2 border-red" : ""}`} type="text" placeholder="123 Street" />
+            <input onChange={handleChange} value={formData.address} name='address' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.address ? "border-2 border-red" : ""}`} placeholder="123 Street" />
             <div>
               <div className='md:flex md:gap-4'>
                 <div className='md:w-1/2'>
@@ -179,14 +212,14 @@ function Checkout() {
                     <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.postal ? "text-red" : ""}`}>Zip Code</label>
                     <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.postal}</p>
                   </div>
-                  <input onChange={handleChange} value={formData.postal} name='postal' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.postal ? "border-2 border-red" : ""}`} type="text" placeholder="12345" />
+                  <input onChange={handleChange} value={formData.postal} name='postal' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.postal ? "border-2 border-red" : ""}`} placeholder="12345" />
                 </div>
                 <div className='md:w-1/2'>
                   <div className='flex justify-between'>
                     <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.city ? "text-red" : ""}`}>City</label>
                     <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.city}</p>
                   </div>
-                  <input onChange={handleChange} value={formData.city} name='city' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.city ? "border-2 border-red" : ""}`} type="text" placeholder="City" />
+                  <input onChange={handleChange} value={formData.city} name='city' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.city ? "border-2 border-red" : ""}`} placeholder="City" />
                 </div>
               </div>
               <div className='md:flex md:gap-4'>
@@ -195,7 +228,7 @@ function Checkout() {
                     <label className={`text-xs font-bold text-black2 tracking-[-0.21px] mb-2 ${formErrors.country ? "text-red" : ""}`}>Country</label>
                     <p className='text-xs font-medium tracking-[-0.21px] mb-2 text-red'>{formErrors.country}</p>
                   </div>
-                  <input onChange={handleChange} value={formData.country} name='country' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.country ? "border-2 border-red" : ""}`} type="text" placeholder="Country" />
+                  <input onChange={handleChange} value={formData.country} name='country' className={`h-14 w-full px-6 py-4 border border-inputborder rounded-lg mb-6 text-sm font-bold tracking-[-0.25px] focus:outline-darkorange ${formErrors.country ? "border-2 border-red" : ""}`} placeholder="Country" />
                 </div>
                 <div className='md:w-1/2'>
 

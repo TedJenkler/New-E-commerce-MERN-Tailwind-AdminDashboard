@@ -1,6 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+export const placeOrder = createAsyncThunk(
+    'shop/placeOrder',
+    async (orderData, thunkAPI) => {
+        try {
+            const response = await axios.post('http://localhost:2000/order/add', orderData);
+            return response.data.order;
+        } catch (error) {
+            console.error('Error creating order:', error);
+            throw error;
+        }
+    }
+);
+
 export const fetchData = createAsyncThunk(
     'shopSlice/product/get',
     async (_, { rejectWithValue }) => {
@@ -118,7 +131,13 @@ const shopSlice = createSlice({
                 state.status = 'succeeded';
                 state.category = action.payload;
             })
-            .addCase(fetchCategory.rejected, (state, action) => {
+            .addCase(placeOrder.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(placeOrder.fulfilled, (state) => {
+                state.status = 'succeeded';
+            })
+            .addCase(placeOrder.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             });
