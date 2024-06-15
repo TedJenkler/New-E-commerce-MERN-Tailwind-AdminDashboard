@@ -6,9 +6,9 @@ import listenxl from '../assets/listenxl.png';
 function Ad() {
   return (
     <div className='text-center xl:flex xl:flex-row-reverse'>
-      <div className='xl:w-[48%]'>
-        <img className='mb-10 md:hidden md:absolute' src={listen} alt='listen' />
-        <img className='hidden absolute mb-16 md:flex md:relative xl:hidden xl:absolute' src={listenmd} alt='listen' />
+      <div className='xl:w-[48%] flex justify-center'>
+        <img className='mb-10 sm:hidden sm:absolute' src={listen} alt='listen' />
+        <img className='hidden absolute mb-16 sm:flex sm:relative xl:hidden xl:absolute' src={listenmd} alt='listen' />
         <img className='hidden absolute xl:flex xl:relative' src={listenxl} alt='listen' />
       </div>
       <div className='xl:w-[52%] xl:flex xl:flex-col xl:items-center xl:justify-center'>

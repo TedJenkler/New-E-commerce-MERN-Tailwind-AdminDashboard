@@ -72,21 +72,21 @@ function productPage() {
             </div>
           </div>
         </div>
-        <div className='md:flex md:gap-5 md:mt-32 md:mb-32 xl:mb-40 xl:justify-between'>
-          <div className='xl:flex xl:flex-col xl:gap-8'>
-            <img className='mt-24 mb-4 md:mt-0 md:mb-5 md:w-[277px] md:h-[174px] xl:hidden xl:absolute' src={product ? product.gallery.first.mobile : null} alt="gallery1" />
+        <div className='flex flex-col md:flex-row md:gap-5 md:mt-32 md:mb-32 xl:mb-40 xl:justify-between'>
+          <div className='flex flex-col xl:gap-8 xl:justify-between'>
+            <img className='mt-24 mb-4 md:mt-0 md:mb-5 md:w-full md:h-full xl:hidden xl:absolute' src={product ? product.gallery.first.mobile : null} alt="gallery1" />
             <img className='hidden absolute xl:flex xl:relative' src={product ? product.gallery.first.desktop : null} alt="gallery1" />
-            <img className='mb-4 md:mb-0 md:w-[277px] md:h-[174px] xl:hidden xl:absolute' src={product ? product.gallery.second.mobile : null} alt="gallery2" />
+            <img className='mb-4 md:mb-0 md:w-full md:h-full xl:hidden xl:absolute' src={product ? product.gallery.second.mobile : null} alt="gallery2" />
             <img className='absolute hidden xl:relative xl:flex' src={product ? product.gallery.second.desktop : null} alt="gallery2" />
           </div>
-          <img className='mb-32 md:mb-0 md:w-[395px] md:h-[368px] xl:hidden xl:absolute' src={product ? product.gallery.third.mobile : null} alt="gallery2" />
+          <img className='mb-32 md:mb-0 md:w-1/2 md:h-[368px] xl:hidden xl:absolute' src={product ? product.gallery.third.mobile : null} alt="gallery2" />
           <img className='hidden absolute xl:relative xl:flex' src={product ? product.gallery.third.desktop : null} alt="gallery2" />
         </div>
-        <div className='flex flex-col xl:mb-40'>
+        <div className='flex flex-col md:w-full xl:mb-40'>
           <h3 className='text-2xl text-black2 font-bold text-center mb-10 tracking-[0.86px] md:text-32xl md:tracking-[1.14px] md:mb-14 xl:mb-0'>YOU MAY ALSO LIKE</h3>
-          <div className='md:flex md:gap-3 xl:gap-8'>
+          <div className='md:flex md:w-full md:gap-3 xl:gap-8'>
             {product ? product.others.map((item, index) => (
-              <div key={index} className='flex flex-col items-center mb-32 xl:mb-0'>
+              <div key={index} className='flex flex-col items-center mb-32 xl:mb-0 md:w-1/3'>
                 <img className='mb-8 md:hidden md:absolute' src={item.image.mobile} />
                 <img className='mb-10 hidden absolute md:flex md:relative xl:hidden xl:absolute' src={item.image.tablet} />
                 <img className='mb-10 hidden absolute xl:flex xl:relative' src={item.image.desktop} />

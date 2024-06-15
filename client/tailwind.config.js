@@ -9,6 +9,13 @@ export default {
       fontFamily: {
         sans: ['Manrope', 'sans-serif'],
       },
+      screens: {
+        'base': '376px',
+        'xsm': '450px',
+        'sm': '600px',
+        'lmd': '900px',
+        'l': '1000px',
+      },
       fontSize: {
         'lxs': '0.8125rem',
         'sbase': '0.938rem',

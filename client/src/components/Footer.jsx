@@ -45,7 +45,7 @@ function Footer() {
       <div>
         <div className='xl:flex xl:mb-14'>
           <div className='xl:w-1/2'>
-            <p className='text-white text-sbase opacity-50 mb-12 md:text-start md:mb-20 xl:mb-0'>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.</p>
+            <p className='sm:mx-10 l:mr-40 text-white text-sbase opacity-50 mb-12 md:mx-0 md:text-start md:mb-20 xl:mb-0'>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.</p>
           </div>
           <div className='xl:w-1/2 xl:flex xl:items-end xl:justify-end'>
             <div className='hidden absolute gap-4 xl:flex xl:relative'>
