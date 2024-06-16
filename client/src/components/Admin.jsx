@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../features/adminSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Admin() {
     const [loginForm, setLoginForm] = useState({ email: "", password: "" });
     const dispatch = useDispatch();
+    const state = useSelector((state) => state.admin)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -16,8 +19,10 @@ function Admin() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         dispatch(login(loginForm));
+        if(state.status === 'succeeded'){
+            navigate('/adminpage')
+        }
     };
 
     return (

@@ -18,6 +18,7 @@ import Admin from './components/Admin';
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import AdminPage from './components/AdminPage';
 
 const stripePromise = loadStripe('pk_test_51PPfNkP7UvQT87QE68NIZvrMqWqZleH2fi2zG5y1Sh5sTz24MhhC3ULZitXA6sqdN9e6JpDpsQObBsr26iyH9rhx00Evd4LB0n');
 
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <Admin />
+  },
+  {
+    path: "/adminpage",
+    element: <AdminPage />
   },
 ]);
 

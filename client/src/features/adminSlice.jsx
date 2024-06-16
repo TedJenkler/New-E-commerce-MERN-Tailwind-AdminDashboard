@@ -12,6 +12,8 @@ export const login = createAsyncThunk(
     async (loginData, thunkAPI) => {
         try {
             const response = await axios.post(`${apiUrl}/admin/login`, loginData);
+            const { token } = response.data;
+            localStorage.setItem('token', token);
             return response.data
         }catch (error) {
             console.error('Error logging in:', error);
@@ -49,3 +51,5 @@ const adminSlice = createSlice({
             });
     }
 })
+
+export default adminSlice.reducer
