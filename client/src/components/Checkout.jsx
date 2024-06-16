@@ -146,7 +146,7 @@ function Checkout() {
           <div className='bg-greywhite rounded-t-lg p-8 pb-6 flex flex-col md:rounded-l-lg md:rounded-r-none md:w-[56%] md:p-6'>
             <div className='flex justify-between pb-3 border-b border-bordergrey/25 mb-3'>
               <div className='flex gap-4'>
-                <img className='w-[50px] h-[50px]' src={cart ? `${getBasePath()}/${cart[0].img}` : null} alt={cart ? cart[0].name : null} />
+                <img className='w-[50px] h-[50px]' src={cart ? `${getBasePath()}${cart[0].img}` : null} alt={cart ? cart[0].name : null} />
                 <div className='flex flex-col'>
                   <p className='text-sbase font-bold text-black2'>{cart ? cart[0].name : null}</p>
                   <p className='text-sm font-bold text-bordergrey'>$ {cart ? cart[0].price : null}</p>
@@ -265,7 +265,7 @@ function Checkout() {
             <div key={index} className='flex justify-between mb-6'>
               <div className='flex gap-4'>
                 <div>
-                  <img className='h-16 min-w-16 rounded-lg' src={`${getBasePath()}/${item.img}`} alt={item.name} />
+                  <img className='h-16 min-w-16 rounded-lg' src={`${getBasePath()}${item.img}`} alt={item.name} />
                 </div>
                 <div className='flex flex-col justify-center'>
                   <p className='text-sbase font-bold text-black2'>{item.name}</p>
