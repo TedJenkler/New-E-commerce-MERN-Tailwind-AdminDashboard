@@ -30,6 +30,22 @@ function ProductPageAdmin() {
                 <div className="container mx-auto px-4 py-6 md:px-8 md:py-10">
                     <h1 className="text-3xl font-bold mb-6 md:mb-8">Product Management</h1>
 
+                    {/* Buttons Section */}
+                    <div className="flex mb-4 space-x-4">
+                        {/* Add Button */}
+                        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
+                            Add
+                        </button>
+                        {/* Edit Button */}
+                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
+                            Edit
+                        </button>
+                        {/* Delete Button */}
+                        <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
+                            Delete
+                        </button>
+                    </div>
+
                     {/* Table of Products */}
                     <div className="bg-white rounded-lg shadow-md p-6">
                         <h2 className="text-xl font-semibold mb-4">Products by Category</h2>
@@ -73,4 +89,3 @@ function ProductPageAdmin() {
 }
 
 export default ProductPageAdmin;
-

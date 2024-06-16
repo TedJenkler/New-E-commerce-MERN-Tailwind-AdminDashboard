@@ -17,11 +17,20 @@ function AdminPage() {
         dispatch(fetchData());
         dispatch(fetchCategory());
 
-        // Fetch orders
+        // Function to fetch orders
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('/api/orders');
-                setOrders(response.data);
+                let apiUrl = '';
+
+                // Check if running in development mode (localhost) or production mode (Render)
+                if (process.env.NODE_ENV === 'development') {
+                    apiUrl = 'http://localhost:2000/order/getAll';
+                } else {
+                    apiUrl = 'https://new-e-commerce-mern-tailwind.onrender.com/order/getAll';
+                }
+
+                const response = await axios.get(apiUrl);
+                setOrders(response.data.order); // Assuming response.data.order contains the array of orders
                 setLoadingOrders(false);
             } catch (err) {
                 setErrorOrders(err.message);
@@ -49,8 +58,23 @@ function AdminPage() {
                     <h1 className="text-3xl font-bold mb-6 md:mb-8">Admin Panel</h1>
 
                     {/* Product Management */}
-                    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <div className="bg-white rounded-lg shadow-md p-6 mb-6 overflow-x-auto">
                         <h2 className="text-xl font-semibold mb-4">Product Management</h2>
+                        {/* Buttons Section */}
+                    <div className="flex mb-4 space-x-4">
+                        {/* Add Button */}
+                        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
+                            Add
+                        </button>
+                        {/* Edit Button */}
+                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
+                            Edit
+                        </button>
+                        {/* Delete Button */}
+                        <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
+                            Delete
+                        </button>
+                    </div>
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
@@ -86,8 +110,23 @@ function AdminPage() {
                     </div>
 
                     {/* Category Management */}
-                    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <div className="bg-white rounded-lg shadow-md p-6 mb-6 overflow-x-auto">
                         <h2 className="text-xl font-semibold mb-4">Category Management</h2>
+                        {/* Buttons Section */}
+                    <div className="flex mb-4 space-x-4">
+                        {/* Add Button */}
+                        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
+                            Add
+                        </button>
+                        {/* Edit Button */}
+                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
+                            Edit
+                        </button>
+                        {/* Delete Button */}
+                        <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
+                            Delete
+                        </button>
+                    </div>
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
@@ -117,42 +156,66 @@ function AdminPage() {
                     </div>
 
                     {/* Order Management */}
-                    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <div className="bg-white rounded-lg shadow-md p-6 mb-6 overflow-x-auto">
                         <h2 className="text-xl font-semibold mb-4">Order Management</h2>
+
+                    {/* Buttons Section */}
+                        <div className="flex mb-4 space-x-4">
+                            {/* Delete Button */}
+                            <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
+                                Delete
+                            </button>
+                            {/* Delete All Button */}
+                            <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
+                                Delete All
+                            </button>
+                        </div>
                         {loadingOrders && <div>Loading...</div>}
                         {errorOrders && <div className="text-red-500">{errorOrders}</div>}
                         {!loadingOrders && !errorOrders && Array.isArray(orders) && orders.length > 0 ? (
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Order ID
-                                        </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Customer Name
-                                        </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Order Date
-                                        </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Status
-                                        </th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer Name</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Postal Code</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">County</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
                                     {orders.map((order) => (
-                                        <tr key={order.id}>
+                                        <tr key={order._id}>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm font-medium text-gray-900">{order.id}</div>
+                                                <div className="text-sm font-medium text-gray-900">{order._id}</div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm text-gray-900">{order.customerName}</div>
+                                                <div className="text-sm text-gray-900">{order.name}</div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm text-gray-900">{new Date(order.orderDate).toLocaleDateString()}</div>
+                                                <div className="text-sm text-gray-900">{order.email}</div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm text-gray-900">{order.status}</div>
+                                                <div className="text-sm text-gray-900">{order.phone}</div>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <div className="text-sm text-gray-900">{order.address}</div>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <div className="text-sm text-gray-900">{order.postal}</div>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <div className="text-sm text-gray-900">{order.country}</div>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <div className="text-sm text-gray-900">{order.city}</div>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <div className="text-sm text-gray-900">{order.price}</div>
                                             </td>
                                         </tr>
                                     ))}
@@ -169,4 +232,3 @@ function AdminPage() {
 }
 
 export default AdminPage;
-
