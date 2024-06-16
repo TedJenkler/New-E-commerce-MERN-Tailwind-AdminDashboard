@@ -60,21 +60,6 @@ function AdminPage() {
                     {/* Product Management */}
                     <div className="bg-white rounded-lg shadow-md p-6 mb-6 overflow-x-auto">
                         <h2 className="text-xl font-semibold mb-4">Product Management</h2>
-                        {/* Buttons Section */}
-                    <div className="flex mb-4 space-x-4">
-                        {/* Add Button */}
-                        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
-                            Add
-                        </button>
-                        {/* Edit Button */}
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
-                            Edit
-                        </button>
-                        {/* Delete Button */}
-                        <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
-                            Delete
-                        </button>
-                    </div>
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
@@ -112,21 +97,6 @@ function AdminPage() {
                     {/* Category Management */}
                     <div className="bg-white rounded-lg shadow-md p-6 mb-6 overflow-x-auto">
                         <h2 className="text-xl font-semibold mb-4">Category Management</h2>
-                        {/* Buttons Section */}
-                    <div className="flex mb-4 space-x-4">
-                        {/* Add Button */}
-                        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
-                            Add
-                        </button>
-                        {/* Edit Button */}
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
-                            Edit
-                        </button>
-                        {/* Delete Button */}
-                        <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
-                            Delete
-                        </button>
-                    </div>
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
@@ -158,18 +128,6 @@ function AdminPage() {
                     {/* Order Management */}
                     <div className="bg-white rounded-lg shadow-md p-6 mb-6 overflow-x-auto">
                         <h2 className="text-xl font-semibold mb-4">Order Management</h2>
-
-                    {/* Buttons Section */}
-                        <div className="flex mb-4 space-x-4">
-                            {/* Delete Button */}
-                            <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
-                                Delete
-                            </button>
-                            {/* Delete All Button */}
-                            <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
-                                Delete All
-                            </button>
-                        </div>
                         {loadingOrders && <div>Loading...</div>}
                         {errorOrders && <div className="text-red-500">{errorOrders}</div>}
                         {!loadingOrders && !errorOrders && Array.isArray(orders) && orders.length > 0 ? (
@@ -232,3 +190,4 @@ function AdminPage() {
 }
 
 export default AdminPage;
+
