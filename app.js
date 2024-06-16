@@ -4,6 +4,7 @@ require('dotenv').config();
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
+const adminRoutes = require('./routes/admin')
 const { default: mongoose } = require('mongoose');
 const port = process.env.PORT || 2000;
 const cors = require('cors')
@@ -28,6 +29,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/product', productRoutes);
 app.use('/category', categoryRoutes);
 app.use('/order', orderRoutes);
+app.use('/admin', adminRoutes);
 
 
 // Example route to serve React app

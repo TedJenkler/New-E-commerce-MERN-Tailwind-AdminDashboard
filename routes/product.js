@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../schema/productSchema')
-const Category = require('../schema/categorySchea');
+const Category = require('../schema/categorySchema');
 
 router.post('/add', async (req, res) => {
     try {
