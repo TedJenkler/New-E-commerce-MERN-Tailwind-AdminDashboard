@@ -5,7 +5,8 @@ const Category = require('../schema/categorySchema');
 
 router.post('/add', async (req, res) => {
     try {
-        const { name, price, slug, isNew, description, features, Image, categoryImage, includes, gallery, others, category } = req.body;
+        const { name, price, slug, description, features, categoryImage, includes, gallery, others, category, img, newP, shortname, imgxl } = req.body;
+
         
         const categoryId = await Category.findOne({ name: category });
         if(!categoryId){
@@ -16,16 +17,18 @@ router.post('/add', async (req, res) => {
             name, 
             price, 
             slug, 
-            isNew, 
             description, 
             features, 
-            Image, 
             categoryImage, 
             includes, 
             gallery, 
             others, 
-            categoryId,
-        })
+            categoryId: categoryId._id,
+            img, 
+            newP, 
+            shortname, 
+            imgxl
+        });
 
         await newProduct.save();
 
@@ -63,5 +66,46 @@ router.get('/get/:id', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+router.put('/update/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, price, slug, description, features, categoryImage, includes, gallery, others, category, img, newP, shortname, imgxl } = req.body;
+
+        const categoryId = await Category.findOne({ name: category });
+        if (!categoryId) {
+            return res.status(400).json(({ message: 'Invalid category name, create the category first' }))
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(
+            id,
+            {
+                name, 
+                price, 
+                slug, 
+                description, 
+                features, 
+                categoryImage, 
+                includes, 
+                gallery, 
+                others, 
+                categoryId: categoryId._id,
+                img, 
+                newP, 
+                shortname, 
+                imgxl
+            },
+            { new: true }
+         );
+         if(!updatedProduct) {
+            return res.status(400).json({ message: 'Product not found' })
+         }
+
+         res.status(200).json({ message: 'Product updated successfully', product: updatedProduct })
+    }catch (error) {
+        console.error('Error updating product', error);
+        res.status(500).json({ message: 'Internal server error' })
+    }
+})
 
 module.exports = router;
