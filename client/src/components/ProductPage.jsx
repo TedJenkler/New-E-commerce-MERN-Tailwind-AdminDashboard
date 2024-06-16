@@ -40,8 +40,8 @@ function ProductPage() {
           </div>
           <div className='md:w-1/2 md:flex md:flex-col pt-12 xl:justify-center'>
             <p className='text-darkorange text-sm tracking-[10px] mb-6 md:text-xs md:tracking-[8.57px] md:mb-4'>{product ? product.newP ? "NEW PRODUCT" : null : null}</p>
-            <h1 className='text-28xl font-bold text-black2 mb-6 tracking-[1px] md:mb-8 xl:mr-40 xl:text-40xl xl:tracking-[1.43px] xl:leading-[44px]'>{product ? product.name : null}</h1>
-            <p className='text-sbase text-bordergrey font-medium mb-6 md:mb-8 xl:mr-20'>{product ? product.description : null}</p>
+            <h1 className='text-28xl font-bold text-black2 leading-[auto] mb-6 tracking-[1px] md:mb-8 xl:mr-40 xl:text-40xl xl:tracking-[1.43px] xl:leading-[44px]'>{product ? product.name : null}</h1>
+            <p className='text-sbase text-bordergrey font-medium mb-6 leading-[25px] md:mb-8 xl:mr-20'>{product ? product.description : null}</p>
             <p className='text-lg text-black2 font-bold mb-8 tracking-[1.29px]'>$ {product ? product.price : null}</p>
             <div className='flex mb-24 xl:gap-4'>
               <div className='flex w-1/2 xl:w-1/4'>
@@ -60,8 +60,8 @@ function ProductPage() {
         <div className='xl:flex xl:gap-32 xl:mb-40'>
           <div className='xl:w-[57%]'>
             <h2 className='text-2xl text-black2 font-bold mb-6 tracking-[0.86px] md:text-32xl xl:mb-8'>FEATURES</h2>
-            <p className='text-sbase text-bordergrey font-medium mb-6'>{product ? splitByTag(product.features)[0] : null}</p>
-            <p className='text-sbase text-bordergrey font-medium mb-28 md:mb-32 xl:mb-0'>{product ? splitByTag(product.features)[1] : null}</p>
+            <p className='text-sbase text-bordergrey leading-[25px] font-medium mb-6'>{product ? splitByTag(product.features)[0] : null}</p>
+            <p className='text-sbase text-bordergrey leading-[25px] font-medium mb-28 md:mb-32 xl:mb-0'>{product ? splitByTag(product.features)[1] : null}</p>
           </div>
           <div className='md:flex md:justify-between'>
             <div className='md:flex md:w-full xl:flex-col xl:min-w-[350px] xl:whitespace-nowrap'>
@@ -95,7 +95,7 @@ function ProductPage() {
                 <img className='mb-8 md:hidden md:absolute' src={product ? `${getBasePath()}${item.image.mobile}`: null} alt="other product" />
                 <img className='mb-10 hidden absolute md:w-full md:flex md:relative xl:hidden xl:absolute' src={product ? `${getBasePath()}${item.image.tablet}`: null} alt="other product" />
                 <img className='mb-10 hidden absolute md:w-full xl:flex xl:relative' src={product ? `${getBasePath()}${item.image.desktop}`: null} alt="other product" />
-                <p className='text-2xl font-bold text-black2 text-center mb-8 md:tracking-[1.71px]'>{item.name}</p>
+                <p className='text-2xl font-bold text-black2 text-center mb-8 tracking-[1.71px]'>{item.name}</p>
                 <Link onClick={() => setCount(0)} to={"/product/" + item.slug} className='btn-do'>SEE PRODUCT</Link>
               </div>
             )) : null}

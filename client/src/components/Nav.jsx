@@ -18,9 +18,14 @@ function Nav() {
 
   const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
 
+  // Function to determine base path based on environment
+  const getBasePath = () => {
+    return process.env.NODE_ENV === 'development' ? '../src' : ".";
+  };
+
   return (
     <div>
-      <header className='bg-black1 flex justify-between items-center px-6 py-8 md:px-10 xl:px-40'>
+      <header className='bg-black1 flex min-h-[5.625rem] justify-between items-center px-6 py-8 md:px-10 xl:px-40'>
         <div className='flex md:gap-10 items-center'>
           <img onClick={() => path.pathname === "/checkout" ? null : dispatch(toggleNav({ toggle: true }))} className='h-4 w-4 xl:hidden xl:absolute' src={burger} alt='menu' />
           <img className='h-6 absolute left-1/2 transform -translate-x-1/2 md:left-0 md:relative md:transform-none' src={logo} alt='logo' />
@@ -35,7 +40,7 @@ function Nav() {
       </header>
 
       {navToggle ? (
-        <nav className='absolute bg-white w-full px-6 pt-20 z-50 md:px-10'>
+        <nav className='absolute bg-white w-full px-6 max-h-[46.875rem] md:max-h-none pt-20 z-50 md:px-10'>
           <CategoryLinks />
         </nav>
       ) : null }
@@ -50,7 +55,7 @@ function Nav() {
             <div key={index} className='flex justify-between mb-6'>
               <div className='flex gap-4'>
                 <div>
-                  <img className='h-16 min-w-16 rounded-lg' src={item.img} alt={item.name} />
+                  <img className='h-16 min-w-16 rounded-lg' src={`${getBasePath()}${item.img}`} alt={item.name} />
                 </div>
                 <div className='flex flex-col justify-center'>
                   <p className='text-sbase font-bold text-black2'>{item.name}</p>
@@ -69,7 +74,7 @@ function Nav() {
             <p className='text-lg text-black2 font-bold'>$ {totalPrice}</p>
           </div>
           <div className='flex justify-center'>
-            <Link onClick={() => cart.length === 0 ? null : dispatch(toggleCart(false))} to={cart.length === 0 ? null : "/checkout"} className='text-lxs bg-darkorange hover:bg-lightorange text-white w-full py-[15px] text-center'>CHECKOUT</Link>
+            <Link onClick={() => cart.length === 0 ? null : dispatch(toggleCart(false))} to={cart.length === 0 ? null : "/checkout"} className='text-lxs bg-darkorange font-bold tracking-[1px] hover:bg-lightorange text-white w-full py-[15px] text-center'>CHECKOUT</Link>
           </div>
         </div>
       ) : null}

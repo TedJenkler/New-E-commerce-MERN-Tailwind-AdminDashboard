@@ -35,8 +35,8 @@ function CategoryPage() {
 
   return (
     <section className=''>
-      <div className='bg-black1 py-8 flex items-center justify-center border-t border-bordergrey border-opacity-25 mb-16 md:pt-28 md:pb-24 md:mb-32 xl:mb-40'>
-        <h1 className='text-white text-28xl font-bold md:text-40xl md:tracking-[1.43px]'>{category ? category.name.toUpperCase() : null}</h1>
+      <div className='bg-black1 py-8 flex min-h-[6.375rem] items-center justify-center border-t border-bordergrey border-opacity-25 mb-16 md:pt-28 md:pb-24 md:mb-32 xl:mb-40'>
+        <h1 className='text-white text-28xl tracking-[2px] font-bold md:text-40xl md:tracking-[1.43px]'>{category ? category.name.toUpperCase() : null}</h1>
       </div>
       {sortedP ? sortedP.map((item, index) => {
         return (
@@ -47,8 +47,8 @@ function CategoryPage() {
             </div>
             <div className='mb-32 xl:w-1/2 xl:flex xl:flex-col xl:items-start xl:justify-center xl:mb-0'>
               <p className='text-darkorange text-sm tracking-[10px] mb-6 md:mb-4 xl:text-start'>{item.newP ? "NEW PRODUCT" : null}</p>
-              <h2 className='text-28xl tracking-[1px] text-black2 font-bold mb-6 md:mb-8 md:mx-52 md:text-40xl md:tracking-[1.43px] md:leading-[44px] xl:text-start xl:mx-0 xl:mr-20'>{item.name}</h2>
-              <p className='sm:mx-10 text-sbase text-bordergrey font-medium mb-6 md:mx-24 xl:text-start xl:mx-0 xl:mr-20'>{item.description}</p>
+              <h2 className='text-28xl tracking-[1px] leading-[auto] text-black2 font-bold mb-6 md:mb-8 md:mx-52 md:text-40xl md:tracking-[1.43px] md:leading-[44px] xl:text-start xl:mx-0 xl:mr-20'>{item.name}</h2>
+              <p className='sm:mx-10 text-sbase text-bordergrey leading-[25px] font-medium mb-10 md:mx-24 xl:text-start xl:mx-0 xl:mr-20'>{item.description}</p>
               <Link to={"/product/" + item.slug} className='btn-do'>SEE PRODUCT</Link>
             </div>
           </div>

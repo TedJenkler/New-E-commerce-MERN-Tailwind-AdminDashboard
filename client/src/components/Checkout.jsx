@@ -130,10 +130,15 @@ function Checkout() {
     }
   };
 
+  // Function to determine base path based on environment
+  const getBasePath = () => {
+    return process.env.NODE_ENV === 'development' ? '../src' : ".";
+  };
+
   return (
     <section className='bg-lightgreywhite pb-24 xl:pt-20 xl:px-40 xl:pb-32'>
       {orderConfirmed ? 
-      <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56 md:w-[70%] md:p-12 xl:w-[37%] z-50'>
+      <div className='absolute bg-white p-8 w-11/12 rounded-lg left-1/2 -translate-x-1/2 top-56 md:w-[70%] md:p-12 xl:w-[37%] z-50 min-h-[37.5rem]'>
         <img className='mb-6 md:mb-8' src={img} alt='check' />
         <p className='text-2xl font-bold  text-black2 tracking-[0.86px] mb-4 md:text-32xl md:tracking-[1.14px] md:mr-40 md:mb-6'>THANK YOU FOR YOUR ORDER</p>
         <p className='text-sbase font-medium text-bordergrey mb-6 md:mb-8'>You will receive an email confirmation shortly.</p>
@@ -141,7 +146,7 @@ function Checkout() {
           <div className='bg-greywhite rounded-t-lg p-8 pb-6 flex flex-col md:rounded-l-lg md:rounded-r-none md:w-[56%] md:p-6'>
             <div className='flex justify-between pb-3 border-b border-bordergrey/25 mb-3'>
               <div className='flex gap-4'>
-                <img className='w-[50px] h-[50px]' src={cart ? cart[0].img : null} alt={cart ? cart[0].name : null} />
+                <img className='w-[50px] h-[50px]' src={cart ? `${getBasePath()}/${cart[0].img}` : null} alt={cart ? cart[0].name : null} />
                 <div className='flex flex-col'>
                   <p className='text-sbase font-bold text-black2'>{cart ? cart[0].name : null}</p>
                   <p className='text-sm font-bold text-bordergrey'>$ {cart ? cart[0].price : null}</p>
@@ -155,7 +160,7 @@ function Checkout() {
               <p className='text-xs text-bordergrey font-bold tracking-[0.21px]'>and {cart.length} other {cart.length > 1 ? "item(s)" : "item"}</p>
             </div>
           </div>
-          <div className='bg-black2 text-white rounded-b-lg pt-4 pb-5 px-6 md:rounded-r-lg md:rounded-l-none md:w-[44%] md:py-10 md:px-6'>
+          <div className='bg-black2 text-white rounded-b-lg pt-4 pb-5 min-h-[5.75rem] px-6 md:rounded-r-lg md:rounded-l-none md:w-[44%] md:py-10 md:px-6'>
             <p className='text-bordergrey text-sbase font-medium md:mb-2'>GRAND TOTAL</p>
             <p className='text-white text-lg font-bold'>$ {totalPrice + deliveryPrice}</p>
           </div>
@@ -166,7 +171,7 @@ function Checkout() {
         <Link className='hover:text-darkorange text-sbase font-medium text-bordergrey' to="/">Go Back</Link>
       </div>
       <div className={`xl:flex ${orderConfirmed ? "blur" : ""}`}>
-      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col md:mx-10 md:py-8 md:px-7 xl:w-[65%] xl:m-0'>
+      <form className='py-4 bg-white mx-6 p-6 rounded-lg mb-8 flex flex-col min-h-[86.125rem] md:mx-10 md:py-8 md:px-7 xl:w-[65%] xl:m-0'>
         <h1 className='text-28xl font-bold tracking-[1px] text-black2 mb-8 md:text-32xl md:tracking-[1.14px] md:mb-10'>CHECKOUT</h1>
         <div className='flex flex-col md:mb-14'>
           <h2 className='text-darkorange text-lxs font-bold tracking-[0.93px] mb-4'>BILLING DETAILS</h2>
@@ -260,7 +265,7 @@ function Checkout() {
             <div key={index} className='flex justify-between mb-6'>
               <div className='flex gap-4'>
                 <div>
-                  <img className='h-16 min-w-16 rounded-lg' src={item.img} alt={item.name} />
+                  <img className='h-16 min-w-16 rounded-lg' src={`${getBasePath()}/${item.img}`} alt={item.name} />
                 </div>
                 <div className='flex flex-col justify-center'>
                   <p className='text-sbase font-bold text-black2'>{item.name}</p>
