@@ -35,8 +35,8 @@ function ProductPage() {
       <section>
         <div className='md:flex md:gap-16 md:mb-32 xl:gap-32 xl:mb-40'>
           <div className='md:bg-greywhite md:min-h-[480px] md:w-72 md:rounded-lg md:flex md:items-center xl:w-1/2 xl:bg-white'>
-            <img className='mb-8 md:mb-0 xl:absolute xl:hidden' src={product ? `${getBasePath()}/${product.img}` : null} alt="product img"/>
-            <img className='hidden absolute xl:relative xl:flex' src={product ? `${getBasePath()}/${product.imgxl}` : null} alt="product img"/>
+            <img className='mb-8 md:mb-0 xl:absolute xl:hidden' src={product ? `${getBasePath()}${product.img}` : null} alt="product img"/>
+            <img className='hidden absolute xl:relative xl:flex' src={product ? `${getBasePath()}${product.imgxl}` : null} alt="product img"/>
           </div>
           <div className='md:w-1/2 md:flex md:flex-col pt-12 xl:justify-center'>
             <p className='text-darkorange text-sm tracking-[10px] mb-6 md:text-xs md:tracking-[8.57px] md:mb-4'>{product ? product.newP ? "NEW PRODUCT" : null : null}</p>
@@ -79,22 +79,22 @@ function ProductPage() {
         </div>
         <div className='flex flex-col md:flex-row md:gap-5 md:mt-32 md:mb-32 xl:mb-40 xl:justify-start'>
           <div className='flex flex-col xl:gap-8 xl:justify-start'>
-            <img className='mt-24 mb-4 md:mt-0 md:mb-5 md:w-full md:h-full xl:hidden xl:absolute' src={product ? `${getBasePath()}/${product.gallery.first.mobile}` : null} alt="gallery1" />
-            <img className='hidden absolute xl:flex xl:relative' src={product ? `${getBasePath()}/${product.gallery.first.desktop}` : null} alt="gallery1" />
-            <img className='mb-4 md:mb-0 md:w-full md:h-full xl:hidden xl:absolute' src={product ? `${getBasePath()}/${product.gallery.second.mobile}` : null} alt="gallery2" />
-            <img className='absolute hidden xl:flex xl:relative' src={product ? `${getBasePath()}/${product.gallery.second.desktop}` : null} alt="gallery2" />
+            <img className='mt-24 mb-4 md:mt-0 md:mb-5 md:w-full md:h-full xl:hidden xl:absolute' src={product ? `${getBasePath()}${product.gallery.first.mobile}` : null} alt="gallery1" />
+            <img className='hidden absolute xl:flex xl:relative' src={product ? `${getBasePath()}${product.gallery.first.desktop}` : null} alt="gallery1" />
+            <img className='mb-4 md:mb-0 md:w-full md:h-full xl:hidden xl:absolute' src={product ? `${getBasePath()}${product.gallery.second.mobile}` : null} alt="gallery2" />
+            <img className='absolute hidden xl:flex xl:relative' src={product ? `${getBasePath()}${product.gallery.second.desktop}` : null} alt="gallery2" />
           </div>
-          <img className='mb-32 md:mb-0 md:w-1/2 md:h-[368px] xl:hidden xl:absolute' src={product ? `${getBasePath()}/${product.gallery.third.mobile}` : null} alt="gallery3" />
-          <img className='hidden absolute xl:relative xl:flex' src={product ? `${getBasePath()}/${product.gallery.third.desktop}` : null} alt="gallery3" />
+          <img className='mb-32 md:mb-0 md:w-1/2 md:h-[368px] xl:hidden xl:absolute' src={product ? `${getBasePath()}${product.gallery.third.mobile}` : null} alt="gallery3" />
+          <img className='hidden absolute xl:relative xl:flex' src={product ? `${getBasePath()}${product.gallery.third.desktop}` : null} alt="gallery3" />
         </div>
         <div className='flex flex-col md:w-full xl:mb-40'>
           <h3 className='text-2xl text-black2 font-bold text-center mb-10 tracking-[0.86px] md:text-32xl md:tracking-[1.14px] md:mb-14'>YOU MAY ALSO LIKE</h3>
           <div className='md:flex md:w-full md:gap-3 xl:gap-8 xl:justify-between'>
             {product ? product.others.map((item, index) => (
               <div key={index} className='flex flex-col items-center mb-32 xl:mb-0 md:w-1/3'>
-                <img className='mb-8 md:hidden md:absolute' src={product ? `${getBasePath()}/${item.image.mobile}`: null} alt="other product" />
-                <img className='mb-10 hidden absolute md:w-full md:flex md:relative xl:hidden xl:absolute' src={product ? `${getBasePath()}/${item.image.tablet}`: null} alt="other product" />
-                <img className='mb-10 hidden absolute md:w-full xl:flex xl:relative' src={product ? `${getBasePath()}/${item.image.desktop}`: null} alt="other product" />
+                <img className='mb-8 md:hidden md:absolute' src={product ? `${getBasePath()}${item.image.mobile}`: null} alt="other product" />
+                <img className='mb-10 hidden absolute md:w-full md:flex md:relative xl:hidden xl:absolute' src={product ? `${getBasePath()}${item.image.tablet}`: null} alt="other product" />
+                <img className='mb-10 hidden absolute md:w-full xl:flex xl:relative' src={product ? `${getBasePath()}${item.image.desktop}`: null} alt="other product" />
                 <p className='text-2xl font-bold text-black2 text-center mb-8 md:tracking-[1.71px]'>{item.name}</p>
                 <Link onClick={() => setCount(0)} to={"/product/" + item.slug} className='btn-do'>SEE PRODUCT</Link>
               </div>

@@ -42,8 +42,8 @@ function CategoryPage() {
         return (
           <div key={index} className='card flex flex-col items-center text-center px-6 md:px-10 xl:px-40 xl:flex-row xl:gap-32 xl:mb-40'>
             <div className='md:bg-greywhite md:w-full md:rounded-lg md:flex md:justify-center md:mb-14 xl:bg-white xl:justify-between xl:w-1/2 xl:mb-0'>
-              <img className='mb-8 md:mb-0 xl:hidden xl:absolute' src={`${getBasePath()}/${item.img}`} alt='product img' />
-              <img className='hidden absolute xl:relative xl:flex' src={`${getBasePath()}/${item.imgxl}`} alt='product img' />
+              <img className='mb-8 md:mb-0 xl:hidden xl:absolute' src={`${getBasePath()}${item.img}`} alt='product img' />
+              <img className='hidden absolute xl:relative xl:flex' src={`${getBasePath()}${item.imgxl}`} alt='product img' />
             </div>
             <div className='mb-32 xl:w-1/2 xl:flex xl:flex-col xl:items-start xl:justify-center xl:mb-0'>
               <p className='text-darkorange text-sm tracking-[10px] mb-6 md:mb-4 xl:text-start'>{item.newP ? "NEW PRODUCT" : null}</p>

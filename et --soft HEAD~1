@@ -1,0 +1,289 @@
+[33mcommit a7b1f32387bd18dcc759e95e40b1cc7b7fa71357[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 21:14:15 2024 +0200
+
+    bugfix
+
+[33mcommit 64fca31469a91e1a3d5dffc923739507a650e78d[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 21:02:26 2024 +0200
+
+    bugfix
+
+[33mcommit 1176d82e528eba1047333df8dccdc55f4dc4bbdf[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 20:54:43 2024 +0200
+
+    deploy bugfix and samll style fix
+
+[33mcommit 358f430c478a917101e61cc23eb12a74d641e399[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 20:49:05 2024 +0200
+
+    small deploy fix
+
+[33mcommit 4f3bcdd14f53fe13095ac3e677e24ce89c56ffca[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 20:44:08 2024 +0200
+
+    bugfix
+
+[33mcommit 5d9de18d5923a79341934f030c9da764d79fbc3b[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 20:39:03 2024 +0200
+
+    style fixes and made so i can work both live and local
+
+[33mcommit 0847a6716dae89bed47ba1f0f8f0c45663616815[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 20:04:32 2024 +0200
+
+    path bugfix
+
+[33mcommit 7bd043eec6d85b5656e8d228db5afaec5895341c[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 19:58:57 2024 +0200
+
+    path bugfix
+
+[33mcommit 898e16c7ad37140411171cd474681ccbbd007ccb[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 19:54:06 2024 +0200
+
+    deploy changes
+
+[33mcommit d5ae5358dea2b1f121aa78bbac5bacb876a8bf59[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 19:29:28 2024 +0200
+
+    bugfix deployment
+
+[33mcommit 61b8f9a5e14c602cb337abb8f46754ed77b47ad0[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 19:26:41 2024 +0200
+
+    vite config
+
+[33mcommit 1f6dd4338b2d965f381e5df6a552392cb82cf7db[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 19:09:20 2024 +0200
+
+    deployment bugfixes
+
+[33mcommit baf6dc2b9731a1232df80db658216a3184557786[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 18:59:57 2024 +0200
+
+    preparing development
+
+[33mcommit bdc8b185f178cd282fa690fded6a5f8204e8ee16[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 18:09:37 2024 +0200
+
+    responsive bugfixes
+
+[33mcommit 89e846419f97084e6c8da89abc8a74c0ca4e760b[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 16:19:02 2024 +0200
+
+    cart and order bugfix
+
+[33mcommit c334c77139a2f3e5f86bd476e6c3aeff46a89df6[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 16:16:01 2024 +0200
+
+    e-commerce is now fully functionall just need to remove the test mode on stripe
+
+[33mcommit 50537e53fb5555f5a232e5f97b02901795d2d6e3[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 13:21:55 2024 +0200
+
+    add order backend
+
+[33mcommit 547d1a1c46d6d0b33818af791238e7fbcb0d0fe2[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 12:25:03 2024 +0200
+
+    bugfixes cart
+
+[33mcommit b868f99220c11d0d3f5ff41b8e27826290af2a35[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 12:05:51 2024 +0200
+
+    improved menu logic with blur and self closing
+
+[33mcommit 1d9ed567cc375e3122d5094e2902f53876b633bd[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 11:38:38 2024 +0200
+
+    small fixes
+
+[33mcommit 2b97364c5b7fbf3867246809fc7b016259aaf412[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 11:18:37 2024 +0200
+
+    nav and cart fixes and small style cahnges
+
+[33mcommit 5f16b52e8d7472c46835cfb1a5654e0d8c9264fd[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 09:51:06 2024 +0200
+
+    style details added and blur effect added
+
+[33mcommit 3b16936432cb559a86bb77a3418cf152c125bbc8[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 08:42:29 2024 +0200
+
+    validation styled
+
+[33mcommit 45ff38494b8283ea008f70a4caecff7eed97fc39[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 15 08:01:28 2024 +0200
+
+    simple form validation logic
+
+[33mcommit b680f659904ea211f2f1339afd0c14381b282111[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Thu Jun 13 10:08:30 2024 +0200
+
+    styling for mobile, tablet and desktop done
+
+[33mcommit 665913fe0db0c223f3a9e054c8eb37aa93dd1efc[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Wed Jun 12 10:31:50 2024 +0200
+
+    tablet style done
+
+[33mcommit 0fb64d056e263428a854e45ff471457c2d372660[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Wed Jun 12 07:51:18 2024 +0200
+
+    tablet categorypage, homepage and productpage done
+
+[33mcommit 4252869f512268bd5192e4c813744848b5561d7f[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Tue Jun 11 07:31:20 2024 +0200
+
+    details style bugfix
+
+[33mcommit 279c2ee1cccb93c887ebcde1b34ea5848cfbffb0[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Mon Jun 10 10:29:49 2024 +0200
+
+    conformation added
+
+[33mcommit cdb2140356307b26f92f3f2e9d924c50d067167a[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Mon Jun 10 08:21:50 2024 +0200
+
+    styled checkout summary
+
+[33mcommit 48195894daf5cf73f84809fa13e16300eb7b2467[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Mon Jun 10 06:28:20 2024 +0200
+
+    form styling addded
+
+[33mcommit 8e1b1ff645a6fc3bd8a8a58fd582331670b0746f[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sun Jun 9 08:56:42 2024 +0200
+
+    stripe added
+
+[33mcommit 217df0a4a8048c25dde55d4c7a9a4ee3ea17d465[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sun Jun 9 07:46:36 2024 +0200
+
+    test
+
+[33mcommit 0c8d657ed60d942481152f570bc23deaf61b446b[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sun Jun 9 07:31:00 2024 +0200
+
+    buxfix
+
+[33mcommit 03b66feb64d22c6e0952608ba7f836ef6452d157[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sun Jun 9 07:26:23 2024 +0200
+
+    bugfix
+
+[33mcommit 68325faae6ca860fa363d2f4ef4f88d0c5e780e6[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sun Jun 9 07:18:19 2024 +0200
+
+    security fix
+
+[33mcommit e33eb3330cd8acf2f00b72a1e7f3cc909e6f7c6e[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sun Jun 9 06:56:47 2024 +0200
+
+    remove all added and img bugfix
+
+[33mcommit 360758fa9095af3d04fcf6f5daf5dba4cebb9b04[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sun Jun 9 06:52:36 2024 +0200
+
+    cart logic added
+
+[33mcommit b923f50459e47ab3f4b5cfea7c4a0b76280ebf55[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 8 09:02:03 2024 +0200
+
+    improved cart
+
+[33mcommit 10f2b15d792558d2b59acb6de00fe4d94cbd0a61[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 8 08:21:03 2024 +0200
+
+    cart logic added
+
+[33mcommit 3b671635cf84455cad58e9c3b8f7dbf154bc3b1b[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 8 07:40:27 2024 +0200
+
+    added nav links
+
+[33mcommit ce7e33795ff545972c0652f1c1690771bbc00efc[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 8 07:23:47 2024 +0200
+
+    mobile done with links fixed - nav and cart functionally left
+
+[33mcommit 0e5a9ff6f663b427d5e79c509ae414509ad7fb65[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Sat Jun 8 04:38:18 2024 +0200
+
+    category page mobile done and sort added
+
+[33mcommit bf64e41d1d11cf74221d4ee82cb8f7eca3eed5aa[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Fri Jun 7 08:14:23 2024 +0200
+
+    categoryPage logic fixed
+
+[33mcommit ddd3b92f161c1e65367941dab1006f6ca9062089[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Fri Jun 7 07:22:31 2024 +0200
+
+    added new product text
+
+[33mcommit 34d282a61b05184f3ce334af4ce02c454fc23d9a[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Fri Jun 7 07:04:47 2024 +0200
+
+    added category logic
+
+[33mcommit 53352267483c9b9bdecc2ed0dd69384655f04bf1[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Fri Jun 7 06:26:00 2024 +0200
+
+    added get category and made frontend save in store
+
+[33mcommit fdba81fd5fa118b3314bc3bc3140386a83a20ee4[m
+Author: Ted Jenkler <tedjenkler@gmail.com>
+Date:   Fri Jun 7 05:36:14 2024 +0200
+
+    added nav and footer and will now add category logic
+
+[33mcommit 7cafec
