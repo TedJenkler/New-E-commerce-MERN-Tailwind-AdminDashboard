@@ -28,6 +28,26 @@ router.get('/get', async (req, res) => {
         console.error('Error fetching category:', error);
         res.status().json({ message: 'Internal server error'});
     }
-})
+});
+
+router.put('/update/:name', async (req, res) => {
+    try{
+        const categoryName = req.params.name;
+        const { name, img } = req.body;
+
+        const updatedCategory = await Category.findOneAndUpdate(
+            { name: categoryName },
+            { name, img }
+        );
+        if (!updatedCategory) {
+            return res.status(404).json({ message: 'Category not found' });
+        }
+
+        res.status(200).json({ message: 'Category name updated successfully', category: updatedCategory })
+    }catch (error) {
+        console.error('Error updating category', error)
+        res.status(500).json({ message: 'Internal server error'})
+    }
+});
 
 module.exports = router

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Adjust as per your routing library
+import { Link } from 'react-router-dom';
 
 const SideMenu = () => {
     return (
@@ -28,7 +28,6 @@ const SideMenu = () => {
                         Orders
                     </Link>
                 </li>
-                {/* Add more menu items as needed */}
             </ul>
         </nav>
     );
