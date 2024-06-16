@@ -29,7 +29,7 @@ function Footer() {
   };
 
   return (
-    <footer className='px-6 text-center min-h-[40.875rem] pb-10 bg-black2 flex flex-col items-center md:items-start md:px-10 md:pb-11 xl:px-40'>
+    <footer className='px-6 text-center pb-10 bg-black2 flex flex-col items-center md:items-start md:px-10 md:pb-11 xl:px-40'>
       <div className='h-1 w-24 border-t-4 border-darkorange mb-14 md:mb-16'></div>
       <div className='xl:flex xl:w-full xl:justify-between'>
         <img className='mb-12 md:mb-8 xl:mb-9' src={logo} alt='logo' />
