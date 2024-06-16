@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Category = require('../schema/categorySchema');
+const authenticateToken = require('../middleware/authMiddleware');
 
 router.post('/add', async (req, res) => {
     try {
