@@ -14,11 +14,14 @@ import Layout from './components/Layout';
 import Checkout from './components/Checkout';
 import Blur from './components/Blur';
 import ScrollToTop from './components/ScrollToTop';
-import Admin from './components/Admin';
+import CategoryPageAdmin from './components/CategoryPageAdmin';
+import Admin from './components/Admin'
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import AdminPage from './components/AdminPage';
+import ProductPageAdmin from './components/ProductPageAdmin';
+import OrderPageAdmin from './components/OrderPageAdmin';
 
 const stripePromise = loadStripe('pk_test_51PPfNkP7UvQT87QE68NIZvrMqWqZleH2fi2zG5y1Sh5sTz24MhhC3ULZitXA6sqdN9e6JpDpsQObBsr26iyH9rhx00Evd4LB0n');
 
@@ -74,6 +77,18 @@ const router = createBrowserRouter([
   {
     path: "/adminpage",
     element: <AdminPage />
+  },
+  {
+    path: "/admin/products",
+    element: <ProductPageAdmin />
+  },
+  {
+    path: "/admin/categories",
+    element: <CategoryPageAdmin />
+  },
+  {
+    path: "/admin/orders",
+    element: <OrderPageAdmin />
   },
 ]);
 
