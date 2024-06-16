@@ -60,7 +60,7 @@ router.delete('/delete/:name', async (req, res) =>  {
             return res.status(404).json({ message: 'Category not found' })
         };
 
-        res.status(200).json({ message: 'Category name deleted successfully', category: deleteCategory})
+        res.status(200).json({ message: 'Category name deleted successfully', category: deleteCategory })
     }catch (error) {
         console.error('Error deleting category', error)
         res.status(500).json({ message: 'Internal server error' })
