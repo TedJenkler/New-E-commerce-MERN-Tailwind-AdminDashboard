@@ -20,7 +20,7 @@ function Nav() {
 
   // Function to determine base path based on environment
   const getBasePath = () => {
-    return process.env.NODE_ENV === 'development' ? '../src' : ".";
+    return process.env.NODE_ENV === 'development' ? '../src' : "";
   };
 
   return (
