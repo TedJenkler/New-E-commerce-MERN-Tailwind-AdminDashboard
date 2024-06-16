@@ -45,6 +45,10 @@ router.post('/add', async (req, res) => {
 router.get('/get', async (req, res) => {
     try {
         const products = await Product.find();
+        if(!products) {
+            return res.status(400).json({ message: 'Cant find any products' })
+        }
+
         res.status(200).json(products)
     }catch (error) {
         res.status(500).json({ message: error.message })

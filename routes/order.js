@@ -25,7 +25,21 @@ router.post("/add", async (req, res) => {
         res.status(200).json({ message: 'Order created successfully', order: newOrder })
     }catch (error) {
         console.error('Error creating order', error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+router.get('/getAll', async (req, res) => {
+    try {
+        const orders = await Order.find();
+        if(!orders) {
+            return res.status(400).json({ message: 'Cant find any orders' })
+        }
+        
+        res.status(200).json({ message: 'Order fetched successfully', order: orders })
+    }catch (error) {
+        console.error('Error getting orders', error);
+        res.status(500).json( { message: 'Internal Server Error' })
     }
 })
 
