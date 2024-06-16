@@ -14,6 +14,7 @@ import Layout from './components/Layout';
 import Checkout from './components/Checkout';
 import Blur from './components/Blur';
 import ScrollToTop from './components/ScrollToTop';
+import Admin from './components/Admin';
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
         </Elements>
       </Layout>
     ),
+  },
+  {
+    path: "/admin",
+    element: <Admin />
   },
 ]);
 
