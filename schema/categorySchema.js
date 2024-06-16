@@ -12,4 +12,4 @@ const categorySchema = new mongoose.Schema({
     img: {}
 });
 
-module.exports = mongoose.model('Category', categorySchema);    
+module.exports = mongoose.model('Category', categorySchema);

@@ -31,7 +31,7 @@ router.get('/get', async (req, res) => {
 });
 
 router.put('/update/:name', async (req, res) => {
-    try{
+    try {
         const categoryName = req.params.name;
         const { name, img } = req.body;
 
@@ -49,5 +49,21 @@ router.put('/update/:name', async (req, res) => {
         res.status(500).json({ message: 'Internal server error'})
     }
 });
+
+router.delete('/delete/:name', async (req, res) =>  {
+    try {
+        const categoryName = req.params.name;
+
+        const deleteCategory = await Category.findOneAndDelete({ name: categoryName });
+        if(!deleteCategory){
+            return res.status(404).json({ message: 'Category not found' })
+        };
+
+        res.status(200).json({ message: 'Category name deleted successfully', category: deleteCategory})
+    }catch (error) {
+        console.error('Error deleting category', error)
+        res.status(500).json({ message: 'Internal server error' })
+    }
+})
 
 module.exports = router
