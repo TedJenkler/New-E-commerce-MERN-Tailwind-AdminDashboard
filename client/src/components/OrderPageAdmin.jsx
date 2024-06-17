@@ -3,6 +3,7 @@ import SideMenu from './SideMenu';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { deleteOrder } from '../features/adminSlice';
+import { deleteAllOrders } from '../features/adminSlice';
 
 function OrderPageAdmin() {
   const [orders, setOrders] = useState([]);
@@ -11,6 +12,7 @@ function OrderPageAdmin() {
   const [btnState, setBtnState] = useState('');
   const dispatch = useDispatch();
   const [deleteForm, setDeleteForm] = useState({ id: "" });
+  const [deleteAllForm, setDeleteAllForm] = useState({ pass: "" });
 
   useEffect(() => {
     fetchOrders();
@@ -44,7 +46,8 @@ function OrderPageAdmin() {
 
   const handleDeleteAll = (e) => {
     e.preventDefault();
-    console.log('Deleted All')
+    dispatch(deleteAllOrders(deleteAllForm.password));
+    setDeleteForm({ password: "" });
   }
 
   return (
@@ -150,13 +153,6 @@ function OrderPageAdmin() {
                           <div className="text-sm text-gray-900">{order.price}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          {/* Delete Button */}
-                          <button
-                            className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300"
-                            onClick={() => deleteOrder(order._id)}
-                          >
-                            Delete
-                          </button>
                         </td>
                       </tr>
                     ))}
@@ -180,7 +176,7 @@ function OrderPageAdmin() {
           {btnState === "deleteall" ? 
             <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md" onSubmit={handleDeleteAll}>
               <label className="block mb-2 text-sm font-medium text-gray-700">Password</label>
-              <input type="password" className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+              <input onChange={(e) => setDeleteAllForm({ ...deleteAllForm, password: e.target.value })} value={deleteAllForm.password} name='password' type="password" className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
               <button type='submit'>Submit</button>
             </form>
           : null}

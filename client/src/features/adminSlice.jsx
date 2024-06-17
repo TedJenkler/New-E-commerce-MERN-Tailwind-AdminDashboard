@@ -35,6 +35,19 @@ export const deleteOrder = createAsyncThunk(
     }
 );
 
+export const deleteAllOrders = createAsyncThunk(
+    'orders/deleteAll',
+    async (password, thunkAPI) => {
+        try {
+            const response = await axios.delete(`${apiUrl}/order/deleteAll`, { data: { password } });
+            return response.data;
+        } catch (error) {
+            console.error('Error deleting all orders:', error);
+            throw error;
+        }
+    }
+);
+
 const initialState = {
     status: 'idle',
     error: null,
@@ -69,6 +82,18 @@ const adminSlice = createSlice({
                 state.error = null;
             })
             .addCase(deleteOrder.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(deleteAllOrders.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(deleteAllOrders.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(deleteAllOrders.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             })
