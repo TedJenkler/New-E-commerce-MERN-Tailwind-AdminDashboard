@@ -43,19 +43,23 @@ router.get('/getAll', async (req, res) => {
     }
 });
 
-router.delete('/delete', async (req, res) => {
+router.delete('/deleteAll', async (req, res) => {
     try {
-        const { id } = req.body;
-        
-        const order = await Order.findByIdAndDelete(id);
-        if (!order) {
-            return res.status(400).json({ message: 'Cannot find that order' });
-        }
+        const { password } = req.body;
+        const correctPassword = 'password';
 
-        res.status(200).json({ message: 'Order deleted successfully', order: order });
-    } catch (error) {
-        console.error('Error deleting order', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        if (password === correctPassword) {
+            const deleteAll = await Order.deleteMany();
+            if (!deleteAll) {
+                return res.status(400).json({ message: 'Delete All failed' });
+            }
+            res.status(200).json({ message: 'All orders deleted successfully' });
+        } else {
+            res.status(403).json({ message: 'Incorrect password' });
+        }
+    }catch (error) {
+        console.error('Error Deleting all orders', error);
+        res.status(500).json({ message: 'Internal Server Error'});
     }
 });
 
