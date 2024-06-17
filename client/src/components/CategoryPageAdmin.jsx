@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SideMenu from './SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategory } from '../features/shopSlice';
@@ -6,6 +6,7 @@ import { fetchCategory } from '../features/shopSlice';
 function CategoryPageAdmin() {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.shop.category);
+    const [btnState, setBtnState] = useState('');
 
     useEffect(() => {
         dispatch(fetchCategory());
@@ -26,15 +27,15 @@ function CategoryPageAdmin() {
                     {/* Buttons Section */}
                     <div className="flex mb-4 space-x-4">
                         {/* Add Button */}
-                        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
+                        <button onClick={() => setBtnState('add')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
                             Add
                         </button>
                         {/* Edit Button */}
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
+                        <button onClick={() => setBtnState('edit')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
                             Edit
                         </button>
                         {/* Delete Button */}
-                        <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
+                        <button onClick={() => setBtnState('delete')} className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
                             Delete
                         </button>
                     </div>
@@ -69,6 +70,46 @@ function CategoryPageAdmin() {
                             </tbody>
                         </table>
                     </div>
+
+                    {/* Conditional Forms */}
+                    {btnState === "add" ? 
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Name</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        </form>
+                    : null}
+
+                    {btnState === "edit" ? 
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Name</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        </form>
+                    : null}
+
+                    {btnState === "delete" ? 
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+                            <label className="block mb-2 text-sm font-medium text-gray-700">ID</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        </form>
+                    : null}
                 </div>
             </main>
         </div>
@@ -76,4 +117,3 @@ function CategoryPageAdmin() {
 }
 
 export default CategoryPageAdmin;
-

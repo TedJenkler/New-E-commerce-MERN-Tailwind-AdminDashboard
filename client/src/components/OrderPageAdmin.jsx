@@ -6,6 +6,7 @@ function OrderPageAdmin() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [btnState, setBtnState] = useState('');
 
   useEffect(() => {
     fetchOrders();
@@ -23,7 +24,7 @@ function OrderPageAdmin() {
       }
 
       const response = await axios.get(apiUrl);
-      setOrders(response.data.order); // Assuming response.data.order contains the array of orders
+      setOrders(response.data.order);
       setLoading(false);
     } catch (err) {
       setError(err.message);
@@ -33,19 +34,16 @@ function OrderPageAdmin() {
 
   const deleteOrder = async (orderId) => {
     try {
-      // Implement delete logic here
-      console.log(`Deleting order with ID: ${orderId}`);
+      // Replace with your actual delete API endpoint
+      const apiUrl = `https://your-production-api-url/order/delete/${orderId}`;
+      const response = await axios.delete(apiUrl);
+      // Handle success response (optional)
+      console.log('Order deleted:', response.data);
+      // Refresh orders after deletion
+      fetchOrders();
     } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const deleteAllOrders = async () => {
-    try {
-      // Implement delete all logic here
-      console.log('Deleting all orders');
-    } catch (err) {
-      setError(err.message);
+      console.error('Error deleting order:', err);
+      // Handle error as needed
     }
   };
 
@@ -66,14 +64,14 @@ function OrderPageAdmin() {
             {/* Delete Button */}
             <button
               className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300"
-              onClick={() => deleteOrder(order._id)} // Replace with actual delete logic
+              onClick={() => setBtnState('delete')}
             >
               Delete
             </button>
             {/* Delete All Button */}
             <button
               className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300"
-              onClick={deleteAllOrders} // Replace with actual delete all logic
+              onClick={() => setBtnState('deleteall')}
             >
               Delete All
             </button>
@@ -169,6 +167,22 @@ function OrderPageAdmin() {
               <div className="text-sm text-gray-500 text-center">No orders found.</div>
             )}
           </div>
+
+          {/* Conditional Forms */}
+          {btnState === "delete" ? 
+            <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+              <label className="block mb-2 text-sm font-medium text-gray-700">ID</label>
+              <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+            </form>
+          : null}
+
+          {btnState === "deleteall" ? 
+            <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+              <label className="block mb-2 text-sm font-medium text-gray-700">Password</label>
+              <input type="password" className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+            </form>
+          : null}
+
         </div>
       </main>
     </div>

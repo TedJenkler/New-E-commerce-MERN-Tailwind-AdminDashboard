@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SideMenu from './SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategory, fetchData } from '../features/shopSlice';
@@ -7,6 +7,7 @@ function ProductPageAdmin() {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.shop.category);
     const products = useSelector(state => state.shop.data);
+    const [btnState, setBtnState] = useState('');
 
     useEffect(() => {
         dispatch(fetchData());
@@ -33,15 +34,15 @@ function ProductPageAdmin() {
                     {/* Buttons Section */}
                     <div className="flex mb-4 space-x-4">
                         {/* Add Button */}
-                        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
+                        <button onClick={() => setBtnState('add')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
                             Add
                         </button>
                         {/* Edit Button */}
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
+                        <button onClick={() => setBtnState('edit')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
                             Edit
                         </button>
                         {/* Delete Button */}
-                        <button className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
+                        <button onClick={() => setBtnState('delete')} className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
                             Delete
                         </button>
                     </div>
@@ -83,6 +84,203 @@ function ProductPageAdmin() {
                         </table>
                     </div>
                 </div>
+                {/* Conditional Forms */}
+                {btnState === "add" ? 
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Slug</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Name</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <div>
+                                <h2>Main Img</h2>
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            
+                            </div>
+                            <div>
+                                <label>Category</label>
+                                <select>
+                                    <option>headphones</option>
+                                    <option>earphones</option>
+                                    <option>speakers</option>
+                                </select>
+                            </div>
+                            <div>
+                                <h2>Caregory img</h2>
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            </div>
+                                <label className="block mb-2 text-sm font-medium text-gray-700">Price</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                                <label className="block mb-2 text-sm font-medium text-gray-700">Description</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                                <label className="block mb-2 text-sm font-medium text-gray-700">Features</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <div>
+                                <h2>Includes</h2>
+                                <label className="block mb-2 text-sm font-medium text-gray-700">Quantity</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                                <label className="block mb-2 text-sm font-medium text-gray-700">Item</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            </div>
+                            <div>
+                                <h2>Gallery</h2>
+                                <h3>First</h3>
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                                <h3>Second</h3>
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                                <h3>Third</h3>
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                                <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            </div>
+                            <div>
+                                <h2>Others</h2>
+                            </div>
+                            <div>
+                                <label>New Product</label>
+                                <button>True or False</button>
+                            </div>
+                            <div>
+                                <label>Shortname</label>
+                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            </div>
+                        </form>
+                    : null}
+
+                    {btnState === "edit" ? 
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+                        <label>Id</label>
+                        <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        <label className="block mb-2 text-sm font-medium text-gray-700">Slug</label>
+                        <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        <label className="block mb-2 text-sm font-medium text-gray-700">Name</label>
+                        <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        <div>
+                            <h2>Main Img</h2>
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        
+                        </div>
+                        <div>
+                            <label>Category</label>
+                            <select>
+                                <option>headphones</option>
+                                <option>earphones</option>
+                                <option>speakers</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h2>Caregory img</h2>
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        </div>
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Price</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Description</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Features</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        <div>
+                            <h2>Includes</h2>
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Quantity</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Item</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        </div>
+                        <div>
+                            <h2>Gallery</h2>
+                            <h3>First</h3>
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <h3>Second</h3>
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <h3>Third</h3>
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        </div>
+                        <div>
+                            <h2>Others</h2>
+                        </div>
+                        <div>
+                            <label>New Product</label>
+                            <button>True or False</button>
+                        </div>
+                        <div>
+                            <label>Shortname</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        </div>
+                    </form>
+                    : null}
+
+                    {btnState === "delete" ? 
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+                            <label className="block mb-2 text-sm font-medium text-gray-700">ID</label>
+                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        </form>
+                    : null}
             </main>
         </div>
     );
