@@ -48,6 +48,45 @@ export const deleteAllOrders = createAsyncThunk(
     }
 );
 
+export const addCategory = createAsyncThunk(
+    'category/add',
+    async (formData, thunkAPI) => {
+        try {
+            const response = await axios.post(`${apiUrl}/category/add`, formData);
+            return response.data;
+        }catch (error) {
+            console.error('Error adding category', error);
+            throw error;
+        }
+    }
+);
+
+export const editCategory = createAsyncThunk(
+    'category/edit',
+    async (formData, thunkAPI) => {
+        try {
+            const response = await axios.put(`${apiUrl}/category/update/${formData.oldname}`, formData);
+            return response.data;
+        }catch (error) {
+            console.error('Error editing category', error);
+            throw error;
+        }
+    }
+);
+
+export const deleteCategory = createAsyncThunk(
+    'category/delete',
+    async (name, thunkAPI) => {
+        try {
+            const response = await axios.delete(`${apiUrl}/category/delete/${name}`);
+            return response.data;
+        }catch (error) {
+            console.error('Error deleting category', error);
+            throw error;
+        }
+    }
+)
+
 const initialState = {
     status: 'idle',
     error: null,
@@ -94,6 +133,42 @@ const adminSlice = createSlice({
                 state.error = null;
             })
             .addCase(deleteAllOrders.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(addCategory.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(addCategory.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(addCategory.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(editCategory.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(editCategory.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(editCategory.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(deleteCategory.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(deleteCategory.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(deleteCategory.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             })

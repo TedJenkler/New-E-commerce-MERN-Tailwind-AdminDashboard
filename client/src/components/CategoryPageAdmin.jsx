@@ -2,15 +2,37 @@ import React, { useEffect, useState } from 'react';
 import SideMenu from './SideMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategory } from '../features/shopSlice';
+import { addCategory, editCategory, deleteCategory } from '../features/adminSlice';
 
 function CategoryPageAdmin() {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.shop.category);
     const [btnState, setBtnState] = useState('');
+    const [addForm, setAddForm] = useState({ name: "", img: { mobile: "", tablet: "", desktop: "" }});
+    const [editForm, setEditForm] = useState({ oldname: "", name: "", img: { mobile: "", tablet: "", desktop: "" }});
+    const [deleteForm, setDeleteForm] = useState({ name: "" });
 
     useEffect(() => {
         dispatch(fetchCategory());
     }, [dispatch]);
+
+    const handleAdd = (e) => {
+        e.preventDefault();
+        dispatch(addCategory(addForm));
+        setAddForm({ name: "", img: { mobile: "", tablet: "", desktop: "" }});
+    }
+
+    const handleEdit = (e) => {
+        e.preventDefault();
+        dispatch(editCategory(editForm));
+        setEditForm({ oldname: "", name: "", img: { mobile: "", tablet: "", desktop: "" }});
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        dispatch(deleteCategory(deleteForm.name))
+        setDeleteForm({ name: "" });
+    }
 
     return (
         <div className="flex">
@@ -73,47 +95,54 @@ function CategoryPageAdmin() {
 
                     {/* Conditional Forms */}
                     {btnState === "add" ? 
-                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md" onSubmit={handleAdd}>
                             <label className="block mb-2 text-sm font-medium text-gray-700">Name</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <input onChange={(e) => setAddForm({...addForm, name: e.target.value })} value={addForm.name} name='name' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
 
                             <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <input onChange={(e) => setAddForm({...addForm, img: { ...addForm.img, mobile: e.target.value } })} value={addForm.img.mobile} name='mobile' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
 
                             <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <input onChange={(e) => setAddForm({...addForm, img: { ...addForm.img, tablet: e.target.value } })} value={addForm.img.tablet} name='tablet' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
 
                             <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <input onChange={(e) => setAddForm({...addForm, img: { ...addForm.img, desktop: e.target.value } })} value={addForm.img.desktop} name='desktop' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <button type='submit'>Submit</button>
                         </form>
                     : null}
 
                     {btnState === "edit" ? 
-                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md" onSubmit={handleEdit}>
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Old Name</label>
+                            <input onChange={(e) => setEditForm({...editForm, oldname: e.target.value })} value={editForm.oldname} name='oldname' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+
+                            
                             <label className="block mb-2 text-sm font-medium text-gray-700">Name</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <input onChange={(e) => setEditForm({...editForm, name: e.target.value })} value={editForm.name} name='name' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
 
                             <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <input onChange={(e) => setEditForm({...editForm, img: { ...editForm.img, mobile: e.target.value } })} value={editForm.img.mobile} name='mobile' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
 
                             <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Tablet)</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <input onChange={(e) => setEditForm({...editForm, img: { ...editForm.img, tablet: e.target.value } })} value={editForm.img.tablet} name='tablet' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
 
                             <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Desktop)</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <input onChange={(e) => setEditForm({...editForm, img: { ...editForm.img, desktop: e.target.value } })} value={editForm.img.desktop} name='desktop' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <button type='submit'>Submit</button>
                         </form>
                     : null}
 
                     {btnState === "delete" ? 
-                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
-                            <label className="block mb-2 text-sm font-medium text-gray-700">ID</label>
-                            <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md" onSubmit={handleDelete}>
+                            <label className="block mb-2 text-sm font-medium text-gray-700">Name</label>
+                            <input onChange={(e) => setDeleteForm({...deleteForm, name: e.target.value })} value={deleteForm.name} name='name' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                            <button type='submit'>Submit</button>
                         </form>
                     : null}
                 </div>
             </main>
         </div>
     );
-}
+};
 
 export default CategoryPageAdmin;

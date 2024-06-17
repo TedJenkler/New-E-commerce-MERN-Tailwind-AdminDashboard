@@ -5,11 +5,12 @@ const authenticateToken = require('../middleware/authMiddleware');
 
 router.post('/add', async (req, res) => {
     try {
-        const { name, products } = req.body;
+        const { name, products, img } = req.body;
 
         const newCategory = new Category({
             name,
-            products
+            products,
+            img
         })
 
         await newCategory.save();
@@ -38,16 +39,18 @@ router.put('/update/:name', async (req, res) => {
 
         const updatedCategory = await Category.findOneAndUpdate(
             { name: categoryName },
-            { name, img }
+            { name, img },
+            { new: true }
         );
+
         if (!updatedCategory) {
             return res.status(404).json({ message: 'Category not found' });
         }
 
-        res.status(200).json({ message: 'Category name updated successfully', category: updatedCategory })
-    }catch (error) {
-        console.error('Error updating category', error)
-        res.status(500).json({ message: 'Internal server error'})
+        res.status(200).json({ message: 'Category updated successfully', category: updatedCategory });
+    } catch (error) {
+        console.error('Error updating category', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
@@ -65,6 +68,6 @@ router.delete('/delete/:name', async (req, res) =>  {
         console.error('Error deleting category', error)
         res.status(500).json({ message: 'Internal server error' })
     }
-})
+});
 
 module.exports = router
