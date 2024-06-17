@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import SideMenu from './SideMenu';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { deleteOrder } from '../features/adminSlice';
 
 function OrderPageAdmin() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [btnState, setBtnState] = useState('');
+  const dispatch = useDispatch();
+  const [deleteForm, setDeleteForm] = useState({ id: "" });
 
   useEffect(() => {
     fetchOrders();
@@ -32,20 +36,16 @@ function OrderPageAdmin() {
     }
   };
 
-  const deleteOrder = async (orderId) => {
-    try {
-      // Replace with your actual delete API endpoint
-      const apiUrl = `https://your-production-api-url/order/delete/${orderId}`;
-      const response = await axios.delete(apiUrl);
-      // Handle success response (optional)
-      console.log('Order deleted:', response.data);
-      // Refresh orders after deletion
-      fetchOrders();
-    } catch (err) {
-      console.error('Error deleting order:', err);
-      // Handle error as needed
-    }
-  };
+  const handleDelete = (e) => {
+    e.preventDefault();
+    dispatch(deleteOrder(deleteForm.id));
+    setDeleteForm({ id: "" });
+  }
+
+  const handleDeleteAll = (e) => {
+    e.preventDefault();
+    console.log('Deleted All')
+  }
 
   return (
     <div className="flex">
@@ -170,16 +170,18 @@ function OrderPageAdmin() {
 
           {/* Conditional Forms */}
           {btnState === "delete" ? 
-            <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+            <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md" onSubmit={handleDelete}>
               <label className="block mb-2 text-sm font-medium text-gray-700">ID</label>
-              <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+              <input onChange={(e) => setDeleteForm({ ...deleteForm, id: e.target.value })} value={deleteForm.id} name='id' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+              <button type='submit'>Submit</button>
             </form>
           : null}
 
           {btnState === "deleteall" ? 
-            <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
+            <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md" onSubmit={handleDeleteAll}>
               <label className="block mb-2 text-sm font-medium text-gray-700">Password</label>
               <input type="password" className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+              <button type='submit'>Submit</button>
             </form>
           : null}
 

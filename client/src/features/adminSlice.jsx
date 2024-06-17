@@ -20,9 +20,20 @@ export const login = createAsyncThunk(
             throw error;
         }
     }
-)
+);
 
-
+export const deleteOrder = createAsyncThunk(
+    'order/delete',
+    async (id, thunkAPI) => {
+        try {
+            const response = await axios.delete(`${apiUrl}/order/delete`, { data: { id } });
+            return response.data;
+        }catch (error) {
+            console.error('Error deleting item', error);
+            throw error;
+        }
+    }
+);
 
 const initialState = {
     status: 'idle',
@@ -48,7 +59,19 @@ const adminSlice = createSlice({
             .addCase(login.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
-            });
+            })
+            .addCase(deleteOrder.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(deleteOrder.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(deleteOrder.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
     }
 })
 
