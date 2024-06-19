@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../schema/productSchema')
 const Category = require('../schema/categorySchema');
+const authenticateToken = require('../middleware/authMiddleware');
 
-router.post('/add', async (req, res) => {
+router.post('/add', authenticateToken, async (req, res) => {
     try {
         const { name, price, slug, description, features, categoryImage, includes, gallery, others, category, img, newP, shortname } = req.body;
 
@@ -70,7 +71,7 @@ router.get('/get/:id', async (req, res) => {
     }
 });
 
-router.put('/update', async (req, res) => {
+router.put('/update', authenticateToken, async (req, res) => {
     try {
         const { oldSlug, slug, name, price, description, features, categoryImage, includes, gallery, others, category, img, newP, shortname } = req.body;
 
@@ -117,7 +118,7 @@ router.put('/update', async (req, res) => {
     }
 });
 
-router.delete('/delete/:slug', async (req, res) => {
+router.delete('/delete/:slug', authenticateToken, async (req, res) => {
     try {
         const { slug } = req.params;
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../schema/orderSchema')
+const authenticateToken = require('../middleware/authMiddleware');
 
 router.post("/add", async (req, res) => {
     try {
@@ -43,7 +44,7 @@ router.get('/getAll', async (req, res) => {
     }
 });
 
-router.delete('/delete', async (req, res) => {
+router.delete('/delete', authenticateToken, async (req, res) => {
     try {
         const { id } = req.body;
 
@@ -59,7 +60,7 @@ router.delete('/delete', async (req, res) => {
     }
 });
 
-router.delete('/deleteAll', async (req, res) => {
+router.delete('/deleteAll', authenticateToken, async (req, res) => {
     try {
         const { password } = req.body;
         const correctPassword = 'password';

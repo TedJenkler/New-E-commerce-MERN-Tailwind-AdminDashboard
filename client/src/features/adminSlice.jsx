@@ -1,17 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 
-// Define the base URLs for development and production environments
-const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:2000'
-    : 'https://new-e-commerce-mern-tailwind.onrender.com';
-
-console.log(process.env.NODE_ENV)
 export const login = createAsyncThunk(
     'admin/login',
     async (loginData, thunkAPI) => {
         try {
-            const response = await axios.post(`${apiUrl}/admin/login`, loginData);
+            const response = await axiosInstance.post(`/admin/login`, loginData);
             const { token } = response.data;
             localStorage.setItem('token', token);
             return response.data
@@ -26,7 +21,7 @@ export const deleteOrder = createAsyncThunk(
     'order/delete',
     async (id, thunkAPI) => {
         try {
-            const response = await axios.delete(`${apiUrl}/order/delete`, { data: { id } });
+            const response = await axiosInstance.delete(`/order/delete`, { data: { id } });
             return response.data;
         }catch (error) {
             console.error('Error deleting item', error);
@@ -39,7 +34,7 @@ export const deleteAllOrders = createAsyncThunk(
     'orders/deleteAll',
     async (password, thunkAPI) => {
         try {
-            const response = await axios.delete(`${apiUrl}/order/deleteAll`, { data: { password } });
+            const response = await axiosInstance.delete(`/order/deleteAll`, { data: { password } });
             return response.data;
         } catch (error) {
             console.error('Error deleting all orders:', error);
@@ -52,7 +47,7 @@ export const addCategory = createAsyncThunk(
     'category/add',
     async (formData, thunkAPI) => {
         try {
-            const response = await axios.post(`${apiUrl}/category/add`, formData);
+            const response = await axiosInstance.post(`/category/add`, formData);
             return response.data;
         }catch (error) {
             console.error('Error adding category', error);
@@ -65,7 +60,7 @@ export const editCategory = createAsyncThunk(
     'category/edit',
     async (formData, thunkAPI) => {
         try {
-            const response = await axios.put(`${apiUrl}/category/update/${formData.oldname}`, formData);
+            const response = await axiosInstance.put(`/category/update/${formData.oldname}`, formData);
             return response.data;
         }catch (error) {
             console.error('Error editing category', error);
@@ -78,7 +73,7 @@ export const deleteCategory = createAsyncThunk(
     'category/delete',
     async (name, thunkAPI) => {
         try {
-            const response = await axios.delete(`${apiUrl}/category/delete/${name}`);
+            const response = await axiosInstance.delete(`/category/delete/${name}`);
             return response.data;
         }catch (error) {
             console.error('Error deleting category', error);
@@ -91,7 +86,7 @@ export const addProduct = createAsyncThunk(
     'product/add',
     async (formData, thunkAPI) => {
         try {
-            const response = await axios.post(`${apiUrl}/product/add`, formData);
+            const response = await axiosInstance.post(`/product/add`, formData);
             return response.data;
         }catch (error) {
             console.error('Error adding product', error);
@@ -104,7 +99,7 @@ export const editProduct = createAsyncThunk(
     'product/update',
     async (formData, thunkAPI) => {
         try {
-            const response = await axios.put(`${apiUrl}/product/update`, formData);
+            const response = await axiosInstance.put(`/product/update`, formData);
             return response.data;
         } catch (error) {
             console.error('Error editing product', error);
@@ -114,10 +109,10 @@ export const editProduct = createAsyncThunk(
 );
 
 export const deleteProduct = createAsyncThunk(
-    'product/update',
+    'product/delete',
     async (slug, thunkAPI) => {
         try {
-            const response = await axios.delete(`${apiUrl}/product/delete/${slug}`);
+            const response = await axiosInstance.delete(`/product/delete/${slug}`);
             return response.data;
         }catch (error) {
             console.error('Error deleting product', error);
@@ -220,6 +215,30 @@ const adminSlice = createSlice({
                 state.error = null;
             })
             .addCase(addProduct.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(editProduct.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(editProduct.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(editProduct.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(deleteProduct.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(deleteProduct.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(deleteProduct.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             })

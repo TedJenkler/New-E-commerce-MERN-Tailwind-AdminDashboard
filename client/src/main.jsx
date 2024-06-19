@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import ProductPage from './components/ProductPage';
@@ -15,19 +12,19 @@ import Checkout from './components/Checkout';
 import Blur from './components/Blur';
 import ScrollToTop from './components/ScrollToTop';
 import CategoryPageAdmin from './components/CategoryPageAdmin';
-import Admin from './components/Admin'
-
+import Admin from './components/Admin';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import AdminPage from './components/AdminPage';
 import ProductPageAdmin from './components/ProductPageAdmin';
 import OrderPageAdmin from './components/OrderPageAdmin';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const stripePromise = loadStripe('pk_test_51PPfNkP7UvQT87QE68NIZvrMqWqZleH2fi2zG5y1Sh5sTz24MhhC3ULZitXA6sqdN9e6JpDpsQObBsr26iyH9rhx00Evd4LB0n');
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: (
       <Layout>
         <ScrollToTop />
@@ -38,7 +35,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/product/:id",
+    path: '/product/:id',
     element: (
       <Layout>
         <ScrollToTop />
@@ -49,7 +46,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/:id",
+    path: '/:id',
     element: (
       <Layout>
         <ScrollToTop />
@@ -60,7 +57,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/checkout",
+    path: '/checkout',
     element: (
       <Layout>
         <ScrollToTop />
@@ -71,28 +68,28 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/admin",
-    element: <Admin />
+    path: '/admin',
+    element: <Admin />,
   },
   {
-    path: "/adminpage",
-    element: <AdminPage />
+    path: '/adminpage',
+    element: <ProtectedRoute element={<AdminPage />} />,
   },
   {
-    path: "/admin/products",
-    element: <ProductPageAdmin />
+    path: '/admin/products',
+    element: <ProtectedRoute element={<ProductPageAdmin />} />,
   },
   {
-    path: "/admin/categories",
-    element: <CategoryPageAdmin />
+    path: '/admin/categories',
+    element: <ProtectedRoute element={<CategoryPageAdmin />} />,
   },
   {
-    path: "/admin/orders",
-    element: <OrderPageAdmin />
+    path: '/admin/orders',
+    element: <ProtectedRoute element={<OrderPageAdmin />} />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
