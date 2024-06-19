@@ -5,20 +5,34 @@ import OthersRepeater from './OthersRepeater';
 const EditProductForm = ({ categories, editForm, setEditForm, handleIncludesChange, handleOthersChange }) => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        const [outerKey, innerKey] = name.split('.');
+        const [outerKey, innerKey, subKey] = name.split('.');
 
-        if (innerKey) {
-        
+        let newValue = value;
+        if (name === 'price') {
+            newValue = parseFloat(value);
+        }
+
+        if (subKey) {
             setEditForm({
                 ...editForm,
                 [outerKey]: {
                     ...editForm[outerKey],
-                    [innerKey]: value 
+                    [innerKey]: {
+                        ...editForm[outerKey][innerKey],
+                        [subKey]: newValue
+                    }
+                }
+            });
+        } else if (innerKey) {
+            setEditForm({
+                ...editForm,
+                [outerKey]: {
+                    ...editForm[outerKey],
+                    [innerKey]: newValue
                 }
             });
         } else {
-            
-            setEditForm({ ...editForm, [name]: value });
+            setEditForm({ ...editForm, [name]: newValue });
         }
     };
 
@@ -26,9 +40,22 @@ const EditProductForm = ({ categories, editForm, setEditForm, handleIncludesChan
         setEditForm({ ...editForm, category: e.target.value });
     };
 
+    const handleNewPChange = (value) => {
+        setEditForm({ ...editForm, newP: value === 'true' });
+    };
+
     return (
         <form className="mt-4 p-6 bg-white rounded-lg shadow-md w-full">
-            {['id', 'slug', 'name', 'price', 'description', 'features'].map((field, idx) => (
+            <div className="mb-6">
+                <label className="block mb-2 text-sm font-medium text-gray-700">Old Slug</label>
+                <input
+                    name="oldSlug"
+                    value={editForm.oldSlug}
+                    onChange={handleInputChange}
+                    className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+            </div>
+            {['slug', 'name', 'price', 'description', 'features'].map((field, idx) => (
                 <div key={idx} className="mb-6">
                     <label className="block mb-2 text-sm font-medium text-gray-700">
                         {field.charAt(0).toUpperCase() + field.slice(1)}
@@ -103,7 +130,9 @@ const EditProductForm = ({ categories, editForm, setEditForm, handleIncludesChan
                 <h2 className="text-lg font-medium text-gray-900 mb-4">Gallery</h2>
                 {['first', 'second', 'third'].map((item, idx) => (
                     <div key={idx} className="mb-6">
-                        <h3 className="text-md font-medium text-gray-800 mb-2">{item.charAt(0).toUpperCase() + item.slice(1)}</h3>
+                        <h3 className="text-md font-medium text-gray-800 mb-2">
+                            {item.charAt(0).toUpperCase() + item.slice(1)}
+                        </h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {['mobile', 'tablet', 'desktop'].map((device, idx2) => (
                                 <div key={idx2} className="mb-6">
@@ -126,14 +155,29 @@ const EditProductForm = ({ categories, editForm, setEditForm, handleIncludesChan
             <OthersRepeater initialOthers={editForm.others} onChange={handleOthersChange} />
 
             <div className="mb-6">
-                <label className="block mb-2 text-sm font-medium text-gray-700">New Product</label>
-                <input
-                    type="checkbox"
-                    name="newProduct"
-                    checked={editForm.newProduct}
-                    onChange={(e) => setEditForm({ ...editForm, newProduct: e.target.checked })}
-                    className="block px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                />
+                <label className="block mb-2 text-sm font-medium text-gray-700">NewP</label>
+                <div className="flex items-center">
+                    <input
+                        type="radio"
+                        id="trueRadio"
+                        name="newP"
+                        value="true"
+                        checked={editForm.newP === true}
+                        onChange={(e) => handleNewPChange(e.target.value)}
+                        className="mr-2"
+                    />
+                    <label htmlFor="trueRadio" className="text-sm text-gray-800">True</label>
+                    <input
+                        type="radio"
+                        id="falseRadio"
+                        name="newP"
+                        value="false"
+                        checked={editForm.newP === false}
+                        onChange={(e) => handleNewPChange(e.target.value)}
+                        className="ml-4 mr-2"
+                    />
+                    <label htmlFor="falseRadio" className="text-sm text-gray-800">False</label>
+                </div>
             </div>
 
             <div className="mb-6">
@@ -150,3 +194,5 @@ const EditProductForm = ({ categories, editForm, setEditForm, handleIncludesChan
 };
 
 export default EditProductForm;
+
+

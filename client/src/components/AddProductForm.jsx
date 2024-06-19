@@ -5,15 +5,21 @@ import OthersRepeater from './OthersRepeater';
 const AddProductForm = ({ categories, addForm, setAddForm, handleIncludesChange, handleOthersChange }) => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+
         if (name.includes('.')) {
-            const [parent, child] = name.split('.');
-            setAddForm({
-                ...addForm,
-                [parent]: {
-                    ...addForm[parent],
-                    [child]: value
+            const keys = name.split('.');
+            let updatedForm = { ...addForm };
+
+            keys.reduce((acc, key, index) => {
+                if (index === keys.length - 1) {
+                    acc[key] = value;
+                } else {
+                    acc = acc[key];
                 }
-            });
+                return acc;
+            }, updatedForm);
+
+            setAddForm({ ...updatedForm });
         } else {
             setAddForm({ ...addForm, [name]: value });
         }
@@ -128,9 +134,9 @@ const AddProductForm = ({ categories, addForm, setAddForm, handleIncludesChange,
                 <label className="block mb-2 text-sm font-medium text-gray-700">New Product</label>
                 <input
                     type="checkbox"
-                    name="newProduct"
-                    checked={addForm.newProduct}
-                    onChange={(e) => setAddForm({ ...addForm, newProduct: e.target.checked })}
+                    name="newP"
+                    checked={addForm.newP}
+                    onChange={(e) => setAddForm({ ...addForm, newP: e.target.checked })}
                     className="block px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
             </div>
@@ -149,4 +155,3 @@ const AddProductForm = ({ categories, addForm, setAddForm, handleIncludesChange,
 };
 
 export default AddProductForm;
-

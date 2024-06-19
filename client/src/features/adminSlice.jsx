@@ -85,7 +85,46 @@ export const deleteCategory = createAsyncThunk(
             throw error;
         }
     }
-)
+);
+
+export const addProduct = createAsyncThunk(
+    'product/add',
+    async (formData, thunkAPI) => {
+        try {
+            const response = await axios.post(`${apiUrl}/product/add`, formData);
+            return response.data;
+        }catch (error) {
+            console.error('Error adding product', error);
+            throw error;
+        }
+    }
+);
+
+export const editProduct = createAsyncThunk(
+    'product/update',
+    async (formData, thunkAPI) => {
+        try {
+            const response = await axios.put(`${apiUrl}/product/update`, formData);
+            return response.data;
+        } catch (error) {
+            console.error('Error editing product', error);
+            throw error;
+        }
+    }
+);
+
+export const deleteProduct = createAsyncThunk(
+    'product/update',
+    async (slug, thunkAPI) => {
+        try {
+            const response = await axios.delete(`${apiUrl}/product/delete/${slug}`);
+            return response.data;
+        }catch (error) {
+            console.error('Error deleting product', error);
+            throw error;
+        }
+    }
+);
 
 const initialState = {
     status: 'idle',
@@ -169,6 +208,18 @@ const adminSlice = createSlice({
                 state.error = null;
             })
             .addCase(deleteCategory.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(addProduct.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(addProduct.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(addProduct.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             })

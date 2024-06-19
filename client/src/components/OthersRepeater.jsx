@@ -5,8 +5,6 @@ const OthersRepeater = ({ initialOthers = [], onChange }) => {
 
     const handleAddOther = () => {
         setOthers([...others, {
-            slug: '',
-            name: '',
             image: {
                 mobile: '',
                 tablet: '',
@@ -40,22 +38,7 @@ const OthersRepeater = ({ initialOthers = [], onChange }) => {
             <h2 className="text-xl font-bold mb-2">Others</h2>
             {others.map((other, index) => (
                 <div key={index} className="mb-4 border border-gray-300 p-4 rounded-md">
-                    <label className="block mb-2 text-sm font-medium text-gray-700">Slug</label>
-                    <input
-                        type="text"
-                        value={other.slug}
-                        onChange={(e) => handleInputChange(e, index, 'slug')}
-                        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    />
-
-                    <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Name</label>
-                    <input
-                        type="text"
-                        value={other.name}
-                        onChange={(e) => handleInputChange(e, index, 'name')}
-                        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    />
-
+                    
                     <label className="block mt-2 mb-2 text-sm font-medium text-gray-700">Image (Mobile)</label>
                     <input
                         type="text"

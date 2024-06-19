@@ -6,6 +6,11 @@ const productSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    img: {
+        mobile: String,
+        tablet: String,
+        desktop: String
+    },
     price: {
         type: Number,
         required: true
@@ -13,11 +18,11 @@ const productSchema = new mongoose.Schema({
     slug: String,
     description: String,
     features: String,
-    categoryImage: [{
+    categoryImage: {
         mobile: String,
         tablet: String,
         desktop: String
-    }],
+    },
     includes: [{
         quantity: Number,
         item: String
@@ -48,15 +53,13 @@ const productSchema = new mongoose.Schema({
             desktop: String
         }
     }],
-    categoryId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Category', 
+    categoryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
         required: true
     },
-    img: String,
     newP: Boolean,
-    shortname: String,
-    imgxl: String
+    shortname: String
 });
 
 module.exports = mongoose.model('Product', productSchema);

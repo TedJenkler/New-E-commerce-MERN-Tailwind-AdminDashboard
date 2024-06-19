@@ -5,7 +5,7 @@ const Category = require('../schema/categorySchema');
 
 router.post('/add', async (req, res) => {
     try {
-        const { name, price, slug, description, features, categoryImage, includes, gallery, others, category, img, newP, shortname, imgxl } = req.body;
+        const { name, price, slug, description, features, categoryImage, includes, gallery, others, category, img, newP, shortname } = req.body;
 
         
         const categoryId = await Category.findOne({ name: category });
@@ -26,8 +26,7 @@ router.post('/add', async (req, res) => {
             categoryId: categoryId._id,
             img, 
             newP, 
-            shortname, 
-            imgxl
+            shortname,
         });
 
         await newProduct.save();
@@ -71,60 +70,79 @@ router.get('/get/:id', async (req, res) => {
     }
 });
 
-router.put('/update/:id', async (req, res) => {
+router.put('/update', async (req, res) => {
     try {
-        const { id } = req.params;
-        const { name, price, slug, description, features, categoryImage, includes, gallery, others, category, img, newP, shortname, imgxl } = req.body;
+        const { oldSlug, slug, name, price, description, features, categoryImage, includes, gallery, others, category, img, newP, shortname } = req.body;
+
+        if (isNaN(price)) {
+            return res.status(400).json({ message: 'Invalid price value' });
+        }
+
+        const galleryFields = ['first', 'second', 'third'];
+        for (let field of galleryFields) {
+            if (typeof gallery[field] !== 'object') {
+                return res.status(400).json({ message: `Invalid gallery value for ${field}` });
+            }
+        }
+
+        const existingProduct = await Product.findOne({ slug: oldSlug });
+        if (!existingProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
 
         const categoryId = await Category.findOne({ name: category });
         if (!categoryId) {
-            return res.status(400).json(({ message: 'Invalid category name, create the category first' }))
+            return res.status(400).json({ message: 'Invalid category name, create the category first' });
         }
 
-        const updatedProduct = await Product.findByIdAndUpdate(
-            id,
-            {
-                name, 
-                price, 
-                slug, 
-                description, 
-                features, 
-                categoryImage, 
-                includes, 
-                gallery, 
-                others, 
-                categoryId: categoryId._id,
-                img, 
-                newP, 
-                shortname, 
-                imgxl
-            },
-            { new: true }
-         );
-         if(!updatedProduct) {
-            return res.status(400).json({ message: 'Product not found' })
-         }
+        existingProduct.slug = slug;
+        existingProduct.name = name;
+        existingProduct.price = parseFloat(price);
+        existingProduct.description = description;
+        existingProduct.features = features;
+        existingProduct.categoryImage = categoryImage;
+        existingProduct.includes = includes;
+        existingProduct.gallery = gallery;
+        existingProduct.img = img;
+        existingProduct.category = categoryId._id;
+        existingProduct.newP = newP;
+        existingProduct.shortname = shortname;
+        existingProduct.others = others;
 
-         res.status(200).json({ message: 'Product updated successfully', product: updatedProduct })
-    }catch (error) {
-        console.error('Error updating product', error);
-        res.status(500).json({ message: 'Internal server error' })
+        await existingProduct.save();
+
+        res.status(200).json({ message: 'Product updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating product', error: error.message });
     }
-})
+});
 
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:slug', async (req, res) => {
     try {
-        const { id } = req.params;
+        const { slug } = req.params;
 
-        const deleteProduct = await Product.findByIdAndDelete(id);
-        if(!deleteProduct){
-            return res.status(400).json({ message: 'Product not found' })
+        const existingProduct = await Product.findOne({ slug });
+        if (!existingProduct) {
+            return res.status(404).json({ message: 'Product not found' });
         }
 
-        res.status(200).json({ message: 'Product deleted successfully', product: deleteProduct })
-    }catch (error) {
-        console.error('Error deleting product', error);
-        res.status(500).json({ message: 'Internal server error' })
+        const deletedProduct = await Product.findByIdAndDelete(existingProduct._id);
+        if (!deletedProduct) {
+            return res.status(400).json({ message: 'Product not found or could not be deleted' });
+        }
+
+        const category = await Category.findOne({ products: deletedProduct._id });
+        if (!category) {
+            return res.status(404).json({ message: 'Category not found or product not in category' });
+        }
+
+        category.products = category.products.filter(productId => !productId.equals(deletedProduct._id));
+        await category.save();
+
+        res.status(200).json({ message: 'Product deleted successfully', product: deletedProduct });
+    } catch (error) {
+        console.error('Error deleting product:', error.message);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 

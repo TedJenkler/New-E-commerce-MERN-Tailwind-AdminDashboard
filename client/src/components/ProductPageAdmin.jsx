@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategory, fetchData } from '../features/shopSlice';
 import AddProductForm from './AddProductForm';
 import EditProductForm from './EditProductForm';
+import { addProduct, editProduct, deleteProduct } from '../features/adminSlice';
 
 function ProductPageAdmin() {
     const dispatch = useDispatch();
@@ -26,28 +27,31 @@ function ProductPageAdmin() {
         others: [], 
         category: "", 
         img: { mobile: "", tablet: "", desktop: "" }, 
-        newP: null, 
+        newP: false, 
         shortname: ""
     });
 
     const [editForm, setEditForm] = useState({
-        id: '',
-        slug: '',
-        name: '',
-        img: { mobile: '', tablet: '', desktop: '' },
-        category: '',
-        categoryImage: { mobile: '', tablet: '', desktop: '' },
-        price: '',
-        description: '',
-        features: '',
-        includes: [],
-        gallery: { first: { mobile: '', tablet: '', desktop: '' }, second: { mobile: '', tablet: '', desktop: '' }, third: { mobile: '', tablet: '', desktop: '' } },
-        others: [],
-        newProduct: false,
-        shortname: ''
+        name: "", 
+        price: "", 
+        slug: "", 
+        description: "", 
+        features: "", 
+        categoryImage: { mobile: "", tablet: "", desktop: "" }, 
+        includes: [], 
+        gallery: { 
+            first: { mobile: "", tablet: "", desktop: "" }, 
+            second: { mobile: "", tablet: "", desktop: "" }, 
+            third: { mobile: "", tablet: "", desktop: "" }
+        }, 
+        others: [], 
+        category: "", 
+        img: { mobile: "", tablet: "", desktop: "" }, 
+        newP: false, 
+        shortname: ""
     });
 
-    console.log(addForm, editForm)
+    const [deleteForm, setDeleteForm] = useState({ slug: "" })
 
     useEffect(() => {
         dispatch(fetchData());
@@ -69,45 +73,86 @@ function ProductPageAdmin() {
     };
 
     const handleSave = () => {
-        // Implement save functionality
-        console.log('Save button clicked');
+        dispatch(addProduct(addForm));
+        resetForms();
     };
 
     const handleEdit = () => {
-        // Implement edit functionality
-        console.log('Edit button clicked');
+        dispatch(editProduct(editForm));
+        resetForms();
     };
 
+    const handleDelete = () => {
+        dispatch(deleteProduct(deleteForm.slug));
+        resetForms();
+    }
+
+    const resetForms = () => {
+        setAddForm({
+            name: "", 
+            price: "", 
+            slug: "", 
+            description: "", 
+            features: "", 
+            categoryImage: { mobile: "", tablet: "", desktop: "" }, 
+            includes: [], 
+            gallery: { 
+                first: { mobile: "", tablet: "", desktop: "" }, 
+                second: { mobile: "", tablet: "", desktop: "" }, 
+                third: { mobile: "", tablet: "", desktop: "" }
+            }, 
+            others: [], 
+            category: "", 
+            img: { mobile: "", tablet: "", desktop: "" }, 
+            newP: false, 
+            shortname: ""
+        });
+
+        setEditForm({
+            name: "", 
+            price: "", 
+            slug: "", 
+            description: "", 
+            features: "", 
+            categoryImage: { mobile: "", tablet: "", desktop: "" }, 
+            includes: [], 
+            gallery: { 
+                first: { mobile: "", tablet: "", desktop: "" }, 
+                second: { mobile: "", tablet: "", desktop: "" }, 
+                third: { mobile: "", tablet: "", desktop: "" }
+            }, 
+            others: [], 
+            category: "", 
+            img: { mobile: "", tablet: "", desktop: "" }, 
+            newP: false, 
+            shortname: ""
+        });
+
+        setDeleteForm({ slug: "" });
+    };
 
     return (
         <div className="flex flex-col md:flex-row h-screen">
-            {/* Sidebar (Visible on Medium screens and up) */}
             <div className="md:flex md:flex-shrink-0">
                 <SideMenu />
             </div>
 
-            {/* Main Content */}
             <main className="flex-1 overflow-y-auto bg-gray-100">
                 <div className="container mx-auto px-4 py-6 md:px-8 md:py-10">
                     <h1 className="text-3xl font-bold mb-6 md:mb-8">Product Management</h1>
 
-                    {/* Buttons Section */}
                     <div className="flex flex-wrap mb-4 space-x-4 md:space-x-0 md:space-y-0 md:flex-row md:mb-8">
-                        {/* Add Button */}
                         <button onClick={() => setBtnState('add')} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
                             Add
                         </button>
-                        {/* Edit Button */}
                         <button onClick={() => setBtnState('edit')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
                             Edit
                         </button>
-                        {/* Delete Button */}
                         <button onClick={() => setBtnState('delete')} className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300">
                             Delete
                         </button>
                     </div>
 
-                    {/* Table of Products */}
                     <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                         <h2 className="text-xl font-semibold mb-4">Products by Category</h2>
                         <div className="overflow-x-auto">
@@ -146,7 +191,6 @@ function ProductPageAdmin() {
                         </div>
                     </div>
 
-                    {/* Conditionally render the AddProductForm */}
                     {btnState === 'add' && (
                         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                             <AddProductForm
@@ -162,7 +206,6 @@ function ProductPageAdmin() {
                         </div>
                     )}
 
-                    {/* Conditionally render the EditProductForm */}
                     {btnState === 'edit' && (
                         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                             <EditProductForm
@@ -178,13 +221,15 @@ function ProductPageAdmin() {
                         </div>
                     )}
 
-                    {/* Conditionally render the Delete Form */}
                     {btnState === 'delete' && (
                         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                             <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md">
                                 <label className="block mb-2 text-sm font-medium text-gray-700">Slug</label>
-                                <input className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                                <input onChange={(e) => setDeleteForm({ slug: e.target.value })} value={deleteForm.slug} name="slug" className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
                             </form>
+                            <button onClick={handleDelete} className="px-4 py-2 bg-blue-500 text-white rounded-md mt-4">
+                                Delete Product
+                            </button>
                         </div>
                     )}
                 </div>
