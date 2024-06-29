@@ -19,6 +19,7 @@ import AdminPage from './components/AdminPage';
 import ProductPageAdmin from './components/ProductPageAdmin';
 import OrderPageAdmin from './components/OrderPageAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
+import DesignPageAdmin from './components/DesignPageAdmin';
 
 const stripePromise = loadStripe('pk_test_51PPfNkP7UvQT87QE68NIZvrMqWqZleH2fi2zG5y1Sh5sTz24MhhC3ULZitXA6sqdN9e6JpDpsQObBsr26iyH9rhx00Evd4LB0n');
 
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
   {
     path: '/admin/orders',
     element: <ProtectedRoute element={<OrderPageAdmin />} />,
+  },
+  {
+    path: '/admin/design',
+    element: <ProtectedRoute element={<DesignPageAdmin />} />,
   },
 ]);
 

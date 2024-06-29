@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import axiosInstance from "../api/axiosInstance";
 
 export const login = createAsyncThunk(
@@ -121,17 +120,42 @@ export const deleteProduct = createAsyncThunk(
     }
 );
 
+export const getDesign = createAsyncThunk(
+    'design/get',
+    async (_, thunkAPI) => {
+        try {
+            const response = await axiosInstance.get('/design')
+            return response.data;
+        }catch (error) {
+            console.error('Error fetching design', error);
+            throw error;
+        }
+    }
+);
+
+export const updateLogo = createAsyncThunk(
+    'logo/update',
+    async (formData, thunkAPI) => {
+        try {
+            const response = await axiosInstance.put('/design/logo', formData);
+            return response.data;
+        }catch (error) {
+            console.error('Error updating logo', error);
+            throw error;
+        }
+    }
+);
+
 const initialState = {
+    design: {},
     status: 'idle',
     error: null,
-}
+};
 
 const adminSlice = createSlice({
     name: 'admin',
     initialState,
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state) => {
@@ -242,7 +266,20 @@ const adminSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.payload;
             })
-    }
-})
+            .addCase(getDesign.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(getDesign.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.design = action.payload.design;
+                state.error = null;
+            })
+            .addCase(getDesign.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            });
+    },
+});
 
-export default adminSlice.reducer
+export default adminSlice.reducer;

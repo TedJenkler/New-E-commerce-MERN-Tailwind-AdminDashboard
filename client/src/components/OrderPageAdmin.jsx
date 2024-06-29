@@ -4,10 +4,11 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { deleteOrder } from '../features/adminSlice';
 import { deleteAllOrders } from '../features/adminSlice';
+import NavBarAdminPage from './NavBarAdminPage';
+import FooterAdminPage from './FooterAdminPage';
 
 function OrderPageAdmin() {
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [btnState, setBtnState] = useState('');
   const dispatch = useDispatch();
@@ -31,10 +32,8 @@ function OrderPageAdmin() {
 
       const response = await axios.get(apiUrl);
       setOrders(response.data.order);
-      setLoading(false);
     } catch (err) {
       setError(err.message);
-      setLoading(false);
     }
   };
 
@@ -47,33 +46,35 @@ function OrderPageAdmin() {
   const handleDeleteAll = (e) => {
     e.preventDefault();
     dispatch(deleteAllOrders(deleteAllForm.password));
-    setDeleteForm({ password: "" });
+    setDeleteAllForm({ password: "" });
   }
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar (Visible on Medium screens and up) */}
       <div className="hidden md:flex">
         <SideMenu />
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto bg-gray-100">
-        <div className="container mx-auto px-4 py-6 md:px-8 md:py-10">
+      <main className="flex-1 overflow-y-auto p-4 xl:ml-80">
+        <NavBarAdminPage />
+
+        <div className="bg-white shadow-lg px-6 py-3 rounded-xl mb-6">
           <h1 className="text-3xl font-bold mb-6 md:mb-8">Order Management</h1>
 
           {/* Buttons Section */}
           <div className="flex mb-4 space-x-4">
             {/* Delete Button */}
             <button
-              className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300"
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-300"
               onClick={() => setBtnState('delete')}
             >
               Delete
             </button>
             {/* Delete All Button */}
             <button
-              className="bg-red hover:bg-red text-white px-4 py-2 rounded-md transition duration-300"
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-300"
               onClick={() => setBtnState('deleteall')}
             >
               Delete All
@@ -83,7 +84,6 @@ function OrderPageAdmin() {
           {/* List of Orders */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Orders</h2>
-            {loading && <div>Loading...</div>}
             {error && <div className="text-red-500">{error}</div>}
             {orders && orders.length > 0 ? (
               <div className="overflow-x-auto">
@@ -153,6 +153,13 @@ function OrderPageAdmin() {
                           <div className="text-sm text-gray-900">{order.price}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
+                          {/* Example of a delete button for each order */}
+                          <button
+                            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-300"
+                            onClick={() => dispatch(deleteOrder(order._id))}
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -169,7 +176,7 @@ function OrderPageAdmin() {
             <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md" onSubmit={handleDelete}>
               <label className="block mb-2 text-sm font-medium text-gray-700">ID</label>
               <input onChange={(e) => setDeleteForm({ ...deleteForm, id: e.target.value })} value={deleteForm.id} name='id' className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
-              <button type='submit'>Submit</button>
+              <button type='submit' className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">Submit</button>
             </form>
           : null}
 
@@ -177,17 +184,15 @@ function OrderPageAdmin() {
             <form className="mt-4 px-4 py-2 bg-white rounded-lg shadow-md" onSubmit={handleDeleteAll}>
               <label className="block mb-2 text-sm font-medium text-gray-700">Password</label>
               <input onChange={(e) => setDeleteAllForm({ ...deleteAllForm, password: e.target.value })} value={deleteAllForm.password} name='password' type="password" className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
-              <button type='submit'>Submit</button>
+              <button type='submit' className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">Submit</button>
             </form>
           : null}
 
         </div>
+        <FooterAdminPage />
       </main>
     </div>
   );
 }
 
 export default OrderPageAdmin;
-
-
-

@@ -4,7 +4,8 @@ require('dotenv').config();
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
-const adminRoutes = require('./routes/admin')
+const adminRoutes = require('./routes/admin');
+const designRoutes = require('./routes/design');
 const { default: mongoose } = require('mongoose');
 const port = process.env.PORT || 2000;
 const cors = require('cors')
@@ -30,7 +31,7 @@ app.use('/product', productRoutes);
 app.use('/category', categoryRoutes);
 app.use('/order', orderRoutes);
 app.use('/admin', adminRoutes);
-
+app.use('/design', designRoutes);
 
 // Example route to serve React app
 app.get('*', (req, res) => {
